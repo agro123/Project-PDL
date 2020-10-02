@@ -7,3 +7,5 @@ GraphQl
 ELECTRONJS
 NEXTJS
 REACT
+
+run npm install
