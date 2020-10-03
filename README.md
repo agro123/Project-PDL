@@ -1,11 +1,7 @@
 # Project-REICO
-Use:
-PostgresSQL
-nodejs
-expressjs
-GraphQl
-ELECTRONJS
-NEXTJS
-REACT
+npm install
 
-run npm install
+npm run dev
+or
+yarn dev
+
