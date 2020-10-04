@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,11 +13,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Bienvenido a Project Reico
         </h1>
-        <p className={styles.description}>
-            <a href="/page1/hello" target="_blank">ir al inicio</a>
-        </p>
       </main>
-
     </div>
   )
 }

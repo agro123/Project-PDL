@@ -1,10 +1,14 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
+import 'antd/dist/antd.css';
+import '../styles/layout.css';
 import Head from 'next/head';
 import Layout from '../components/constants/layout';
 
 function MyApp({ Component, pageProps }) {
   return <>
+    <Layout>
       <Component {...pageProps} />
+    </Layout>
   </>
 }
 
