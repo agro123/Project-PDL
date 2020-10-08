@@ -24,7 +24,7 @@ const MyLayout = ({ children }) => (
           }}
         >
           <Menu.Item key="1" icon={<CopyOutlined />}><MenuOption label="Ordenes de servicio" url="/ordenesS/controlOrdeneS" /></Menu.Item>
-          <Menu.Item key="2"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
+          <Menu.Item key="2"><MenuOption label="Viaticos" url="/viaticos/controlViaticos" /></Menu.Item>
           <Menu.Item key="3"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
           <Menu.Item key="4"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
           <Menu.Item key="5"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
