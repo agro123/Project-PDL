@@ -22,7 +22,7 @@ function createWindow() {
 	.prepare()
 	.then(() => {
 		// una vez lista creamos un servidor HTTP que use nuestro
-		// handler para ruteas todas las peticiones HTTP
+		// handler para rutas todas las peticiones HTTP
 		// que reciba Next.js
 		const server = createServer((req, res) => {
 			// si recibimos una petición por fuera de Electron
