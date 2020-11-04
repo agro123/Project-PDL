@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -14,26 +16,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
 }
 
 .title {
   color: #1890FF;
   margin: 0;
   line-height: 1.15;
-  font-size: 3rem;
-
+  font-size: 72px;
+  font-family: 'Roboto';
 }
 
 .grid {

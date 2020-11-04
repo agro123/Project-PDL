@@ -5,7 +5,7 @@ function CuentaCobro() {
     <>
       <div>
         <h1 className={styles.title}>
-          Cuenta de cobro 
+          Cuenta de cobro
        </h1>
       </div>
     </>)
