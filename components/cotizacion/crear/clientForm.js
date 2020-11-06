@@ -14,7 +14,7 @@ const ClienteForm = () => {
         }
     ];
 
-    const style ={ width: '45%', margin: '0 10% 2% 0' };    
+    const style ={ width: '195px', margin: '0 2% 2% 0' };    
  
     return (
         <>
@@ -31,7 +31,7 @@ const ClienteForm = () => {
                     />
 
                     <AutoComplete
-                        style={{ width: '45%', margin: '0 0 2% 0' }}
+                        style={{ width: '195px', margin: '0 0 2% 0' }}
                         placeholder="Identificación"
                         options={options}
                     />
@@ -40,11 +40,11 @@ const ClienteForm = () => {
                         placeholder="Dirección"
                     />
                     <Input
-                        style={{ width: '45%', margin: '0 0 2% 0' }}
+                        style={{ width: '195px', margin: '0 0 2% 0' }}
                         placeholder="Teléfono"
                     />
                     <Input
-                        style={style}
+                        style={{ width: '195px', margin: '0 2% 0 0' }}
                         placeholder="Correo Electronico"
                     />
                 </Input.Group>

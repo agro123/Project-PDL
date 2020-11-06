@@ -52,8 +52,8 @@ function createWindow() {
 
 				// una vez iniciamos el servidor creamos una nueva ventana
 				win = new BrowserWindow({
-					height: 720,
-					width: 1280,
+					height: 768,
+					width: 1366,
 					webPreferences: {
 						nodeIntegration: true
 					}

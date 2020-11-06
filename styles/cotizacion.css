@@ -3,9 +3,19 @@
     display: flex;
     position: relative;
 }
+.middle {
+    display: flex;
+    position: relative;
+}
+.bot {
+    display: flex;
+    position: relative;
+    flex: auto;
+
+}
 .containerDate {
     position: relative;
-    width: 10%;
+    width: 150px;
 }
 .date {
     text-align:center;
@@ -13,27 +23,23 @@
 }
 /* ---------------------*/
 
-/*---Formulario cliente---------- */
-.clientForm {
-    width: 28%;
-    position: relative;
-}
-.cotizacionPanel {
-    margin-top: 5%;
-}
+
 /*---Titulo de cada formulario---*/
+.cotizacionPanel {
+    margin-top: 50px;
+}
 .titleLine {
     background-color: #1890FF;
     position: relative;
+    display: flex;
     width: 100%;
-    height: 30px;
-    padding: 5px;
+    height: 25px;
+    padding: 2px;
     padding-left: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 .titleLine p {
     /* Datos de cliente */
-    position: absolute;
     width: 129px;
     height: 21px;
     font-style: normal;
@@ -41,6 +47,55 @@
     font-family: var(--fuente);
     line-height: 21px;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 16px;
 }
-/*----------------------- */
+/*---Formulario layout---------- */
+.clientForm {
+    width: 400px;
+    position: relative;
+    margin: 0 30px 30px 0;
+}
+.materialsForm {
+    width: 750px;
+    position: relative;
+    margin: 0 30px 30px 0;
+}
+
+.otherForm {
+    width: 500px;
+    position: relative;
+    margin-right: 30px;
+}
+.observationForm {
+    position: relative;
+    flex: auto;
+}
+.totalDisplay {
+    position: relative;
+    width: 220px;
+}
+
+.final {
+    display: flex;
+    flex: auto;
+    justify-content: flex-end;
+    align-content: flex-start;
+    align-self: flex-end;
+}
+
+.total {
+    text-align:center;
+    font-size: 32px;
+}
+
+@media screen and (max-width: 1366px) {
+    .clientForm {
+        margin: 0 30px 10px 0;
+    }
+    .materialsForm {
+        margin: 0 30px 10px 0;
+    }
+    .cotizacionPanel {
+        margin-top: 5px;
+    }
+}

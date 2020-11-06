@@ -22,11 +22,12 @@
 .title {
   color: #1890FF;
   margin: 0;
-  line-height: 1.15;
-  font-size: 72px;
+  line-height: 1;
+  font-size: 60px;
   flex: auto;
   font-family: 'Roboto';
 }
+
 
 .grid {
   display: flex;
@@ -43,5 +44,10 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+}
+@media screen and (max-width: 1366px) {
+	.title {
+    font-size: 48px;
   }
 }

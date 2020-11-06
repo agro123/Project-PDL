@@ -5,6 +5,7 @@ import {
   ReconciliationOutlined,
   ContainerOutlined
 } from '@ant-design/icons';
+import { autoUpdater } from 'electron';
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -14,8 +15,8 @@ const MyLayout = ({ children }) => (
     <Layout className="layout">
       <Sider
         style={{
-          height: '100vh',
           background: '#001529',
+          flex: 'auto'
         }}
       >
         <Menu
