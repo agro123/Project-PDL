@@ -2,3 +2,12 @@
     Padding: 50px;
     min-height: 100vh;
   }
+.layout {
+  display: flex;
+}
+
+@media screen and (max-width: 1366px) {
+	.site-layout-content {
+    Padding: 15px;
+  }
+}

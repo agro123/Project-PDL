@@ -19,67 +19,65 @@ let win;
 function createWindow() {
 	// iniciamos la app de Next.js
 	nextApp
-	.prepare()
-	.then(() => {
-		// una vez lista creamos un servidor HTTP que use nuestro
-		// handler para rutas todas las peticiones HTTP
-		// que reciba Next.js
-		const server = createServer((req, res) => {
-			// si recibimos una petición por fuera de Electron
-			// respondemos con un 404
-			if (req.headers['user-agent'].indexOf('Electron') === -1) {
-				res.writeHead(404);
-				res.end();
-				return;
-			}
-
-			res.setHeader('Access-Control-Request-Method', 'GET');
-
-			// solo permitimos peticiones GET
-			if (req.method !== 'GET') {
-				res.writeHead(405);
-				res.end('Method Not Allowed');
-				return;
-			}
-
-			// dejamos que Next maneje las peticiones
-			return handler(req, res);
-		});
-        
-		// empezamos a escuchar el puerto 3000 con el servidor HTTP
-		server.listen(3000, (error) => {
-			if (error) throw error;
-
-			// una vez iniciamos el servidor creamos una nueva ventana
-			win = new BrowserWindow({
-				height: 720,
-				width: 1280,
-				backgroundColor: '#504C4C',
-		
-				webPreferences: {
-					nodeIntegration: true
+		.prepare()
+		.then(() => {
+			// una vez lista creamos un servidor HTTP que use nuestro
+			// handler para rutas todas las peticiones HTTP
+			// que reciba Next.js
+			const server = createServer((req, res) => {
+				// si recibimos una petición por fuera de Electron
+				// respondemos con un 404
+				if (req.headers['user-agent'].indexOf('Electron') === -1) {
+					res.writeHead(404);
+					res.end();
+					return;
 				}
+
+				res.setHeader('Access-Control-Request-Method', 'GET');
+
+				// solo permitimos peticiones GET
+				if (req.method !== 'GET') {
+					res.writeHead(405);
+					res.end('Method Not Allowed');
+					return;
+				}
+
+				// dejamos que Next maneje las peticiones
+				return handler(req, res);
 			});
-			
-		
 
-			// y abrimos la URL local del servidor HTTP que creamos
-			win.loadURL('http://localhost:3000');
+			// empezamos a escuchar el puerto 3000 con el servidor HTTP
+			server.listen(3000, (error) => {
+				if (error) throw error;
 
-			// abrimos las herramientas de desarrollo
-			if (dev) {
-				win.webContents.openDevTools();
-			}
+				// una vez iniciamos el servidor creamos una nueva ventana
+				win = new BrowserWindow({
+					height: 768,
+					width: 1366,
+					webPreferences: {
+						nodeIntegration: true
+					}
+				});
 
 
-			win.on('close', () => {
-				// cuando el usuario cierra la ventana borramo `win`
-				// y paramos el servidor HTTP
-				win = null;
-				server.close();
+
+				// y abrimos la URL local del servidor HTTP que creamos
+				win.loadURL('http://localhost:3000');
+
+				// abrimos las herramientas de desarrollo
+				if (dev) {
+					win.webContents.openDevTools();
+				}
+
+
+				win.on('close', () => {
+					// cuando el usuario cierra la ventana borramo `win`
+					// y paramos el servidor HTTP
+					win = null;
+					server.close();
+				});
 			});
 		});
-	});
 }
 
 // una vez la app esté lista iniciamos una ventana nueva
