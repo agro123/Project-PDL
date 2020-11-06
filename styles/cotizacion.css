@@ -1,0 +1,46 @@
+/*-----Fecha---------- */
+.top {
+    display: flex;
+    position: relative;
+}
+.containerDate {
+    position: relative;
+    width: 10%;
+}
+.date {
+    text-align:center;
+    font-size: 18px;
+}
+/* ---------------------*/
+
+/*---Formulario cliente---------- */
+.clientForm {
+    width: 28%;
+    position: relative;
+}
+.cotizacionPanel {
+    margin-top: 5%;
+}
+/*---Titulo de cada formulario---*/
+.titleLine {
+    background-color: #1890FF;
+    position: relative;
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+.titleLine p {
+    /* Datos de cliente */
+    position: absolute;
+    width: 129px;
+    height: 21px;
+    font-style: normal;
+    font-weight: normal;
+    font-family: var(--fuente);
+    line-height: 21px;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+/*----------------------- */
