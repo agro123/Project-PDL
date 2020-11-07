@@ -1,34 +1,41 @@
-import { Layout, Menu} from 'antd';
-import { CopyOutlined }from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
 import MenuOption from './menuOption';
-const {  Content, Sider } = Layout;
+import {
+  FileTextOutlined,
+  ReconciliationOutlined,
+  ContainerOutlined
+} from '@ant-design/icons';
+import { autoUpdater } from 'electron';
 
+const { SubMenu } = Menu;
+const { Content, Sider } = Layout;
 
 const MyLayout = ({ children }) => (
   <>
     <Layout className="layout">
       <Sider
         style={{
-          height: '100vh',
-          background: '#015DB5',
+          background: '#001529',
+          flex: 'auto'
         }}
       >
         <Menu
           mode="inline"
           defaultSelectedKeys={['2']}
           theme='dark'
-          style={{
-            background: '#015DB5',
-            height: '100vh',
-            color: 'white'
-          }}
         >
-          <Menu.Item key="1" icon={<CopyOutlined />}><MenuOption label="Ordenes de servicio" url="/ordenesS/controlOrdeneS" /></Menu.Item>
-          <Menu.Item key="2"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
-          <Menu.Item key="3"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
-          <Menu.Item key="4"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
-          <Menu.Item key="5"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
-          <Menu.Item key="6"><MenuOption label="other" url="/ordenesS/controlOrdeneS" /></Menu.Item>
+          <SubMenu key="sub1" icon={<FileTextOutlined />} title="Cotización">
+            <Menu.Item key="1"><MenuOption label="Crear" url="/Cotizaciones/cotizacion" /></Menu.Item>
+            <Menu.Item key="2"><MenuOption label="Ver" url="/Cotizaciones/cotizaciones" /></Menu.Item>
+          </SubMenu>
+          <SubMenu key="sub2" icon={<ReconciliationOutlined />} title="Orden de servcio">
+            <Menu.Item key="5"><MenuOption label="Crear" url="/ordenS/ordenServicio" /></Menu.Item>
+            <Menu.Item key="6"><MenuOption label="Ver" url="/ordenS/ordenesServicio" /></Menu.Item>
+          </SubMenu>
+          <SubMenu key="sub3" icon={< ContainerOutlined />} title="Cuenta de cobro">
+            <Menu.Item key="3"><MenuOption label="Crear" url="/cuentaCobro/cuentaCobro" /></Menu.Item>
+            <Menu.Item key="4"><MenuOption label="Ver" url="/cuentaCobro/cuentasCobro" /></Menu.Item>
+          </SubMenu>
         </Menu>
       </Sider>
       <Content
@@ -38,7 +45,7 @@ const MyLayout = ({ children }) => (
       >
         <div className="site-layout-content">{children}</div>
       </Content>
-    </Layout>
+  </Layout>
   </>
 );
 

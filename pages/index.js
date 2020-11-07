@@ -6,12 +6,13 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Reico</title>
+        <title>DIU PROJECT</title>
         <link rel="icon" href="/favicon.ico" />
+        
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenido a Project Reico
+          Project DIU
         </h1>
       </main>
     </div>
