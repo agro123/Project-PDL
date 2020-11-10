@@ -9,6 +9,12 @@ import { Button } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
 
 function Cotizacion() {
+
+  let client;
+  const handleClientForm = (e) => {
+    client = e;
+  }
+
   return (
     <>
       <div className='top'>
@@ -18,7 +24,7 @@ function Cotizacion() {
         <ShowDate />
       </div>
       <div className='cotizacionPanel'>
-        <ClientForm />
+        <ClientForm handleForm={handleClientForm} />
         <div className='middle'>
           <MaterialsForm />
           <ObservationForm />
