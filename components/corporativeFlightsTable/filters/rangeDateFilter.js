@@ -3,12 +3,12 @@ import { SearchOutlined, CalendarOutlined } from '@ant-design/icons';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 /* import esEs from 'antd/es/locale/es_ES'; */
 
-const RangeDateFilter = (dataIndex: string) => {
-    const handleReset = (clearFilters: () => void) => {
+const RangeDateFilter = (dataIndex) => {
+    const handleReset = (clearFilters) => {
         clearFilters();
     };
     return {
-        filterDropdown: ({ setSelectedKeys, confirm, clearFilters }: FilterDropdownProps) => (
+        filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
             <div style={{ padding: 8 }}>
                 <DatePicker.RangePicker
                     style={{ marginBottom: 8 }}
@@ -26,7 +26,7 @@ const RangeDateFilter = (dataIndex: string) => {
                         Search
 				    </Button>
                     <Button
-                        onClick={() => handleReset(clearFilters!)}
+                        onClick={() => handleReset(clearFilters)}
                         size="small"
                         style={{ width: 90 }}
                     >
@@ -35,21 +35,21 @@ const RangeDateFilter = (dataIndex: string) => {
                 </div>
             </div>
         ),
-        filterIcon: (filtered: any) => <CalendarOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-        onFilter: (value: any, record: any) => {
-            const [init, end]: string = value.split('/');
-            const [iYear, iMonth, iDay]: any = init.split('-');
-            const [fYear, fMonth, fDay]: any = end.split('-');
+        filterIcon: (filtered) => <CalendarOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+        onFilter: (value, record) => {
+            const [init, end] = value.split('/');
+            const [iYear, iMonth, iDay] = init.split('-');
+            const [fYear, fMonth, fDay] = end.split('-');
             const initialDate = parseInt(iYear + iMonth + iDay, 10);
             const finalDate = parseInt(fYear + fMonth + fDay, 10);
 
-            const [tYear, tMonth, tDay]: string = record[dataIndex].split('-');
+            const [tYear, tMonth, tDay] = record[dataIndex].split('-');
             const tableDate = parseInt(tYear + tMonth + tDay, 10);
-            const isInRange: boolean = tableDate >= initialDate && tableDate <= finalDate;
+            const isInRange = tableDate >= initialDate && tableDate <= finalDate;
 
             return isInRange;
         },
-        render: (text: string) => text
+        render: (text) => text
     };
 }
 

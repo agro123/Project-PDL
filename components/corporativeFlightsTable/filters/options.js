@@ -1,5 +1,5 @@
-interface Option { value: string, text: string }
-export const statusOptions: Option[] = [
+
+export const statusOptions = [
     {
         text: 'Cancelados',
         value: 'Cancelado',
@@ -26,7 +26,7 @@ export const statusOptions: Option[] = [
     },
 ];
 
-export const typeOptions: Option[] = [
+export const typeOptions = [
     {
         text: 'Ida y Regreso',
         value: 'Ida y Regreso',
@@ -37,7 +37,7 @@ export const typeOptions: Option[] = [
     },
 ];
 
-export const sourceOptions: Option[] = [
+export const sourceOptions = [
     {
         text: 'Call',
         value: 'Call',
@@ -47,9 +47,9 @@ export const sourceOptions: Option[] = [
         value: 'Portal',
     },
 ];
-const unique = (array: Option[]) => {
+const unique = (array) => {
     const hash = {};
-    const newArray = array.filter((current: Option) => {
+    const newArray = array.filter((current) => {
         const go = String(current.value);
         const exists = !hash[go] || false;
         hash[go] = true;
@@ -58,8 +58,8 @@ const unique = (array: Option[]) => {
     return newArray;
 }
 
-export const angetInChargeOptions = (dataSource: any): Option[] => {
-    const d: Option[] = dataSource.map((comp: any) => (
+export const angetInChargeOptions = (dataSource)=> {
+    const d = dataSource.map((comp) => (
         {
             text: comp.agent_in_charge,
             value: comp.agent_in_charge
@@ -68,8 +68,8 @@ export const angetInChargeOptions = (dataSource: any): Option[] => {
     return unique(d);
 }
 
-export const companyOptions = (dataSource: any): Option[] => {
-    const d: Option[] = dataSource.map((comp: any) => (
+export const companyOptions = (dataSource) => {
+    const d = dataSource.map((comp) => (
         {
             text: comp.company,
             value: comp.company

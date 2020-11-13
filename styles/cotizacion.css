@@ -11,7 +11,6 @@
     display: flex;
     position: relative;
     flex: auto;
-
 }
 .containerDate {
     position: relative;
@@ -55,9 +54,10 @@
     margin: 0 30px 30px 0;
 }
 .materialsForm {
-    width: 750px;
     position: relative;
-    margin: 0 30px 30px 0;
+    flex: auto;
+    margin: 0 0 30px 0;
+    height: 300px;
 }
 
 .otherForm {
@@ -68,6 +68,7 @@
 .observationForm {
     position: relative;
     flex: auto;
+    margin-right: 30px;
 }
 .totalDisplay {
     position: relative;
@@ -86,13 +87,16 @@
     text-align:center;
     font-size: 32px;
 }
+.total::before{
+    content: '$ ';
+}
 
 @media screen and (max-width: 1366px) {
     .clientForm {
         margin: 0 30px 10px 0;
     }
     .materialsForm {
-        margin: 0 30px 10px 0;
+        margin: 0 0 10px 0;
     }
     .cotizacionPanel {
         margin-top: 5px;

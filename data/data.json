@@ -21,5 +21,18 @@
             "phoneNumb": "4588124",
             "email": "german@example.com"
         }
+    ],
+    "materiales": [
+        {
+            "ref": "12345",
+            "name": "Lamina de acero",
+            "price": 100000
+        },
+        {
+            "ref": "13456",
+            "name": "Lamina de aluminio",
+            "price": 200000
+        }
+
     ]
 }

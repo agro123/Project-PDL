@@ -1,6 +1,6 @@
 import { Tag } from 'antd';
 
-export default function Tagtable(tag: string): JSX.Element {
+export default function Tagtable(tag) {
     let color = ''
     switch (tag) {
         case 'Cancelado' || 'cancelado':

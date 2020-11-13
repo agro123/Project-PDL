@@ -2,7 +2,7 @@ import { Input, AutoComplete, Form } from 'antd';
 import data from '../../../data/data.json'
 import { useState, useEffect } from 'react';
 import NumericInput from '../../constants/numericInput'
-import { urlObjectKeys } from 'next/dist/next-server/lib/utils';
+
 
 const ClienteForm = ({ handleForm }) => {
     const [client, setClient] = useState({
@@ -14,32 +14,24 @@ const ClienteForm = ({ handleForm }) => {
     });
     useEffect(() => {
         handleForm(client);
+        idList();
+        clientList();
     })
 
     //----------------------------Rellenar Listas-------------------------------------    
     let clientes = [];
     const clientList = () => {
-        for (let i = 0; i < data.clientes.length; i++) {
-            clientes.push(
-                {
-                    value: data.clientes[i].name,
-                    label: data.clientes[i].name
-                }
-            )
-        }
+        data.clientes.map(cliente => {
+            clientes.push({ value: cliente.name, label: cliente.name })
+        })
     }
     clientList();
 
     let ids = [];
     const idList = () => {
-        for (let i = 0; i < data.clientes.length; i++) {
-            ids.push(
-                {
-                    value: data.clientes[i].id,
-                    label: data.clientes[i].id
-                }
-            )
-        }
+        data.clientes.map(cliente => {
+            ids.push({ value: cliente.id, label: cliente.id })
+        })
     }
     idList();
 
@@ -69,7 +61,6 @@ const ClienteForm = ({ handleForm }) => {
                     address: data.clientes[i].address,
                     email: data.clientes[i].email
                 });
-                console.log(client)
                 return true;
             }
         }
@@ -77,26 +68,8 @@ const ClienteForm = ({ handleForm }) => {
     }
 
     //-------------------------------------------------------------------------------
-
-    const onSaveName = value => {
-        setClient({ ...client, name: value });
-        existName(value);
-    };
-    const onSaveId = value => {
-        setClient({ ...client, id: value });
-        existId(value);
-    };
-
-    const onSaveAddress = e => {
-        setClient({ ...client, address: e.target.value });
-    };
-
-    const onSavePhoneNumb = e => {
-        setClient({ ...client, phoneNumb: e.target.value });
-    };
-
-    const onSaveEmail = e => {
-        setClient({ ...client, email: e.target.value });
+    const onChange = e => {
+        setClient({ ...client, [e.target.name]: e.target.value });
     };
 
     const style = { width: '195px', margin: '0 2% 2% 0' };
@@ -114,7 +87,10 @@ const ClienteForm = ({ handleForm }) => {
                         placeholder="Nombre"
                         options={clientes}
                         name="name"
-                        onChange={onSaveName}
+                        onChange={value => {
+                            setClient({ ...client, name: value });
+                            existName(value);
+                        }}
                         allowClear={true}
                     />
                     <AutoComplete
@@ -122,7 +98,10 @@ const ClienteForm = ({ handleForm }) => {
                         placeholder="Identificación"
                         options={ids}
                         value={client.id}
-                        onChange={onSaveId}
+                        onChange={value => {
+                            setClient({ ...client, id: value });
+                            existId(value);
+                        }}
                         name="id"
                         allowClear={true}
                     />
@@ -131,13 +110,13 @@ const ClienteForm = ({ handleForm }) => {
                         placeholder="Dirección"
                         value={client.address}
                         name="address"
-                        onChange={onSaveAddress}
+                        onChange={onChange}
                         allowClear={true}
                     />
                     <Input
                         style={{ width: '195px', margin: '0 0 2% 0' }}
                         placeholder="Teléfono"
-                        onChange={onSavePhoneNumb}
+                        onChange={onChange}
                         name="phoneNumb"
                         value={client.phoneNumb}
                         allowClear={true}
@@ -147,7 +126,7 @@ const ClienteForm = ({ handleForm }) => {
                         placeholder="Correo electronico"
                         name="email"
                         value={client.email}
-                        onChange={onSaveEmail}
+                        onChange={onChange}
                         allowClear={true}
                     />
                 </Form>

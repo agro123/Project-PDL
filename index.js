@@ -69,7 +69,6 @@ function createWindow() {
 					win.webContents.openDevTools();
 				}
 
-
 				win.on('close', () => {
 					// cuando el usuario cierra la ventana borramo `win`
 					// y paramos el servidor HTTP

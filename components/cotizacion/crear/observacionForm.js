@@ -9,7 +9,7 @@ const ObservacionForm = () => {
                 <div className="titleLine">
                     <p>Observaciones</p>
                 </div>
-                <TextArea showCount autoSize={false} style={{height: '200px'}}/>
+                <TextArea showCount autoSize={false} style={{height: '170px'}}/>
             </div>
 
         </>

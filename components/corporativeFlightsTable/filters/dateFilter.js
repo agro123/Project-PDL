@@ -2,12 +2,12 @@ import { DatePicker, Button, Space } from 'antd';
 import { SearchOutlined, CalendarOutlined } from '@ant-design/icons';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 
-const DateFilter = (dataIndex: string) => {
-    const handleReset = (clearFilters: () => void) => {
+const DateFilter = (dataIndex) => {
+    const handleReset = (clearFilters) => {
         clearFilters();
     };
     return ({
-        filterDropdown: ({ setSelectedKeys, confirm, clearFilters }: FilterDropdownProps) => (
+        filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
             <div style={{ padding: 8 }}>
                 <DatePicker
                     placeholder="Seleccionar"
@@ -28,7 +28,7 @@ const DateFilter = (dataIndex: string) => {
                         Search
                         </Button>
                     <Button
-                        onClick={() => handleReset(clearFilters!)}
+                        onClick={() => handleReset(clearFilters)}
                         size="small"
                         style={{ width: 90 }}
                     >
@@ -37,9 +37,9 @@ const DateFilter = (dataIndex: string) => {
                 </Space>
             </div>
         ),
-        filterIcon: (filtered: boolean) =>
+        filterIcon: (filtered) =>
             (<CalendarOutlined style={{ color: filtered ? "#1890ff" : undefined }} />),
-        onFilter: (value: string, record: any) => {
+        onFilter: (value, record) => {
             return record[dataIndex] ? record[dataIndex].toString().includes(value) : ""
         },
     });

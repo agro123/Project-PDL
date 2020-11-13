@@ -1,13 +1,13 @@
 import { ColumnsType } from 'antd/es/table';
-import Tagtable from './tags.tsx';
-import { statusOptions, typeOptions, sourceOptions, angetInChargeOptions, companyOptions } from './filters/options.tsx'
-import searchBarFilter from './filters/customFilter.tsx';
-import rangeDateFilter from './filters/rangeDateFilter.tsx';
-import dateFilter from './filters/dateFilter.tsx';
-import timeFilter from './filters/timeFilter.tsx';
+import Tagtable from './tags.js';
+import { statusOptions, typeOptions, sourceOptions, angetInChargeOptions, companyOptions } from './filters/options'
+import searchBarFilter from './filters/customFilter';
+import rangeDateFilter from './filters/rangeDateFilter';
+import dateFilter from './filters/dateFilter';
+import timeFilter from './filters/timeFilter';
 import dataSource from './data_table';
 
-const Columns: ColumnsType = [
+const Columns = [
     {
         title: 'Cod.',
         dataIndex: 'reservationCode',
@@ -46,7 +46,7 @@ const Columns: ColumnsType = [
         render: Tagtable,
         filters: typeOptions,
         filterMultiple: false,
-        onFilter: (value: string, record: any) => record.type === value,
+        onFilter: (value, record) => record.type === value,
         align: 'center',
         width: 124
     },
@@ -88,14 +88,14 @@ const Columns: ColumnsType = [
         dataIndex: 'reservation_price',
         key: 'reservation_price',
         align: 'center',
-        sorter: (a: any, b: any) => a.reservation_price - b.reservation_price,
+        sorter: (a, b) => a.reservation_price - b.reservation_price,
     },
     {
         title: 'T.A',
         dataIndex: 'reservation_admin_fee',
         key: 'reservation_admin_fee',
         align: 'center',
-        sorter: (a: any, b: any) => a.reservation_admin_fee - b.reservation_admin_fee,
+        sorter: (a, b) => a.reservation_admin_fee - b.reservation_admin_fee,
     },
     {
         title: 'Pago',
@@ -110,7 +110,7 @@ const Columns: ColumnsType = [
         render: Tagtable,
         filters: statusOptions,
         filterMultiple: false,
-        onFilter: (value: string, record: any) => record.status === value,
+        onFilter: (value, record) => record.status === value,
         align: 'center',
         width: 168
     },
@@ -121,7 +121,7 @@ const Columns: ColumnsType = [
         render: Tagtable,
         filters: sourceOptions,
         filterMultiple: false,
-        onFilter: (value: string, record: any) => record.source === value,
+        onFilter: (value, record) => record.source === value,
         align: 'center',
         width: 95
     },
@@ -131,7 +131,7 @@ const Columns: ColumnsType = [
         key: 'agent_in_charge',
         filters: angetInChargeOptions(dataSource),
         filterMultiple: false,
-        onFilter: (value: string, record: any) => record.agent_in_charge === value,
+        onFilter: (value, record) => record.agent_in_charge === value,
         align: 'center'
     },
     {
@@ -140,7 +140,7 @@ const Columns: ColumnsType = [
         key: 'company',
         filters: companyOptions(dataSource),
         filterMultiple: false,
-        onFilter: (value: string, record: any) => record.company === value,
+        onFilter: (value, record) => record.company === value,
         align: 'center'
     }
 ];

@@ -2,12 +2,12 @@ import { TimePicker, Button } from 'antd';
 import { SearchOutlined, FieldTimeOutlined } from '@ant-design/icons';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 
-const TimeFilter = (dataIndex: string) => {
-    const handleReset = (clearFilters: () => void) => {
+const TimeFilter = (dataIndex) => {
+    const handleReset = (clearFilters) => {
         clearFilters();
     };
     return {
-        filterDropdown: ({ setSelectedKeys, confirm, clearFilters }: FilterDropdownProps) => (
+        filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
             <div style={{ padding: 8 }}>
                 <TimePicker.RangePicker
                     format="HH:mm"
@@ -28,7 +28,7 @@ const TimeFilter = (dataIndex: string) => {
                         Search
                     </Button>
                     <Button
-                        onClick={() => handleReset(clearFilters!)}
+                        onClick={() => handleReset(clearFilters)}
                         size="small"
                         style={{ width: 90 }}
                     >
@@ -37,21 +37,21 @@ const TimeFilter = (dataIndex: string) => {
                 </div>
             </div>
         ),
-        filterIcon: (filtered: any) => <FieldTimeOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-        onFilter: (value: any, record: any) => {
-            const [init, end]: string = value.split('/');
-            const [iHour, iMin]: any = init.split(':');
-            const [fHour, fMin]: any = end.split(':');
+        filterIcon: (filtered) => <FieldTimeOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+        onFilter: (value, record) => {
+            const [init, end] = value.split('/');
+            const [iHour, iMin] = init.split(':');
+            const [fHour, fMin] = end.split(':');
             const initialTime = parseInt(iHour + iMin, 10);
             const finalTime = parseInt(fHour + fMin, 10);
 
-            const [tHour, tMin]: string = record[dataIndex].split(':');
+            const [tHour, tMin] = record[dataIndex].split(':');
             const tableTime = parseInt(tHour + tMin, 10);
-            const isInRange: boolean = tableTime >= initialTime && tableTime <= finalTime;
+            const isInRange = tableTime >= initialTime && tableTime <= finalTime;
 
             return isInRange;
         },
-        render: (text: string) => text
+        render: (text) => text
     };
 }
 

@@ -5,13 +5,13 @@ import { Input, Space, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 
-const CustomFilter = (dataIndex: string) => {
-  const handleReset = (clearFilters: () => void) => {
+const CustomFilter = (dataIndex) => {
+  const handleReset = (clearFilters) => {
     clearFilters();
   };
 
   return {
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: FilterDropdownProps) => (
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
         <Input
           placeholder={`Search ${dataIndex}`}
@@ -30,16 +30,16 @@ const CustomFilter = (dataIndex: string) => {
           >
             Search
           </Button>
-          <Button onClick={() => handleReset(clearFilters!)} size='small' style={{ width: 90 }}>
+          <Button onClick={() => handleReset(clearFilters)} size='small' style={{ width: 90 }}>
             Reset
           </Button>
         </Space>
       </div>
     ),
-    filterIcon: (filtered: any) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value: string, record: { [x: string]: { toString: () => string } }) => 
+    filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) => 
       record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : false,
-    render: (text: string) => text
+    render: (text) => text
   };
 };
 

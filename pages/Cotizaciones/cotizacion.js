@@ -12,7 +12,11 @@ function Cotizacion() {
 
   let client;
   const handleClientForm = (e) => {
+    console.log(e)
     client = e;
+  }
+  const handleMaterialForm = (e) => {
+    console.log(e)
   }
 
   return (
@@ -26,11 +30,11 @@ function Cotizacion() {
       <div className='cotizacionPanel'>
         <ClientForm handleForm={handleClientForm} />
         <div className='middle'>
-          <MaterialsForm />
-          <ObservationForm />
+          <MaterialsForm handleForm={handleMaterialForm}/>
+          
         </div>
         <div className='bot'>
-          <OtherForm />
+          <ObservationForm />
           <TotalDisplay />
           <div className='final'>
             <Button type="primary"

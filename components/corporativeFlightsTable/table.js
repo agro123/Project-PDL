@@ -2,9 +2,9 @@ import { useState/* , useEffect */ } from 'react';
 import { Table } from 'antd';
 /* import { dataSource } from '../../undersoft_data/corporative_flights.json';  */
 import dataSource from './data_table';
-import columns from './columns.tsx'
+import columns from './columns'
 
-const TableInfo: React.FC = () => {
+const TableInfo = () => {
     /* const [ response, setResponse ] = useState([]); */
     const [isLoading, setLoading] = useState(true);
     /* useEffect(() => {

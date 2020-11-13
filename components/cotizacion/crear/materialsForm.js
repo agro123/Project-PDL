@@ -1,64 +1,219 @@
-import { Input, AutoComplete,Button } from 'antd';
-import {PlusOutlined} from '@ant-design/icons';
-import MaterialsTable from './materialTable';
-const MaterialsForm = () => {
-    const ref = [
-        {
-            value: "32414",
-            label: "32414",
-        },
-        {
-            value: "55667",
-            label: "55667",
+import { Input, AutoComplete, Button, Form, Table } from 'antd';
+import { PlusOutlined } from '@ant-design/icons'
+import { useState, useEffect } from 'react';
+import columns from './columns';
+import data from '../../../data/data.json';
 
-        }
-    ];
-    const mat = [
-        {
-            value: "Lamina de aluminio",
-            label: "Lamina de aluminio",
-        },
-        {
-            value: "Lamina de acero",
-            label: "Lamina de acero",
 
+function MaterialsForm(props) {
+    const [material, setMaterial] = useState({
+        ref: '',
+        name: '',
+        price: '',
+        heigth: '',
+        width: '',
+        quantity: '',
+        saleValue: ''
+    })
+    const [list, setList] = useState([])
+    const [area, setArea] = useState('')
+
+
+    useEffect(() => {
+        updateMaterial(material);
+        updateList(list);
+        calcArea();
+    })
+    const updateList = (l) => { setList(l) };
+    const updateMaterial = (m) => { setMaterial(m) };
+    let key = 0;
+
+    //----------------------------Rellenar Listas-------------------------------------    
+    let references = [];
+    const refList = () => {
+        data.materiales.map(material => {
+            references.push({ value: material.ref, label: material.ref })
+        })
+    }
+    refList();
+
+    let materials = [];
+    const materialList = () => {
+        data.materiales.map(material => {
+            materials.push({ value: material.name, label: material.name })
+        })
+    }
+    materialList();
+
+
+    //----------------------------AutoRellenar--------------------------------------
+    const existMaterial = (prop) => {
+        data.materiales.map(mat => {
+            if (prop === mat.name) {
+                setMaterial({
+                    ...material,
+                    name: mat.name,
+                    ref: mat.ref,
+                    price: mat.price
+                });
+                return true;
+            }
+        })
+        return false;
+    }
+    const existRef = (prop) => {
+        data.materiales.map(mat => {
+            if (prop === mat.ref) {
+                setMaterial({
+                    ...material,
+                    name: mat.name,
+                    ref: mat.ref,
+                    price: mat.price
+                });
+                return true;
+            }
+        })
+        return false;
+    }
+    //-------------------------------------------------------------------------------
+    function calcArea() {
+        const q = parseInt(material.heigth, 10);
+        const p = parseInt(material.width, 10);
+
+        if ((!isNaN(q) && !isNaN(p)) && (q != undefined && p != undefined)) {
+            setArea(q * p);
+        } else {
+            setArea('');
         }
-    ];
+    }
+    const verficarDatos = () => {
+        if (material.ref == '' || material.name == '' || material.price == '' || material.saleValue == ''
+            || material.quantity == '') {
+            console.log('error');
+            return false;
+        }
+        return true;
+    }
+
+    //-------------------------------------------------------------------------------
+    const onChange = e => {
+        setMaterial({ ...material, [e.target.name]: e.target.value, });
+    };
+
+    const onClick = e => {
+        if (verficarDatos()) {
+            key++;
+            setList([...list, { ...material, area: area, key: key }]);
+            setMaterial({
+                ref: '',
+                name: '',
+                price: '',
+                heigth: '',
+                width: '',
+                quantity: '',
+                saleValue: ''
+            })
+        }
+    }
+    const remove = (record, rowIndex) => {
+        return {
+            onDoubleClick: e => {
+                let l = list;
+                l.splice(rowIndex, 1);
+                setList([]);
+            }
+        };
+    }
     return (
         <>
             <div className="materialsForm">
                 <div className="titleLine">
                     <p>Materiales</p>
                 </div>
-                <Input.Group style={{display: 'flex'}}>
+                <Form style={{ display: 'flex' }}>
                     <AutoComplete
-                        style={{ width: '15%', margin: '0 2% 2% 0' }}
-                        placeholder="Referencia"
-                        options={ref}
+                        value={material.ref}
+                        style={{ width: '100px', margin: '0 5px 10px 0' }}
+                        placeholder="Ref."
+                        options={references}
+                        onChange={value => {
+                            setMaterial({ ...material, ref: value });
+                            existRef(value);
+                        }}
+                        allowClear={true}
                     />
                     <AutoComplete
-                        style={{ width: '25%', margin: '0 2% 2% 0', flex: 'auto' }}
-                        placeholder="Material"
-                        options={mat}
+                        style={{ flex: 'auto', margin: '0 5px 10px 0' }}
+                        placeholder="Descripción"
+                        options={materials}
+                        value={material.name}
+                        onChange={value => {
+                            setMaterial({ ...material, name: value });
+                            existMaterial(value);
+                        }}
+                        allowClear={true}
                     />
                     <Input
-                        style={{ width: '15%', margin: '0 2% 2% 0' }}
-                        placeholder="Precio unit."
+                        style={{ width: '90px', margin: '0 5px 10px 0' }}
+                        value={material.width}
+                        name="width"
+                        onChange={onChange}
+                        placeholder="Ancho"
+                        allowClear={true}
                     />
                     <Input
-                        style={{ width: '10%', margin: '0 2% 2% 0' }}
+                        style={{ width: '90px', margin: '0 5px 10px 0' }}
+                        value={material.heigth}
+                        name="heigth"
+                        onChange={onChange}
+                        placeholder="Alto"
+                        allowClear={true}
+                    />
+                    <Input
+                        style={{ width: '90px', margin: '0 5px 10px 0' }}
+                        value={area}
+                        name="area"
+                        placeholder="Area"
+                    />
+                    <Input
+                        style={{ width: '150px', margin: '0 5px 10px 0' }}
+                        value={material.price}
+                        name="price"
+                        onChange={onChange}
+                        placeholder="Precio"
+                        allowClear={true}
+                    />
+                    <Input
+                        style={{ width: '90px', margin: '0 5px 10px 0' }}
                         placeholder="Cant."
+                        value={material.quantity}
+                        name="quantity"
+                        onChange={onChange}
+                        allowClear={true}
                     />
                     <Input
-                        style={{ width: '15%', margin: '0 2% 2% 0' }}
-                        placeholder="Total"
+                        style={{ width: '150px', margin: '0 5px 10px 0' }}
+                        placeholder="Valor de venta"
+                        value={material.saleValue}
+                        name="saleValue"
+                        onChange={onChange}
+                        allowClear={true}
                     />
-                    <Button type="primary" shape="circle" icon={<PlusOutlined />} />
-                </Input.Group>
-                <MaterialsTable />
+                    <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={onClick} />
+                </ Form>
+                <Table columns={columns}
+                    dataSource={list}
+                    showHeader={false}
+                    scroll={{
+                        y: 120
+                    }}
+                    size='small'
+                    pagination={false}
+                    onRow={remove}
+                />
+
             </div>
         </>
     )
 }
-
 export default MaterialsForm;
