@@ -1,9 +1,8 @@
-import { Input, AutoComplete, Form } from 'antd';
+import { Input, AutoComplete, Form, Tooltip } from 'antd';
 import data from '../../../data/data.json'
 import { useState, useEffect } from 'react';
 
 import NumericInput from '../../constants/numericInput'
-
 
 const ClienteForm = ({ handleForm }) => {
     const [client, setClient] = useState({
@@ -94,6 +93,7 @@ const ClienteForm = ({ handleForm }) => {
                         }}
                         allowClear={true}
                     />
+                    <Tooltip placement="top" title={"C.C. o NIT"}>
                     <AutoComplete
                         style={{ width: '195px', margin: '0 0 2% 0' }}
                         placeholder="Identificación"
@@ -106,6 +106,7 @@ const ClienteForm = ({ handleForm }) => {
                         name="id"
                         allowClear={true}
                     />
+                    </Tooltip>
                     <Input
                         style={style}
                         placeholder="Dirección"

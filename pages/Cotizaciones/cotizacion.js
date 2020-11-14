@@ -2,7 +2,6 @@ import styles from '../../styles/Home.module.css';
 import ClientForm from '../../components/cotizacion/crear/clientForm';
 import ShowDate from '../../components/cotizacion/crear/showDate';
 import MaterialsForm from '../../components/cotizacion/crear/materialsForm';
-import OtherForm from '../../components/cotizacion/crear/otherForm';
 import ObservationForm from '../../components/cotizacion/crear/observacionForm';
 import TotalDisplay from '../../components/cotizacion/crear/totalDisplay';
 import { Button } from 'antd';
@@ -17,6 +16,9 @@ function Cotizacion() {
   }
   const handleMaterialForm = (e) => {
     console.log(e)
+  }
+  const handleObservationForm = (e) => {
+    console.log("observation:",e)
   }
 
   return (
@@ -33,7 +35,7 @@ function Cotizacion() {
           <MaterialsForm handleForm={handleMaterialForm}/>
         </div>
         <div className='bot'>
-          <ObservationForm />
+          <ObservationForm handleForm={handleObservationForm}/>
           <TotalDisplay />
           <div className='final'>
             <Button type="primary"

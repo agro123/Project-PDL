@@ -1,5 +1,5 @@
-import { Input, AutoComplete, Button, Form, Table } from 'antd';
-import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons'
+import { Input, AutoComplete, Button, Form, Table,Tooltip } from 'antd';
+import { PlusOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react';
 import columns from './columns';
 import data from '../../../data/data.json';
@@ -152,6 +152,7 @@ function MaterialsForm(props) {
                         }}
                         allowClear={true}
                     />
+                    <Tooltip placement="top" title={"Milimetros"}>
                     <Input
                         style={{ width: '90px', margin: '0 5px 10px 0' }}
                         value={material.width}
@@ -160,6 +161,8 @@ function MaterialsForm(props) {
                         placeholder="Ancho"
                         allowClear={true}
                     />
+                    </Tooltip>
+                    <Tooltip placement="top" title={"Milimetros"}>
                     <Input
                         style={{ width: '90px', margin: '0 5px 10px 0' }}
                         value={material.heigth}
@@ -168,12 +171,15 @@ function MaterialsForm(props) {
                         placeholder="Alto"
                         allowClear={true}
                     />
+                    </Tooltip>
+                    <Tooltip placement="top" title={"Milimetros"}>
                     <Input
                         style={{ width: '90px', margin: '0 5px 10px 0' }}
                         value={area}
                         name="area"
                         placeholder="Area"
                     />
+                    </Tooltip>
                     <Input
                         style={{ width: '150px', margin: '0 5px 10px 0' }}
                         value={material.price}
