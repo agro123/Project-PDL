@@ -47,6 +47,7 @@
     color: #FFFFFF;
     font-size: 16px;
 }
+
 /*---Formulario layout---------- */
 .clientForm {
     width: 400px;
@@ -57,7 +58,7 @@
     position: relative;
     flex: auto;
     margin: 0 0 30px 0;
-    height: 195px;
+    height: 350px;
 }
 
 .otherForm {
@@ -85,11 +86,14 @@
 
 .total {
     text-align:center;
-    font-size: 32px;
+    font-size: 32px; 
 }
-.total::before{
-    content: '$ ';
+.unitTotal {
+    text-align:center;
+    font-size: 17px;
+    width: 140px;
 }
+
 
 @media screen and (max-width: 1366px) {
     .clientForm {
@@ -97,6 +101,7 @@
     }
     .materialsForm {
         margin: 0 0 10px 0;
+        height: 195px;
     }
     .cotizacionPanel {
         margin-top: 5px;

@@ -1,4 +1,11 @@
-import { MinusCircleOutlined } from '@ant-design/icons'
+import { MinusCircleOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
+
+const formatter = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+})
 const columns = (onDelete) => [
     {
         title: 'Referencia',
@@ -12,22 +19,38 @@ const columns = (onDelete) => [
     {
         title: 'Ancho',
         dataIndex: 'width',
-        width: 95,
+        width: 105,
+        render: (text, record, index) => (
+            <Tooltip placement="top" title={"Milímetros"}>
+             {text}
+            </Tooltip>
+        ),
     },
     {
         title: 'Alto',
         dataIndex: 'heigth',
-        width: 95,
+        width: 105,
+        render: (text, record, index) => (
+            <Tooltip placement="top" title={"Milímetros"}>
+             {text}
+            </Tooltip>
+        ),
     },
     {
         title: 'Area',
         dataIndex: 'area',
-        width: 95,
+        width: 105,
+        render: (text, record, index) => (
+            <Tooltip placement="top" title={"Milímetros"}>
+                {text}
+            </Tooltip>
+        ),
     },
     {
         title: 'Precio Unitario',
         dataIndex: 'price',
-        width: 155
+        width: 155,
+        render: (text, record, index) => (formatter.format(text)),
     },
     {
         title: 'Cantidad',
@@ -36,8 +59,9 @@ const columns = (onDelete) => [
     },
     {
         title: 'Valor de venta',
-        dataIndex: 'saleValue',
-        width: 145
+        dataIndex: 'total',
+        width: 130,
+        render: (text, record, index) => (formatter.format(text)),
     },
     {
         title: '',
@@ -45,10 +69,12 @@ const columns = (onDelete) => [
         key: 'x',
         width: 25,
         render: (text, record) => (
-            <MinusCircleOutlined onClick={(e) => { onDelete(record.key, e); }} />
+            <Tooltip placement="top" title={"Eliminar"}>
+                <MinusCircleOutlined onClick={(e) => { onDelete(record.key, e); }} />
+            </Tooltip>
         ),
     }
-    
+
 ];
 
 export default columns;

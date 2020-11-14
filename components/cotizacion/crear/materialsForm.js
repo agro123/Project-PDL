@@ -1,10 +1,10 @@
-import { Input, AutoComplete, Button, Form, Table,Tooltip } from 'antd';
+import { Input, AutoComplete, Button, Form, Table, Tooltip } from 'antd';
 import { PlusOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react';
 import columns from './columns';
 import data from '../../../data/data.json';
 
-function MaterialsForm(props) {
+function MaterialsForm({ handleForm, getTotal }) {
     const [material, setMaterial] = useState({
         ref: '',
         name: '',
@@ -12,21 +12,31 @@ function MaterialsForm(props) {
         heigth: '',
         width: '',
         quantity: '',
-        saleValue: ''
     })
     const [list, setList] = useState([]);
     const [area, setArea] = useState('');
-    const [key, setKey] = useState(0)
+    const [unitTotal, setUnitTotal] = useState(0);
+    const [key, setKey] = useState(0);
+    const [total, setTotal] = useState(0);
+
 
 
     useEffect(() => {
-        updateMaterial(material);
-        updateList(list);
-        console.log(list)
+        /* updateMaterial(material);
+        updateList(list); */
         calcArea();
+        calcTotal();
+        calcUnitTotal();
+        getTotal(total);
+        handleForm(list);
     })
-    const updateList = (l) => { setList(l) };
-    const updateMaterial = (m) => { setMaterial(m) };
+    /* const updateList = (l) => { setList(l) };
+    const updateMaterial = (m) => { setMaterial(m) }; */
+    const formatter = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+    })
 
     //----------------------------Rellenar Listas-------------------------------------    
     let references = [];
@@ -75,8 +85,8 @@ function MaterialsForm(props) {
         })
         return false;
     }
-    //-------------------------------------------------------------------------------
-    function calcArea() {
+    //--------------------------Calculo y verficacion de datos -----------------------------------------
+    const calcArea = () => {
         const q = parseInt(material.heigth, 10);
         const p = parseInt(material.width, 10);
 
@@ -86,9 +96,29 @@ function MaterialsForm(props) {
             setArea('');
         }
     }
+    const calcTotal = () => {
+        let t = 0;
+        list.map(m => {
+            const q = parseInt(m.price, 10);
+            const p = parseInt(m.quantity, 10);
+            t = t + (q * p);
+        })
+        setTotal(t);
+    }
+    const calcUnitTotal = () => {
+        const q = parseInt(material.price, 10);
+        const p = parseInt(material.quantity, 10);
+
+        if ((!isNaN(q) && !isNaN(p)) && (q != undefined && p != undefined)) {
+            setUnitTotal(q * p);
+        } else {
+            setUnitTotal(0);
+        }
+    }
 
     const verficarDatos = () => {
-        if (material.ref == '' || material.name == '' || material.price == '' || material.saleValue == ''
+        if (material.ref == '' || material.name == ''
+            || material.price == ''
             || material.quantity == '') {
             console.log('error');
             return false;
@@ -103,7 +133,7 @@ function MaterialsForm(props) {
     const onClick = e => {
         if (verficarDatos()) {
             setKey(key + 1);
-            setList([...list, { ...material, area: area, key: key }]);
+            setList([...list, { ...material, area: area, key: key, total: unitTotal }]);
             setMaterial({
                 ref: '',
                 name: '',
@@ -111,14 +141,12 @@ function MaterialsForm(props) {
                 heigth: '',
                 width: '',
                 quantity: '',
-                saleValue: ''
             })
         }
     }
     const onDelete = (key, e) => {
         e.preventDefault();
         const data = list.filter(item => item.key !== key);
-        console.log("data::::", data)
         setList(data);
 
     }
@@ -152,33 +180,33 @@ function MaterialsForm(props) {
                         }}
                         allowClear={true}
                     />
-                    <Tooltip placement="top" title={"Milimetros"}>
-                    <Input
-                        style={{ width: '90px', margin: '0 5px 10px 0' }}
-                        value={material.width}
-                        name="width"
-                        onChange={onChange}
-                        placeholder="Ancho"
-                        allowClear={true}
-                    />
+                    <Tooltip placement="top" title={"Milímetros"}>
+                        <Input
+                            style={{ width: '100px', margin: '0 5px 10px 0' }}
+                            value={material.width}
+                            name="width"
+                            onChange={onChange}
+                            placeholder="Ancho"
+                            allowClear={true}
+                        />
+                    </Tooltip>
+                    <Tooltip placement="top" title={"Milímetros"}>
+                        <Input
+                            style={{ width: '100px', margin: '0 5px 10px 0' }}
+                            value={material.heigth}
+                            name="heigth"
+                            onChange={onChange}
+                            placeholder="Alto"
+                            allowClear={true}
+                        />
                     </Tooltip>
                     <Tooltip placement="top" title={"Milimetros"}>
-                    <Input
-                        style={{ width: '90px', margin: '0 5px 10px 0' }}
-                        value={material.heigth}
-                        name="heigth"
-                        onChange={onChange}
-                        placeholder="Alto"
-                        allowClear={true}
-                    />
-                    </Tooltip>
-                    <Tooltip placement="top" title={"Milimetros"}>
-                    <Input
-                        style={{ width: '90px', margin: '0 5px 10px 0' }}
-                        value={area}
-                        name="area"
-                        placeholder="Area"
-                    />
+                        <Input
+                            style={{ width: '100px', margin: '0 5px 10px 0' }}
+                            value={area}
+                            name="area"
+                            placeholder="Área"
+                        />
                     </Tooltip>
                     <Input
                         style={{ width: '150px', margin: '0 5px 10px 0' }}
@@ -196,15 +224,10 @@ function MaterialsForm(props) {
                         onChange={onChange}
                         allowClear={true}
                     />
-                    <Input
-                        style={{ width: '150px', margin: '0 5px 10px 0' }}
-                        placeholder="Valor de venta"
-                        value={material.saleValue}
-                        name="saleValue"
-                        onChange={onChange}
-                        allowClear={true}
-                    />
-                    <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={onClick} />
+                    <p className='unitTotal'>{formatter.format(unitTotal)}</p>
+                    <Tooltip placement="top" title={"Añadir"}>
+                        <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={onClick} />
+                    </Tooltip>
                 </ Form>
                 <Table
                     columns={columns(onDelete)}
