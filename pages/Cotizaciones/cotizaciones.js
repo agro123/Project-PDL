@@ -1,5 +1,5 @@
 import styles from '../../styles/Home.module.css'
-import Tablef from '../../components/corporativeFlightsTable/table'
+import Modal from '../../components/cotizacion/crear/modal'
 
 function Cotizaciones() {
   return (
@@ -8,7 +8,7 @@ function Cotizaciones() {
         <h1 className={styles.title}>
           Cotizaciones
        </h1>
-       <Tablef />
+        <Modal />
       </div>
     </>)
 }

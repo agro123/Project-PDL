@@ -31,7 +31,6 @@ function Cotizacion() {
         <ClientForm handleForm={handleClientForm} />
         <div className='middle'>
           <MaterialsForm handleForm={handleMaterialForm}/>
-          
         </div>
         <div className='bot'>
           <ObservationForm />
@@ -39,7 +38,6 @@ function Cotizacion() {
           <div className='final'>
             <Button type="primary"
               icon={<PrinterOutlined />}
-              style={{}}
             >Imprimir
             </Button>
           </div>

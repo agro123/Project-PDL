@@ -11,7 +11,6 @@ const ObservacionForm = () => {
                 </div>
                 <TextArea showCount autoSize={false} style={{height: '170px'}}/>
             </div>
-
         </>
     )
 }

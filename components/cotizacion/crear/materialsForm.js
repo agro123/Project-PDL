@@ -1,9 +1,8 @@
 import { Input, AutoComplete, Button, Form, Table } from 'antd';
-import { PlusOutlined } from '@ant-design/icons'
+import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react';
 import columns from './columns';
 import data from '../../../data/data.json';
-
 
 function MaterialsForm(props) {
     const [material, setMaterial] = useState({
@@ -15,18 +14,19 @@ function MaterialsForm(props) {
         quantity: '',
         saleValue: ''
     })
-    const [list, setList] = useState([])
-    const [area, setArea] = useState('')
+    const [list, setList] = useState([]);
+    const [area, setArea] = useState('');
+    const [key, setKey] = useState(0)
 
 
     useEffect(() => {
         updateMaterial(material);
         updateList(list);
+        console.log(list)
         calcArea();
     })
     const updateList = (l) => { setList(l) };
     const updateMaterial = (m) => { setMaterial(m) };
-    let key = 0;
 
     //----------------------------Rellenar Listas-------------------------------------    
     let references = [];
@@ -86,6 +86,7 @@ function MaterialsForm(props) {
             setArea('');
         }
     }
+
     const verficarDatos = () => {
         if (material.ref == '' || material.name == '' || material.price == '' || material.saleValue == ''
             || material.quantity == '') {
@@ -99,10 +100,9 @@ function MaterialsForm(props) {
     const onChange = e => {
         setMaterial({ ...material, [e.target.name]: e.target.value, });
     };
-
     const onClick = e => {
         if (verficarDatos()) {
-            key++;
+            setKey(key + 1);
             setList([...list, { ...material, area: area, key: key }]);
             setMaterial({
                 ref: '',
@@ -115,15 +115,14 @@ function MaterialsForm(props) {
             })
         }
     }
-    const remove = (record, rowIndex) => {
-        return {
-            onDoubleClick: e => {
-                let l = list;
-                l.splice(rowIndex, 1);
-                setList([]);
-            }
-        };
+    const onDelete = (key, e) => {
+        e.preventDefault();
+        const data = list.filter(item => item.key !== key);
+        console.log("data::::", data)
+        setList(data);
+
     }
+
     return (
         <>
             <div className="materialsForm">
@@ -201,7 +200,8 @@ function MaterialsForm(props) {
                     />
                     <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={onClick} />
                 </ Form>
-                <Table columns={columns}
+                <Table
+                    columns={columns(onDelete)}
                     dataSource={list}
                     showHeader={false}
                     scroll={{
@@ -209,7 +209,6 @@ function MaterialsForm(props) {
                     }}
                     size='small'
                     pagination={false}
-                    onRow={remove}
                 />
 
             </div>
