@@ -20,8 +20,7 @@ const ObservacionForm = ({ handleForm }) => {
                 </div>
                 <TextArea
                     value={value}
-                    onChange={onChange}
-                    showCount autoSize={false}
+                    onChange={onChange} 
                     style={{ height: '170px' }} />
             </div>
         </>

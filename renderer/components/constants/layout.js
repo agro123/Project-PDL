@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { autoUpdater } from 'electron';
 
+
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
@@ -45,7 +46,7 @@ const MyLayout = ({ children }) => (
       >
         <div className="site-layout-content">{children}</div>
       </Content>
-  </Layout>
+    </Layout>
   </>
 );
 
