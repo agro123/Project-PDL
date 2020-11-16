@@ -1,5 +1,6 @@
 import styles from '../../styles/Home.module.css'
 import Modal from '../../components/cotizacion/crear/modal'
+import ObservationForm from '../../components/cotizacion/crear/observacionForm';
 
 function Cotizaciones() {
   return (
@@ -9,7 +10,7 @@ function Cotizaciones() {
           Cotizaciones
        </h1>
         <Modal />
-      </div>
+      </div> 
     </>)
 }
 
