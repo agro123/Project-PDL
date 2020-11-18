@@ -1,7 +1,16 @@
 import { Input } from 'antd';
+import { useState, useEffect } from 'react'
 const { TextArea } = Input;
 
-const ObservacionForm = () => {
+const ObservacionForm = ({ handleForm }) => {
+    const [value, setValue] = useState('');
+    useEffect(() => {
+        handleForm(value);
+    })
+
+    const onChange = e => {
+        setValue(e.target.value);
+    };
 
     return (
         <>
@@ -9,9 +18,11 @@ const ObservacionForm = () => {
                 <div className="titleLine">
                     <p>Observaciones</p>
                 </div>
-                <TextArea showCount autoSize={false} style={{height: '200px'}}/>
+                <TextArea
+                    value={value}
+                    onChange={onChange} 
+                    style={{ height: '170px' }} />
             </div>
-
         </>
     )
 }

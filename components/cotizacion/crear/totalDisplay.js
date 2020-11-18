@@ -1,12 +1,20 @@
-const TotalDisplay = () => {
+import { useState, useEffect } from 'react';
+
+const TotalDisplay = ({total}) => {
+
+    const formatter = new Intl.NumberFormat('es-CO',{
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+      })
 
     return (
         <>
             <div className='totalDisplay'>
                 <div className="titleLine">
-                    <p>Valor Total</p>
+                    <p>Total</p>
                 </div>
-                <p className="total">100000</p>
+                <p className="total">{formatter.format(total)}</p>
             </div>
 
         </>
