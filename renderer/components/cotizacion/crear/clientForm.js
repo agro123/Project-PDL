@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import NumericInput from '../../constants/numericInput'
 
-const ClienteForm = ({ handleForm }) => {
+const ClienteForm = ({ handleForm, allOk, clientsField }) => {
     const [client, setClient] = useState({
         name: '',
         id: '',
@@ -12,6 +12,7 @@ const ClienteForm = ({ handleForm }) => {
         address: '',
         phoneNumb: ''
     });
+ 
     useEffect(() => {
         handleForm(client);
         idList();
@@ -80,58 +81,65 @@ const ClienteForm = ({ handleForm }) => {
                 <div className="titleLine">
                     <p>Cliente</p>
                 </div>
-                <Form>
-                    <AutoComplete
-                        style={style}
-                        value={client.name}
-                        placeholder="Nombre"
-                        options={clientes}
-                        name="name"
-                        onChange={value => {
-                            setClient({ ...client, name: value });
-                            existName(value);
-                        }}
-                        allowClear={true}
-                    />
-                    <Tooltip placement="top" title={"C.C. o NIT"}>
-                    <AutoComplete
-                        style={{ width: '195px', margin: '0 0 2% 0' }}
-                        placeholder="Identificación"
-                        options={ids}
-                        value={client.id}
-                        onChange={value => {
-                            setClient({ ...client, id: value });
-                            existId(value);
-                        }}
-                        name="id"
-                        allowClear={true}
-                    />
-                    </Tooltip>
-                    <Input
-                        style={style}
-                        placeholder="Dirección"
-                        value={client.address}
-                        name="address"
-                        onChange={onChange}
-                        allowClear={true}
-                    />
-                    <Input
-                        style={{ width: '195px', margin: '0 0 2% 0' }}
-                        placeholder="Teléfono"
-                        onChange={onChange}
-                        name="phoneNumb"
-                        value={client.phoneNumb}
-                        allowClear={true}
-                    />
-                    <Input
-                        style={{ width: '195px', margin: '0 2% 0 0' }}
-                        placeholder="Correo electronico"
-                        name="email"
-                        value={client.email}
-                        onChange={onChange}
-                        allowClear={true}
-                    />
+                <Form style={{ display: 'flex' }}>
+                    <Form.Item validateStatus={allOk} style={style}>
+                        <Tooltip placement="top" title={"Empresa o Persona natural"} >
+                            <AutoComplete
+                                value={client.name}
+                                placeholder="Nombre"
+                                options={clientes}
+                                name="name"
+                                onChange={value => {
+                                    clientsField();
+                                    setClient({ ...client, name: value });
+                                    existName(value);
+                                }}
+                                allowClear={true}
+                            />
+                        </Tooltip>
+                    </Form.Item>
+                    <Form.Item validateStatus={allOk} style={{ width: '195px', margin: '0 0 2% 0' }}>
+                        <Tooltip placement="top" title={"C.C. o NIT"} >
+                            <AutoComplete
+                                placeholder="Identificación"
+                                options={ids}
+                                value={client.id}
+                                onChange={value => {
+                                    clientsField();
+                                    setClient({ ...client, id: value });
+                                    existId(value);
+                                }}
+                                name="id"
+                                allowClear={true}
+                            />
+                        </Tooltip>
+                    </Form.Item>
                 </Form>
+                <Input
+                    style={style}
+                    placeholder="Dirección"
+                    value={client.address}
+                    name="address"
+                    onChange={onChange}
+                    allowClear={true}
+                />
+                <Input
+                    style={{ width: '195px', margin: '0 0 2% 0' }}
+                    placeholder="Teléfono"
+                    onChange={onChange}
+                    name="phoneNumb"
+                    value={client.phoneNumb}
+                    allowClear={true}
+                />
+                <Input
+                    style={{ width: '195px', margin: '0 2% 0 0' }}
+                    placeholder="Correo electronico"
+                    name="email"
+                    value={client.email}
+                    onChange={onChange}
+                    allowClear={true}
+                />
+
             </div>
         </>
     )

@@ -93,8 +93,11 @@
     font-size: 17px;
     width: 140px;
 }
-
-@media screen and (max-width: 1366px) {
+.materialsForm .ant-table-container{
+    overflow-y: scroll;
+    max-height: 280px;
+}
+@media screen and (max-width: 1768px) {
     .clientForm {
         margin: 0 30px 10px 0;
     }
@@ -104,5 +107,8 @@
     }
     .cotizacionPanel {
         margin-top: 5px;
+    }
+    .materialsForm .ant-table-container{
+        max-height: 120px;
     }
 }
