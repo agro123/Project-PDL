@@ -1,4 +1,4 @@
-import { Input, AutoComplete, Button, Form, Table, Tooltip } from 'antd';
+import { Input, AutoComplete, Button, Form, Table, Tooltip, notification } from 'antd';
 import { PlusOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react';
 import columns from './columns';
@@ -18,26 +18,28 @@ function MaterialsForm({ handleForm, getTotal }) {
     const [unitTotal, setUnitTotal] = useState(0);
     const [key, setKey] = useState(0);
     const [total, setTotal] = useState(0);
-
-
+    const [allOk, setAllOk] = useState('');
 
     useEffect(() => {
-        /* updateMaterial(material);
-        updateList(list); */
         calcArea();
         calcTotal();
         calcUnitTotal();
         getTotal(total);
         handleForm(list);
     })
-    /* const updateList = (l) => { setList(l) };
-    const updateMaterial = (m) => { setMaterial(m) }; */
+
     const formatter = new Intl.NumberFormat('es-CO', {
         style: 'currency',
         currency: 'COP',
         minimumFractionDigits: 0
     })
-
+    const openNotificationWithIcon = (status, title, description) => {
+        notification[status]({
+            message: title,
+            description:
+                description,
+        });
+    };
     //----------------------------Rellenar Listas-------------------------------------    
     let references = [];
     const refList = () => {
@@ -64,7 +66,6 @@ function MaterialsForm({ handleForm, getTotal }) {
                     ...material,
                     name: mat.name,
                     ref: mat.ref,
-                    price: mat.price
                 });
                 return true;
             }
@@ -78,7 +79,6 @@ function MaterialsForm({ handleForm, getTotal }) {
                     ...material,
                     name: mat.name,
                     ref: mat.ref,
-                    price: mat.price
                 });
                 return true;
             }
@@ -120,7 +120,9 @@ function MaterialsForm({ handleForm, getTotal }) {
         if (material.ref == '' || material.name == ''
             || material.price == ''
             || material.quantity == '') {
-            console.log('error');
+            setAllOk('error');
+            openNotificationWithIcon('error', 'Campos vacios',
+            'Los campos referencia, descripción, precio y cantidad no deben de estar vacíos al momento de agregar un ítem en el apartado "A cotizar"');
             return false;
         }
         return true;
@@ -128,6 +130,7 @@ function MaterialsForm({ handleForm, getTotal }) {
 
     //-------------------------------------------------------------------------------
     const onChange = e => {
+        setAllOk('')
         setMaterial({ ...material, [e.target.name]: e.target.value, });
     };
     const onClick = e => {
@@ -151,35 +154,43 @@ function MaterialsForm({ handleForm, getTotal }) {
 
     }
 
+    const st = {
+        
+    }
+
     return (
         <>
             <div className="materialsForm">
                 <div className="titleLine">
-                    <p>Materiales</p>
+                    <p>A cotizar</p>
                 </div>
                 <Form style={{ display: 'flex' }}>
-                    <AutoComplete
-                        value={material.ref}
-                        style={{ width: '100px', margin: '0 5px 10px 0' }}
-                        placeholder="Ref."
-                        options={references}
-                        onChange={value => {
-                            setMaterial({ ...material, ref: value });
-                            existRef(value);
-                        }}
-                        allowClear={true}
-                    />
-                    <AutoComplete
-                        style={{ flex: 'auto', margin: '0 5px 10px 0' }}
-                        placeholder="Descripción"
-                        options={materials}
-                        value={material.name}
-                        onChange={value => {
-                            setMaterial({ ...material, name: value });
-                            existMaterial(value);
-                        }}
-                        allowClear={true}
-                    />
+                    <Form.Item validateStatus={allOk} style={{ width: '100px', margin: '0 5px 10px 0' }}>
+                        <AutoComplete
+                            value={material.ref}
+                            placeholder="Ref."
+                            options={references}
+                            onChange={value => {
+                                setAllOk('');
+                                setMaterial({ ...material, ref: value });
+                                existRef(value);
+                            }}
+                            allowClear={true}
+                        />
+                    </Form.Item>
+                    <Form.Item validateStatus={allOk} style={{ flex: 'auto', margin: '0 5px 10px 0' }}>
+                        <AutoComplete
+                            placeholder="Descripción"
+                            options={materials}
+                            value={material.name}
+                            onChange={value => {
+                                setAllOk('');
+                                setMaterial({ ...material, name: value });
+                                existMaterial(value);
+                            }}
+                            allowClear={true}
+                        />
+                    </Form.Item>
                     <Tooltip placement="top" title={"Milímetros"}>
                         <Input
                             style={{ width: '100px', margin: '0 5px 10px 0' }}
@@ -208,22 +219,28 @@ function MaterialsForm({ handleForm, getTotal }) {
                             placeholder="Área"
                         />
                     </Tooltip>
-                    <Input
-                        style={{ width: '150px', margin: '0 5px 10px 0' }}
-                        value={material.price}
-                        name="price"
-                        onChange={onChange}
-                        placeholder="Precio"
-                        allowClear={true}
-                    />
-                    <Input
-                        style={{ width: '90px', margin: '0 5px 10px 0' }}
-                        placeholder="Cant."
-                        value={material.quantity}
-                        name="quantity"
-                        onChange={onChange}
-                        allowClear={true}
-                    />
+                    <Form.Item validateStatus={allOk} style={{ width: '150px', margin: '0 5px 10px 0' }}>
+                        <Tooltip placement="top" title={formatter.format(material.price)}>
+                            <Input
+
+                                value={material.price}
+                                name="price"
+                                onChange={onChange}
+                                placeholder="Precio"
+                                allowClear={true}
+                            />
+                        </Tooltip>
+                    </Form.Item>
+                    <Form.Item validateStatus={allOk} style={{ width: '90px', margin: '0 5px 10px 0' }}>
+                        <Input
+
+                            placeholder="Cant."
+                            value={material.quantity}
+                            name="quantity"
+                            onChange={onChange}
+                            allowClear={true}
+                        />
+                    </Form.Item>
                     <p className='unitTotal'>{formatter.format(unitTotal)}</p>
                     <Tooltip placement="top" title={"Añadir"}>
                         <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={onClick} />
@@ -233,9 +250,9 @@ function MaterialsForm({ handleForm, getTotal }) {
                     columns={columns(onDelete)}
                     dataSource={list}
                     showHeader={false}
-                    scroll={{
-                        y: 120
-                    }}
+                    /* scroll={{
+                        y: 280
+                    }} */
                     size='small'
                     pagination={false}
                 />
