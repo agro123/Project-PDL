@@ -1,0 +1,37 @@
+{
+    "clientes": [
+        {
+            "name": "Juanito Alcachofa",
+            "id": "1234502",
+            "address": "Cra 42 #2a22",
+            "phoneNumb": "4477123",
+            "email": "juan@example.com"
+        },
+        {
+            "name": "Armando Casas de Papel",
+            "id": "1234501",
+            "address": "Cra 41 # 1a11",
+            "phoneNumb": "5588123",
+            "email": "armando@example.com"
+        },
+        {
+            "name": "German Garmendia",
+            "id": "1234503",
+            "address": "Cra 40 # 3a33",
+            "phoneNumb": "4588124",
+            "email": "german@example.com"
+        }
+    ],
+    "materiales": [
+        {
+            "ref": "12345",
+            "name": "Lamina de acero"
+        },
+        {
+            "ref": "13456",
+            "name": "Lamina de aluminio"
+        }
+
+    ],
+    "cotizaciones": []
+}
