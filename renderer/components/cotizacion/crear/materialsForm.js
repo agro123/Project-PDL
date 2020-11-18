@@ -121,8 +121,8 @@ function MaterialsForm({ handleForm, getTotal }) {
             || material.price == ''
             || material.quantity == '') {
             setAllOk('error');
-            openNotificationWithIcon('error', 'Campos vacios',
-            'Los campos referencia, descripción, precio y cantidad no deben de estar vacíos al momento de agregar un ítem en el apartado "A cotizar"');
+            openNotificationWithIcon('error', 'Campos vacios en A cotizar',
+            'Los campos referencia, descripción, precio y cantidad no deben de estar vacíos al momento de agregar un ítem');
             return false;
         }
         return true;

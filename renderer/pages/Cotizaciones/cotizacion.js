@@ -58,17 +58,24 @@ function Cotizacion() {
     setAllOk('');
   }
   const onClick = e => {
-    if (correctClient()) {
-      if (total != 0) {
-        setVisible(true);
+    if (correctClient() && total != 0) {
+      if (correctClient()) {
+        if (total != 0) {
+          setVisible(true);
+        } else {
+          openNotificationWithIcon('error', 'Lista de productos vacía',
+            'Por favor agregue un producto a cotizar para que sea posible imprimir la cotización.');
+        }
+
       } else {
-        openNotificationWithIcon('error', 'Lista de productos vacía', 'Por favor agregue un producto a cotizar para que sea posible imprimir la cotización.');
+        openNotificationWithIcon('error', 'Campos vacios en cliente',
+          'Los campos Nombre e Identificación son obligatorios. Por favor verifique que estén completos.');
+        setAllOk('error');
+
       }
-
     } else {
-      openNotificationWithIcon('error', 'Campos vacios en cliente', 'Los campos Nombre e Identificación son obligatorios. Por favor verifique que estén completos.');
-      setAllOk('error');
-
+      openNotificationWithIcon('error', 'Campos vacios',
+        'Complete los campos para poder agregar una cotización');
     }
   }
   const handleOk = e => {
@@ -113,7 +120,6 @@ function Cotizacion() {
               >Imprimir
             </Button>
             </Tooltip>
-
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Layout, Menu } from 'antd';
+import { Layout, Menu,Image  } from 'antd';
 import MenuOption from './menuOption';
 import {
   FileTextOutlined,
@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { autoUpdater } from 'electron';
 
+const theme = "dark"
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -15,15 +16,17 @@ const MyLayout = ({ children }) => (
   <>
     <Layout className="layout">
       <Sider
+       theme={theme}
         style={{
-          background: '#001529',
+          /* background: '#001529', */
           flex: 'auto'
         }}
       >
+        <Image  src="https://www.anmosugoi.com/wp-content/uploads/2020/01/megumin-sonrojada.jpg"/>
         <Menu
           mode="inline"
           defaultSelectedKeys={['2']}
-          theme='dark'
+          theme={theme}
         >
           <SubMenu key="sub1" icon={<FileTextOutlined />} title="Cotización">
             <Menu.Item key="1"><MenuOption label="Crear" url="/Cotizaciones/cotizacion" /></Menu.Item>
