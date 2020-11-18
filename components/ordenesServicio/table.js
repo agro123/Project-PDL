@@ -37,13 +37,16 @@ class listTable extends Component {
                         dataIndex: 'boton1',
                         key: 'Button1',
                         width: 40,
-                        
+                        /*render:  () => (<Button type='primary' shape='round' onClick= {() => this.showModal(record)                           
+                        }> Ver </Button>)*/
                     },
                     {
                         title: '',
                         dataIndex: 'boton2',
                         key: 'Button2',
                         width: 40,
+                        /*render:  (record) => (<Button type='primary' shape='round' 
+                        onClick= {() => alert('Y aqui se va a editar :3 jeje')} danger> Editar </Button>)*/
                        
                     }
                 ],
@@ -56,16 +59,17 @@ class listTable extends Component {
                     minimumFractionDigits: 0
                   }),
                 
-                  visible: false
+                  visible: false,
+
+                  indice: 0
                 }
         }
 
-        showModal = (key) => {
-            
-            
+        showModal = (id) => {
 
             this.setState({
                 visible: true,
+                indice: id
               });
           };
         
@@ -94,10 +98,10 @@ class listTable extends Component {
                         id: os.id,
                         date: os.date,
                         value: this.state.formatter.format(os.value),
-                        boton1: <Button type='primary' shape='round' onClick= { 
-                            () => this.showModal()                           
-                        }>Ver</Button>,
-                        boton2: <Button shape='round' onClick= {() => this.showModal(os.id)} danger>Editar</Button>
+                        boton1: <Button type='primary' shape='round' onClick= {() => this.showModal(os.id - 1)                           
+                        }> Ver </Button>,
+                        boton2: <Button shape='round' onClick= {() => alert('Aquí va la parte de editar')} 
+                        danger> Editar </Button>
                     }
                 )
             })
@@ -126,13 +130,24 @@ class listTable extends Component {
             />
             </div>
             <Modal
-                title="Te amo mi amor"
+                title="Orden de servicio"
                 visible={this.state.visible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
             >
                 
-                <p> {this.state.ordenes.find(index= key)} </p>
+                <p> Orden de servicio No. {this.state.ordenes[this.state.indice].id} <br /> 
+                    Fecha: {this.state.ordenes[this.state.indice].date} </p> 
+                <h2> Cliente: {this.state.ordenes[this.state.indice].name} </h2>
+                <br />
+                <h3> Valor: {this.state.ordenes[this.state.indice].value} </h3>
+                <br />
+                <br />
+                <p> Esta es toda la informacion que tiene que salir y hago esto grande para que se agrande el Modal
+                    hacia los lados a ver que tan grande puede llegar a ser y que tanta informacion le cabe porque
+                    aqui se supone que van a ir todos los materiales que se van a usar en consecuencia lo que mi padre
+                    llama "La lista de corte", por ello esto va a ser un modal desgraciadamente grande y esto es una 
+                    prueba bastante adecuada para hacerle frente a esa necesidad </p>
                
             </Modal>
             </div>
