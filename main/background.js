@@ -16,6 +16,10 @@ if (isProd) {
   const mainWindow = createWindow('main', {
     width: 1366,
     height: 768,
+    minWidht: 1180,
+    minHeight: 560,
+    maxWidth: 1920,
+    maxHeight: 1080,
   });
 
   if (isProd) {
