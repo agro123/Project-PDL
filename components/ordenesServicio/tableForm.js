@@ -1,7 +1,7 @@
 import { Input, AutoComplete,Button } from 'antd';
-import {PlusOutlined} from '@ant-design/icons';
 import ListTable from '../ordenesServicio/table';
-import OS from '../data/OS.json'
+import OS from '../data/OS.json';
+import Epp from './verOrden'
 
 
 const TableForm = () => {
@@ -30,8 +30,6 @@ const TableForm = () => {
              })
          };
 
-         console.log(ref)
-         console.log(client)
     return (
         <>
             <div className="TableForm">
@@ -46,18 +44,20 @@ const TableForm = () => {
                         options={ref}
                     />
                     <AutoComplete
-                        style={{ width: '34%', margin: '0 2% 2% 0' }}
+                        style={{ width: '31%', margin: '0 2% 2% 0' }}
                         placeholder="Cliente"
                         options={client}
                     />                   
-                    <Input
-                        style={{ width: '34%', margin: '0 2% 2% 0' }}
-                        placeholder="Fecha"
-                    />
                 </Input.Group>
+                
+                <div className= 'Table'>
                 <ListTable />
+                <div />
             </div>
-        </>
+            </div>
+
+            </>
+        
     )
 }
 

@@ -3,49 +3,49 @@
         {
             "name" : "Alan Brito Delgado",
             "id": "1",
-            "date": "May 1 2019",
+            "date": "2019-09-29",
             "value": 1000000
         },
         {
             "name" : "Benjala Melami",
             "id": "2",
-            "date": "January 28 2019",
+            "date": "2020-01-10",
             "value": 2000000
         },
         {
             "name" : "Aquiles Baeza",
             "id": "3",
-            "date": "May 10 2020",
+            "date": "2020-05-11",
             "value": 3000000
         },
         {
             "name" : "Rosa Melorto",
             "id": "4",
-            "date": "June 24 2020",
+            "date": "2019-12-12",
             "value": 235234
         },
         {
             "name" : "Debora Melo",
             "id": "5",
-            "date": "June 24 2020",
+            "date": "2020-01-07",
             "value": 25234235
         },
         {
             "name" : "Elvis Nieto",
             "id": "6",
-            "date": "July 8 2020",
+            "date": "2020-06-24",
             "value": 652343
         },
         {
             "name" : "Mary Conazo",
             "id": "7",
-            "date": "August 12 2020",
+            "date": "2020-09-29",
             "value": 652343
         },
         {
             "name" : "Paca Garte",
             "id": "8",
-            "date": "September 23 2020",
+            "date": "2020-09-29",
             "value": 652343
         }
         
