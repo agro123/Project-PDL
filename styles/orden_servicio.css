@@ -1,0 +1,30 @@
+.title1{
+    font-size: 15px;
+    background: #1890FF; 
+    color: white;
+    margin-top: 50px;
+}
+
+
+
+.tabla{
+    background-color: #1890FF;
+    width: 100%;
+    font-size: 15px;
+    margin-bottom: 0px;
+    color: white;
+}
+
+.margenLetra{
+        height: 10px;
+        margin-top: 10px;
+}
+
+.all{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    
+}
+
