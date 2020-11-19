@@ -1,4 +1,5 @@
 import { Input, Tooltip } from 'antd';
+import { useState, useEffect } from 'react';
 
 function formatNumber(value) {
     value += '';
@@ -61,24 +62,4 @@ class NumericInput extends React.Component {
     }
 }
 
-class NumericInputDemo extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: '' };
-    }
-
-    onChange = value => {
-        this.setState({ value });
-    };
-
-    render() {
-        return (
-            <NumericInput
-                {...this.props}
-                value={this.state.value}
-                onChange={this.onChange}
-            />
-        );
-    }
-}
-export default NumericInputDemo
+export default NumericInput

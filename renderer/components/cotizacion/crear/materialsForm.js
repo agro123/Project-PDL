@@ -3,6 +3,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react';
 import columns from './columns';
 import data from '../../../data/data.json';
+import NumericInput from '../../constants/numericInput'
 
 function MaterialsForm({ handleForm, getTotal }) {
     const [material, setMaterial] = useState({
@@ -129,10 +130,10 @@ function MaterialsForm({ handleForm, getTotal }) {
     }
 
     //-------------------------------------------------------------------------------
-    const onChange = e => {
+    /* const onChange = e => {
         setAllOk('')
         setMaterial({ ...material, [e.target.name]: e.target.value, });
-    };
+    }; */
     const onClick = e => {
         if (verficarDatos()) {
             setKey(key + 1);
@@ -192,21 +193,25 @@ function MaterialsForm({ handleForm, getTotal }) {
                         />
                     </Form.Item>
                     <Tooltip placement="top" title={"Milímetros"}>
-                        <Input
+                        <NumericInput
                             style={{ width: '100px', margin: '0 5px 10px 0' }}
                             value={material.width}
-                            name="width"
-                            onChange={onChange}
+                            onChange={value => {
+                                setAllOk('');
+                                setMaterial({ ...material, width: value });
+                            }}
                             placeholder="Ancho"
                             allowClear={true}
                         />
                     </Tooltip>
                     <Tooltip placement="top" title={"Milímetros"}>
-                        <Input
+                        <NumericInput
                             style={{ width: '100px', margin: '0 5px 10px 0' }}
                             value={material.heigth}
-                            name="heigth"
-                            onChange={onChange}
+                            onChange={value => {
+                                setAllOk('');
+                                setMaterial({ ...material, heigth: value });
+                            }}
                             placeholder="Alto"
                             allowClear={true}
                         />
@@ -221,23 +226,25 @@ function MaterialsForm({ handleForm, getTotal }) {
                     </Tooltip>
                     <Form.Item validateStatus={allOk} style={{ width: '150px', margin: '0 5px 10px 0' }}>
                         <Tooltip placement="top" title={formatter.format(material.price)}>
-                            <Input
-
+                            <NumericInput
                                 value={material.price}
-                                name="price"
-                                onChange={onChange}
+                                onChange={value => {
+                                    setAllOk('');
+                                    setMaterial({ ...material, price: value });
+                                }}
                                 placeholder="Precio"
                                 allowClear={true}
                             />
                         </Tooltip>
                     </Form.Item>
                     <Form.Item validateStatus={allOk} style={{ width: '90px', margin: '0 5px 10px 0' }}>
-                        <Input
-
+                        <NumericInput
                             placeholder="Cant."
                             value={material.quantity}
-                            name="quantity"
-                            onChange={onChange}
+                            onChange={value => {
+                                setAllOk('');
+                                setMaterial({ ...material, quantity: value });
+                            }}
                             allowClear={true}
                         />
                     </Form.Item>
