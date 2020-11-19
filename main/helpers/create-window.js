@@ -25,6 +25,10 @@ export default function createWindow(windowName, options) {
       y: position[1],
       width: size[0],
       height: size[1],
+      minWidht: 1180,
+      minHeight: 690,
+      maxWidth: 1920,
+      maxHeight: 1080,
     };
   };
 

@@ -27,6 +27,7 @@ const MyLayout = ({ children }) => (
           mode="inline"
           defaultSelectedKeys={['2']}
           theme={theme}
+
         >
           <SubMenu key="sub1" icon={<FileTextOutlined />} title="Cotización">
             <Menu.Item key="1"><MenuOption label="Crear" url="/Cotizaciones/cotizacion" /></Menu.Item>

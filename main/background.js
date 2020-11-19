@@ -17,7 +17,7 @@ if (isProd) {
     width: 1366,
     height: 768,
     minWidht: 1180,
-    minHeight: 560,
+    minHeight: 690,
     maxWidth: 1920,
     maxHeight: 1080,
   });
