@@ -1,9 +1,9 @@
 {
   "private": true,
   "name": "ProjectPDL",
-  "description": "My application description",
-  "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "description": "Proyecto final Diu",
+  "version": "0.1.0",
+  "author": "Team DIU",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",

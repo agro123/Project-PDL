@@ -58,7 +58,7 @@ function Cotizacion() {
     setAllOk('');
   }
   const onClick = e => {
-    if (correctClient() && total != 0) {
+    if (correctClient() || total != 0) {
       if (correctClient()) {
         if (total != 0) {
           setVisible(true);
@@ -74,6 +74,7 @@ function Cotizacion() {
 
       }
     } else {
+      console.log("total es",total, "Correct client es",correctClient() )
       openNotificationWithIcon('error', 'Campos vacios',
         'Complete los campos para poder agregar una cotización');
     }
