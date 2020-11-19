@@ -1,4 +1,4 @@
-import { Layout, Menu, Image, Space } from 'antd';
+import { Layout, Menu,Image  } from 'antd';
 import MenuOption from './menuOption';
 import {
   FileTextOutlined,
@@ -6,7 +6,6 @@ import {
   ContainerOutlined
 } from '@ant-design/icons';
 import { autoUpdater } from 'electron';
-import Head from 'next/head';
 
 const theme = "dark"
 
@@ -15,18 +14,15 @@ const { Content, Sider } = Layout;
 
 const MyLayout = ({ children }) => (
   <>
-    <Head>
-      <title>Project PDL</title>
-    </Head>
     <Layout className="layout">
       <Sider
-        theme={theme}
+       theme={theme}
         style={{
           /* background: '#001529', */
           flex: 'auto'
         }}
       >
-        <Image preview={false} width={100} src="/images/LogoBlue.png" />
+        <Image  src="https://www.anmosugoi.com/wp-content/uploads/2020/01/megumin-sonrojada.jpg"/>
         <Menu
           mode="inline"
           defaultSelectedKeys={['2']}

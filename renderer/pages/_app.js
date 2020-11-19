@@ -2,7 +2,6 @@ import '../styles/globals.css';
 import 'antd/dist/antd.css';
 import '../styles/layout.css';
 import '../styles/cotizacion.css';
-
 import Layout from '../components/constants/layout';
 
 function MyApp({ Component, pageProps }) {
