@@ -123,7 +123,7 @@ function MaterialsForm({ handleForm, getTotal }) {
             || material.quantity == '') {
             setAllOk('error');
             openNotificationWithIcon('error', 'Campos vacios en A cotizar',
-            'Los campos referencia, descripción, precio y cantidad no deben de estar vacíos al momento de agregar un ítem');
+                'Los campos referencia, descripción, precio y cantidad no deben de estar vacíos al momento de agregar un ítem');
             return false;
         }
         return true;
@@ -156,7 +156,7 @@ function MaterialsForm({ handleForm, getTotal }) {
     }
 
     const st = {
-        
+
     }
 
     return (
@@ -169,7 +169,7 @@ function MaterialsForm({ handleForm, getTotal }) {
                     <Form.Item validateStatus={allOk} style={{ width: '100px', margin: '0 5px 10px 0' }}>
                         <AutoComplete
                             value={material.ref}
-                            placeholder="Ref."
+                            placeholder="*Ref."
                             options={references}
                             onChange={value => {
                                 setAllOk('');
@@ -181,7 +181,7 @@ function MaterialsForm({ handleForm, getTotal }) {
                     </Form.Item>
                     <Form.Item validateStatus={allOk} style={{ flex: 'auto', margin: '0 5px 10px 0' }}>
                         <AutoComplete
-                            placeholder="Descripción"
+                            placeholder="*Descripción"
                             options={materials}
                             value={material.name}
                             onChange={value => {
@@ -232,21 +232,23 @@ function MaterialsForm({ handleForm, getTotal }) {
                                     setAllOk('');
                                     setMaterial({ ...material, price: value });
                                 }}
-                                placeholder="Precio"
+                                placeholder="*Precio"
                                 allowClear={true}
                             />
                         </Tooltip>
                     </Form.Item>
                     <Form.Item validateStatus={allOk} style={{ width: '90px', margin: '0 5px 10px 0' }}>
-                        <NumericInput
-                            placeholder="Cant."
-                            value={material.quantity}
-                            onChange={value => {
-                                setAllOk('');
-                                setMaterial({ ...material, quantity: value });
-                            }}
-                            allowClear={true}
-                        />
+                        <Tooltip placement="top" title="Cantidad">
+                            <NumericInput
+                                placeholder="*Cant."
+                                value={material.quantity}
+                                onChange={value => {
+                                    setAllOk('');
+                                    setMaterial({ ...material, quantity: value });
+                                }}
+                                allowClear={true}
+                            />
+                        </Tooltip>
                     </Form.Item>
                     <p className='unitTotal'>{formatter.format(unitTotal)}</p>
                     <Tooltip placement="top" title={"Añadir"}>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import data from '../../data/data.json';
 import styles from '../../styles/Home.module.css';
 import ClientForm from '../../components/cotizacion/crear/clientForm';
@@ -18,12 +18,6 @@ function Cotizacion() {
   const [allOk, setAllOk] = useState('');
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    console.log("cliente:", client)
-    console.log("materiales:", materials)
-    console.log("observation:", observation)
-    console.log("total:", total)
-  })
   //------------------------Data confirmation---------------------------------------
   const correctClient = () => {
     if (client.name == '' || client.name === undefined || client.id == '' || client.id === undefined) {

@@ -23,6 +23,7 @@ if (isProd) {
   });
 
   if (isProd) {
+    mainWindow.setMenu(null);
     await mainWindow.loadURL('app://./home.html');
   } else {
     const port = process.argv[2];
