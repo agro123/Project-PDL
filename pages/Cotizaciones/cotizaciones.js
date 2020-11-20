@@ -1,6 +1,7 @@
 import styles from '../../styles/Home.module.css'
 
 function Cotizaciones() {
+
   return (
     <>
       <div>

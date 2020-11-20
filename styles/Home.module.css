@@ -46,7 +46,7 @@
     flex-direction: column;
   }
 }
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1900px) {
 	.title {
     font-size: 48px;
   }

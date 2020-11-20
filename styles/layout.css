@@ -5,8 +5,11 @@
 .layout {
   display: flex;
 }
-
-@media screen and (max-width: 1366px) {
+.logo-img {
+  display: flex;
+  margin-left: 40px;
+}
+@media screen and (max-width: 1900px) {
 	.site-layout-content {
     Padding: 15px;
   }
