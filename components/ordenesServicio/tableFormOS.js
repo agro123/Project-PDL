@@ -1,7 +1,6 @@
 import { Input, AutoComplete,Button } from 'antd';
-import ListTable from '../ordenesServicio/table';
+import ListTable from './tableOS';
 import OS from '../data/OS.json';
-import Epp from './verOrden'
 
 
 const TableForm = () => {

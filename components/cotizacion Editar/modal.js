@@ -1,7 +1,7 @@
 import { Modal, Button } from 'antd';
 import { app } from 'electron';
 
-class Epp extends React.Component {
+class App extends React.Component {
   state = { visible: false };
 
   showModal = () => {
@@ -45,4 +45,4 @@ class Epp extends React.Component {
   }
 }
 
-export default Epp;
+export default App;

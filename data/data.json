@@ -2,21 +2,32 @@
     "clientes": [
         {
             "name": "Juanito Alcachofa",
-            "id": "1234502",
+            "id": "1",
+            "cedula": "11075185204",
             "address": "Cra 42 #2a22",
             "phoneNumb": "4477123",
             "email": "juan@example.com"
         },
         {
             "name": "Armando Casas de Papel",
-            "id": "1234501",
+            "id": "2",
+            "cedula": "11075456456204",
             "address": "Cra 41 # 1a11",
             "phoneNumb": "5588123",
             "email": "armando@example.com"
         },
         {
             "name": "German Garmendia",
-            "id": "1234503",
+            "id": "3",
+            "cedula": "3454575185204",
+            "address": "Cra 40 # 3a33",
+            "phoneNumb": "4588124",
+            "email": "german@example.com"
+        },
+        {
+            "name": "German Garmendia",
+            "id": "4",
+            "cedula": "12345",
             "address": "Cra 40 # 3a33",
             "phoneNumb": "4588124",
             "email": "german@example.com"
@@ -33,5 +44,27 @@
         }
 
     ],
-    "cotizaciones": []
+    "cotizaciones": [
+        {
+            "No": 1,
+
+            "cliente": {
+                "name": "Juanito Alcachofa",
+                "id": "1",
+                "address": "Cra 42 #2a22",
+                "phoneNumb": "4477123",
+                "email": "juan@example.com"
+            },
+            "productos":[ {
+                "ref": "12345",
+                "name": "Lamina de acero",
+                "alto": 2000,
+                "ancho": 1000
+
+            }],
+            "observacion": "Esto es una observación",
+            "total": 80000
+
+        }
+    ]
 }

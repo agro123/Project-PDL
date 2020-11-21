@@ -1,5 +1,5 @@
 import styles from '../../styles/Home.module.css'
-import TableForm from '../../components/ordenesServicio/tableForm';
+import TableForm from '../../components/ordenesServicio/tableFormOS';
 
 function OrdenesServicio() {
   return (

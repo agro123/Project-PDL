@@ -86,7 +86,7 @@ const ClienteForm = ({ handleForm, allOk, clientsField }) => {
                         <Tooltip placement="top" title={"Empresa o Persona natural"} >
                             <AutoComplete
                                 value={client.name}
-                                placeholder="*Nombre"
+                                placeholder="Nombre"
                                 options={clientes}
                                 name="name"
                                 onChange={value => {
@@ -101,7 +101,7 @@ const ClienteForm = ({ handleForm, allOk, clientsField }) => {
                     <Form.Item validateStatus={allOk} style={{ width: '195px', margin: '0 0 2% 0' }}>
                         <Tooltip placement="top" title={"C.C. o NIT"} >
                             <AutoComplete
-                                placeholder="*Identificación"
+                                placeholder="Identificación"
                                 options={ids}
                                 value={client.id}
                                 onChange={value => {
