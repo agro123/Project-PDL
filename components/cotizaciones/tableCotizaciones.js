@@ -53,6 +53,8 @@ class listTable extends Component {
                 ],
 
                 cotizaciones : [],
+
+                prod: [],
                 
                 formatter : new Intl.NumberFormat('es-CO', {
                     style: 'currency',
@@ -93,21 +95,36 @@ class listTable extends Component {
             });
           };
 
+          MyButton = React.forwardRef(({ onClick, href }, ref) => {
+            return (
+              <a href={href} onClick={onClick} ref={ref}>
+                Click Me
+              </a>
+            )
+          })
+
+
+//-------------------------- Cargar Datos Del Archivo JSON -------------
+
+//                          cargar datos generales
         lista = (cotizaciones) => {
             
-            Cotiz.clientes.map(cotiza => {
+            Cotiz.cotizaciones.map(cotiza => {
                 
                 cotizaciones.push(
                     {
-                        key: cotiza.id,
-                        nombre: cotiza.name,
-                        id: cotiza.id,
-                        cedula: cotiza.cedula,
-                        telefono: cotiza.phoneNumb,
-                        email: cotiza.email,
-                        boton1: <Button type='primary' shape='round' onClick= {() => this.showModal(cotiza.id - 1)                           
+                        key: cotiza.No,
+                        nombre: cotiza.cliente.name,
+                        id: cotiza.No,
+                        cedula: cotiza.cliente.cedula,
+                        telefono: cotiza.cliente.phoneNumb,
+                        email: cotiza.cliente.email,
+                        fecha: cotiza.Fecha,
+                        observaciones: cotiza.observacion,
+                        total: cotiza.total,
+                        boton1: <Button type='primary' shape='round' onClick= {() => this.showModal(cotiza.No - 1)                           
                         }> Ver </Button>,
-                        boton2:     <Link href='/Cotizaciones/cotizacionEditar'>
+                        boton2:     <Link href='/Cotizaciones/cotizacionEditar' >
                                         <Button type='default' shape='round' danger>
                                             <a>Editar</a>
                                         </Button>
@@ -117,9 +134,39 @@ class listTable extends Component {
             })
         }
 
+//                                cargar los productos
+        listaProductos= (producto) => {
+
+            Cotiz.cotizaciones.map(cotiza => 
+                {
+                    cotiza.productos.map(pro => {
+
+                        producto.push(
+                            {
+                                key: pro.ref,
+                                referencia: pro.ref,
+                                name: pro.name,
+                                alto: pro.alto,
+                                ancho: pro.ancho,
+                                cantidad: pro.cacantidad,
+                                precio: pro.precio,
+                                area: pro.area
+                            }
+                        )
+                    })
+                }
+            )
+        }
+        
+                    
+        //-------------------------------------------------------------
+
     render() {
         
+        //          Llenar los arreglos de datos
         this.lista(this.state.cotizaciones);
+        this.listaProductos(this.state.prod);
+        console.log(this.state.prod[0].ref)
 
         return (
     
@@ -145,14 +192,25 @@ class listTable extends Component {
                 onCancel={this.handleCancel}
             >
                 
-                <p> Cotizacion No. {this.state.cotizaciones[this.state.indice].id} <br /> 
-                    Email: {this.state.cotizaciones[this.state.indice].email} </p> 
-                <h2> Cliente: {this.state.cotizaciones[this.state.indice].nombre} </h2>
+                <p> Numero de cotización: {this.state.cotizaciones[this.state.indice].id} <br /> 
+                    Fecha: {this.state.cotizaciones[this.state.indice].fecha} </p> 
+                <h3> Señor(a/es): {this.state.cotizaciones[this.state.indice].nombre}, identificado con el Numero
+                de cédula:  
+                {this.state.cotizaciones[this.state.indice].cedula}
+                </h3>
                 <br />
-                <h3> Valor: {this.state.cotizaciones[this.state.indice].telefono} </h3>
-                <h3> Cedula: {this.state.cotizaciones[this.state.indice].cedula} </h3>
+                <h3>A su solicitud se cotizó lo siguiente: </h3>
+                <h3> {this.state.prod[0].cantidad} {this.state.prod[0].name} {this.state.prod[0].ref} 
+                de {this.state.prod[0].alto}mm de alto 
+                por {this.state.prod[0].ancho}mm de ancho, 
+                con un valor por metro cuadrado de ${this.state.prod[0].precio} para un total 
+                de: ${this.state.prod[0].area/1000/1000 * this.state.prod[0].precio}</h3>
+               
                 <br />
+                <h3> El total de su cotización es: ${this.state.cotizaciones[this.state.indice].total} de pesos(COP)
+                </h3>
                 <br />
+                <h3> Nota: {this.state.cotizaciones[this.state.indice].observaciones}</h3>
                 
                
             </Modal>

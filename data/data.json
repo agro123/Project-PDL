@@ -48,9 +48,12 @@
         {
             "No": 1,
 
+            "Fecha": "2020-01-10",
+
             "cliente": {
                 "name": "Juanito Alcachofa",
                 "id": "1",
+                "cedula": "1107518524",
                 "address": "Cra 42 #2a22",
                 "phoneNumb": "4477123",
                 "email": "juan@example.com"
@@ -59,12 +62,13 @@
                 "ref": "12345",
                 "name": "Lamina de acero",
                 "alto": 2000,
-                "ancho": 1000
-
+                "ancho": 1000,
+                "area": 2000000,
+                "precio": 1000000,
+                "cantidad": 2
             }],
             "observacion": "Esto es una observación",
-            "total": 80000
-
+            "total": 2000000
         }
     ]
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import data from '../../data/data.json';
 import styles from '../../styles/Home.module.css';
-import ClientForm from '../../components/cotizacion/crear/clientForm';
+import ClientForm from '../../components/cotizacion Editar/clientForm';
 import ShowDate from '../../components/cotizacion/crear/showDate';
 import MaterialsForm from '../../components/cotizacion/crear/materialsForm';
 import ObservationForm from '../../components/cotizacion/crear/observacionForm';
@@ -10,10 +10,10 @@ import { Button, Tooltip, notification, Modal } from 'antd';
 import { PrinterOutlined, WarningTwoTone } from '@ant-design/icons';
 import Link from 'next/link';
 
-function CotizacionEditar() {
+function CotizacionEditar(cli) {
 
   const [total, setTotal] = useState(0);
-  const [client, setClient] = useState({});
+  const [client = cli, setClient] = useState({});
   const [materials, setMaterials] = useState([]);
   const [observation, setObservation] = useState('');
   const [allOk, setAllOk] = useState('');
@@ -106,6 +106,7 @@ function CotizacionEditar() {
           handleForm={handleClientForm}
           allOk={allOk}
           clientsField={clientFields}
+          //InputCliente={}////////////////////////////////////////////////////
         />
         <div className='middle'>
           <MaterialsForm handleForm={handleMaterialForm} getTotal={handleTotal} />
