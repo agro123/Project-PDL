@@ -90,9 +90,16 @@ function MaterialsForm({ handleForm, getTotal }) {
     const calcArea = () => {
         const q = parseInt(material.heigth, 10);
         const p = parseInt(material.width, 10);
+        let a = ""
 
         if ((!isNaN(q) && !isNaN(p)) && (q != undefined && p != undefined)) {
-            setArea(q * p);
+            a = (q * p) / 1000000
+            a = (a + "").replace(/[,.]/g, function (m) {
+                // m is the match found in the string
+                // If `,` is matched return `.`, if `.` matched return `,`
+                return m === ',' ? '.' : ',';
+            });
+            setArea(a);
         } else {
             setArea('');
         }
@@ -116,7 +123,7 @@ function MaterialsForm({ handleForm, getTotal }) {
             setUnitTotal(0);
         }
     }
-
+    //----------------------------------------------------------------------------------------------------
     const verficarDatos = () => {
         if (material.ref == '' || material.name == ''
             || material.price == ''
@@ -137,7 +144,7 @@ function MaterialsForm({ handleForm, getTotal }) {
     const onClick = e => {
         if (verficarDatos()) {
             setKey(key + 1);
-            setList([...list, { ...material, area: area, key: key, total: unitTotal }]);
+            setList([...list, { ...material, area: area, key: key, total: unitTotal }]);// El area es una dato calculable hay que quitarlo
             setMaterial({
                 ref: '',
                 name: '',
@@ -216,7 +223,7 @@ function MaterialsForm({ handleForm, getTotal }) {
                             allowClear={true}
                         />
                     </Tooltip>
-                    <Tooltip placement="top" title={"Milimetros"}>
+                    <Tooltip placement="top" title={"Metros"}>
                         <Input
                             style={{ width: '100px', margin: '0 5px 10px 0' }}
                             value={area}
