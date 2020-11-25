@@ -1,17 +1,13 @@
 import { Alert, Button, Table, Modal } from 'antd';
 import Cotiz from '../../data/data.json';
-import React, {Component} from 'react';
+import React, {Component, PureComponent, useState} from 'react';
 import customFilter from './filters/customFilter';
 import Link from 'next/link';
 
 
-class listTable extends Component {
-    constructor()
-    {
-        super()
-        this.state = {
-            columns: 
-                [
+const listTable = () => {
+    
+    const [columns, setColumns] = useState ([
                     {
                         title: 'No.',
                         dataIndex: 'id',
@@ -50,67 +46,50 @@ class listTable extends Component {
                         width: 40,
                         
                     }
-                ],
-
-                cotizaciones : [],
-
-                prod: [],
+                ]);
                 
-                formatter : new Intl.NumberFormat('es-CO', {
+    const [cotizaciones, setCotizaciones] = useState ([]);
+    const [prod, setProd] = useState ( []);
+    const [visible, setVisible] = useState (false);
+    const [indice, setIndice] = useState (0);
+
+    const formatter = new Intl.NumberFormat('es-CO', {
                     style: 'currency',
                     currency: 'COP',
                     minimumFractionDigits: 0
-                  }),
+                  });
                 
-                  visible: false,
-
-                  indice: 0
-                }
-        }
-
-        showModal = (id) => {
-
-            this.setState({
-                visible: true,
-                indice: id
-              });
-          };
-
-          showEditar = (id) => {
-              
-            
-          }
+    
         
-          handleOk = e => {
-            console.log(e);
-            this.setState({
-              visible: false,
-            });
-          };
+
+    const showModal = (id) => {
+        setCotizaciones([])
+        setProd([])
+        setIndice(id)
         
-          handleCancel = e => {
-            console.log(e);
-            this.setState({
-              visible: false,
-            });
-          };
+        setVisible(true)
+        console.log('Está llegando hasta aqui y su valor es: ' + visible)
+    };
 
-          MyButton = React.forwardRef(({ onClick, href }, ref) => {
-            return (
-              <a href={href} onClick={onClick} ref={ref}>
-                Click Me
-              </a>
-            )
-          })
-
+    const showEditar = (id) => {}
+        
+    const handleOk = e => {
+        console.log(e);
+        setVisible(false)
+    };
+        
+    const handleCancel = e => {
+        console.log(e);
+        setVisible(false)
+    };
 
 //-------------------------- Cargar Datos Del Archivo JSON -------------
 
 //                          cargar datos generales
-        lista = (cotizaciones) => {
+    const lista = (cotizaciones) => {
             
             Cotiz.cotizaciones.map(cotiza => {
-                
+
                 cotizaciones.push(
                     {
                         key: cotiza.No,
@@ -122,8 +101,9 @@ class listTable extends Component {
                         fecha: cotiza.Fecha,
                         observaciones: cotiza.observacion,
                         total: cotiza.total,
-                        boton1: <Button type='primary' shape='round' onClick= {() => this.showModal(cotiza.No - 1)                           
-                        }> Ver </Button>,
+                        boton1: <Button type='primary' shape='round' 
+                                    onClick= {() => showModal(cotiza.No - 1)                           
+                                    }> Ver </Button>,
                         boton2:     <Link href='/Cotizaciones/cotizacionEditar' >
                                         <Button type='default' shape='round' danger>
                                             <a>Editar</a>
@@ -135,11 +115,13 @@ class listTable extends Component {
         }
 
 //                                cargar los productos
-        listaProductos= (producto) => {
+    const listaProductos= (producto) => {
 
-            Cotiz.cotizaciones.map(cotiza => 
-                {
-                    cotiza.productos.map(pro => {
+
+            
+           
+           
+                    Cotiz.cotizaciones[indice].productos.map(pro => {
 
                         producto.push(
                             {
@@ -154,26 +136,42 @@ class listTable extends Component {
                             }
                         )
                     })
-                }
+                
+                       
+    };
+
+    const algo= () => {
+
+            
+            return(
+                prod.map(
+                    (products1) => 
+                    <h4> {products1.cantidad} {products1.name} {products1.ref} 
+                de {products1.alto}mm de alto 
+                por {products1.ancho}mm de ancho, 
+                con un valor por metro cuadrado de ${products1.precio} para un total 
+                de: ${products1.area/1000/1000 * products1.precio}
+                <p> {products1.key} </p></h4>
             )
-        }
+            )
+    };
+
+
         
-                    
         //-------------------------------------------------------------
-
-    render() {
-        
         //          Llenar los arreglos de datos
-        this.lista(this.state.cotizaciones);
-        this.listaProductos(this.state.prod);
-        console.log(this.state.prod[0].ref)
+    lista(cotizaciones);
+    listaProductos(prod)
 
-        return (
-    
+    console.log('Cotizaciones: ' + cotizaciones.length);
+    console.log('Productos: ' + prod.length);
+    console.log('El valor inicial de visible es: '+ visible);
+
+    return (
             <div>
             <div>
-            <Table columns={this.state.columns}
-                dataSource={this.state.cotizaciones}
+            <Table columns={columns}
+                dataSource={cotizaciones}
           
                 showHeader={true}
                 
@@ -187,38 +185,35 @@ class listTable extends Component {
             </div>
             <Modal
                 title="Cotización"
-                visible={this.state.visible}
-                onOk={this.handleOk}
-                onCancel={this.handleCancel}
+                visible={visible}
+                onOk={handleOk}
+                onCancel={handleCancel}
             >
                 
-                <p> Numero de cotización: {this.state.cotizaciones[this.state.indice].id} <br /> 
-                    Fecha: {this.state.cotizaciones[this.state.indice].fecha} </p> 
-                <h3> Señor(a/es): {this.state.cotizaciones[this.state.indice].nombre}, identificado con el Numero
+                <p> Numero de cotización: {cotizaciones[indice].id} <br /> 
+                    Fecha: {cotizaciones[indice].fecha} </p> 
+                <h3> Señor(a/es): {cotizaciones[indice].nombre}, identificado con el Numero
                 de cédula:  
-                {this.state.cotizaciones[this.state.indice].cedula}
+                {cotizaciones[indice].cedula}
                 </h3>
                 <br />
-                <h3>A su solicitud se cotizó lo siguiente: </h3>
-                <h3> {this.state.prod[0].cantidad} {this.state.prod[0].name} {this.state.prod[0].ref} 
-                de {this.state.prod[0].alto}mm de alto 
-                por {this.state.prod[0].ancho}mm de ancho, 
-                con un valor por metro cuadrado de ${this.state.prod[0].precio} para un total 
-                de: ${this.state.prod[0].area/1000/1000 * this.state.prod[0].precio}</h3>
+                <h3> A su solicitud se cotizó lo siguiente: </h3>
+                
+
+                {algo()}
                
                 <br />
-                <h3> El total de su cotización es: ${this.state.cotizaciones[this.state.indice].total} de pesos(COP)
+                <h3> El total de su cotización es: ${cotizaciones[indice].total} de pesos(COP)
                 </h3>
                 <br />
-                <h3> Nota: {this.state.cotizaciones[this.state.indice].observaciones}</h3>
+                <h3> Nota: {cotizaciones[indice].observaciones}</h3>
                 
                
             </Modal>
             </div>
            
         );
-    }
-
 }
+
 
 export default listTable;
