@@ -2,21 +2,32 @@
     "clientes": [
         {
             "name": "Juanito Alcachofa",
-            "id": "1234502",
+            "id": "1",
+            "cedula": "11075185204",
             "address": "Cra 42 #2a22",
             "phoneNumb": "4477123",
             "email": "juan@example.com"
         },
         {
             "name": "Armando Casas de Papel",
-            "id": "1234501",
+            "id": "2",
+            "cedula": "11075456456204",
             "address": "Cra 41 # 1a11",
             "phoneNumb": "5588123",
             "email": "armando@example.com"
         },
         {
             "name": "German Garmendia",
-            "id": "1234503",
+            "id": "3",
+            "cedula": "3454575185204",
+            "address": "Cra 40 # 3a33",
+            "phoneNumb": "4588124",
+            "email": "german@example.com"
+        },
+        {
+            "name": "German Garmendia",
+            "id": "4",
+            "cedula": "12345",
             "address": "Cra 40 # 3a33",
             "phoneNumb": "4588124",
             "email": "german@example.com"
@@ -33,5 +44,65 @@
         }
 
     ],
-    "cotizaciones": []
+    "cotizaciones": [
+        {
+            "No": 1,
+
+            "Fecha": "2020-01-10",
+
+            "cliente": {
+                "name": "Juanito Alcachofa",
+                "id": "1",
+                "cedula": "1107518524",
+                "address": "Cra 42 #2a22",
+                "phoneNumb": "4477123",
+                "email": "juan@example.com"
+            },
+            "productos":[ {
+                "ref": "12345",
+                "name": "Lamina de acero",
+                "alto": 2000,
+                "ancho": 1000,
+                "area": 2000000,
+                "precio": 1000000,
+                "cantidad": 2
+            }],
+            "observacion": "Esto es una observación",
+            "total": 2000000
+        },
+        {
+            "No": 2,
+
+            "Fecha": "2020-01-10",
+
+            "cliente": {
+                "name": "Laura Pulido Tamayo",
+                "id": "1",
+                "cedula": "1005486485",
+                "address": "Cra 42 #2a22",
+                "phoneNumb": "4477123",
+                "email": "LaPuTa@example.com"
+            },
+            "productos":[ {
+                "ref": "121",
+                "name": "KK de perro",
+                "alto": 2000,
+                "ancho": 1000,
+                "area": 2000000,
+                "precio": 1000000,
+                "cantidad": 2
+            },
+            {
+                "ref": "122",
+                "name": "KK de gato",
+                "alto": 2000,
+                "ancho": 1000,
+                "area": 2000000,
+                "precio": 1000000,
+                "cantidad": 2
+            }],
+            "observacion": "Una garantia",
+            "total": 1350000
+        }
+    ]
 }
