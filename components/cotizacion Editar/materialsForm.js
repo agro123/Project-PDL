@@ -2,16 +2,21 @@ import { Input, AutoComplete, Button, Form, Table, Tooltip, notification } from 
 import { PlusOutlined } from '@ant-design/icons'
 import { useState, useEffect } from 'react';
 import columns from './columns';
-import data from '../../../data/data.json';
+import data from '../../data/data.json';
 
-function MaterialsForm({ handleForm, getTotal }) {
+function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
+
+    console.log('Esto tendría que mostrarse si o sí')
+
     const [material, setMaterial] = useState({
         ref: '',
         name: '',
-        price: '',
-        heigth: '',
-        width: '',
-        quantity: '',
+        precio: '',
+        alto: '',
+        ancho: '',
+        cantidad: '',
+        area: ''
+
     })
     const [list, setList] = useState([]);
     const [area, setArea] = useState('');
@@ -40,6 +45,29 @@ function MaterialsForm({ handleForm, getTotal }) {
                 description,
         });
     };
+
+    //----------------------------Datos Traidos De Editar----------------------------
+
+    const rellenarEditar = (data) => {
+
+        data.map(materia => 
+            {
+                list.push(
+                                    {ref: materia.ref,
+                                    name:materia.name,
+                                    alto: materia.alto,
+                                    ancho: materia.ancho,
+                                    area: materia.area, 
+                                    key: materia.ref, 
+                                    precio: materia.precio,
+                                    cantidad: materia.cantidad,
+                                    total: (materia.cantidad * materia.precio)
+                                    });
+                                    console.log('El valor de los totales'+parseInt(total))
+            }
+        )
+    };
+
     //----------------------------Rellenar Listas-------------------------------------    
     let references = [];
     const refList = () => {
@@ -164,6 +192,7 @@ function MaterialsForm({ handleForm, getTotal }) {
                 <div className="titleLine">
                     <p>A cotizar</p>
                 </div>
+                {rellenarEditar(dataMaterials)}
                 <Form style={{ display: 'flex' }}>
                     <Form.Item validateStatus={allOk} style={{ width: '100px', margin: '0 5px 10px 0' }}>
                         <AutoComplete

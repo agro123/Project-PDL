@@ -2,8 +2,9 @@ import { Input } from 'antd';
 import { useState, useEffect } from 'react'
 const { TextArea } = Input;
 
-const ObservacionForm = ({ handleForm }) => {
-    const [value, setValue] = useState('');
+const ObservacionForm = ({ handleForm, inputForm }) => {
+    const [value, setValue] = useState(inputForm);
+
     useEffect(() => {
         handleForm(value);
     })

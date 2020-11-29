@@ -18,7 +18,7 @@ const columns = (onDelete) => [
     },
     {
         title: 'Ancho',
-        dataIndex: 'width',
+        dataIndex: 'ancho',
         width: 105,
         render: (text, record, index) => (
             <Tooltip placement="top" title={"Milímetros"}>
@@ -28,7 +28,7 @@ const columns = (onDelete) => [
     },
     {
         title: 'Alto',
-        dataIndex: 'heigth',
+        dataIndex: 'alto',
         width: 105,
         render: (text, record, index) => (
             <Tooltip placement="top" title={"Milímetros"}>
@@ -48,13 +48,13 @@ const columns = (onDelete) => [
     },
     {
         title: 'Precio Unitario',
-        dataIndex: 'price',
+        dataIndex: 'precio',
         width: 155,
         render: (text, record, index) => (formatter.format(text)),
     },
     {
         title: 'Cantidad',
-        dataIndex: 'quantity',
+        dataIndex: 'cantidad',
         width: 90
     },
     {
