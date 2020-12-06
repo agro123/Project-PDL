@@ -1,9 +1,10 @@
 import { Alert, Button, Table, Modal } from 'antd';
 import Cotiz from '../../data/data.json';
+import CotizIndice from '../../data/indice.json';
 import React, {Component, PureComponent, useState} from 'react';
 import customFilter from './filters/customFilter';
 import Link from 'next/link';
-
+import CotizacionEditar from '../../pages/Cotizaciones/cotizacionEditar'
 
 const listTable = () => {
     
@@ -60,26 +61,31 @@ const listTable = () => {
                   });
                 
     
-        
 
     const showModal = (id) => {
+        
         setCotizaciones([])
         setProd([])
         setIndice(id)
         
         setVisible(true)
-        console.log('Está llegando hasta aqui y su valor es: ' + visible)
     };
 
-    const showEditar = (id) => {}
+    const showEditar = (id) => {
+
+        CotizIndice.indice = id
+        console.log('El indice del .json es: ' +id)
+    }
         
     const handleOk = e => {
         console.log(e);
+        setProd([])
         setVisible(false)
     };
         
     const handleCancel = e => {
         console.log(e);
+        setProd([])
         setVisible(false)
     };
 
@@ -95,7 +101,7 @@ const listTable = () => {
                         key: cotiza.No,
                         nombre: cotiza.cliente.name,
                         id: cotiza.No,
-                        cedula: cotiza.cliente.cedula,
+                        cedula: cotiza.cliente.id,
                         telefono: cotiza.cliente.phoneNumb,
                         email: cotiza.cliente.email,
                         fecha: cotiza.Fecha,
@@ -104,8 +110,8 @@ const listTable = () => {
                         boton1: <Button type='primary' shape='round' 
                                     onClick= {() => showModal(cotiza.No - 1)                           
                                     }> Ver </Button>,
-                        boton2:     <Link href='/Cotizaciones/cotizacionEditar' >
-                                        <Button type='default' shape='round' danger>
+                        boton2:     <Link href= {{pathname: '/Cotizaciones/cotizacionEditar'}} >
+                                        <Button type='default' shape='round' onClick={() => showEditar(cotiza.No)} danger>
                                             <a>Editar</a>
                                         </Button>
                                     </Link> 
@@ -117,10 +123,6 @@ const listTable = () => {
 //                                cargar los productos
     const listaProductos= (producto) => {
 
-
-            
-           
-           
                     Cotiz.cotizaciones[indice].productos.map(pro => {
 
                         producto.push(
@@ -151,7 +153,7 @@ const listTable = () => {
                 por {products1.ancho}mm de ancho, 
                 con un valor por metro cuadrado de ${products1.precio} para un total 
                 de: ${products1.area/1000/1000 * products1.precio}
-                <p> {products1.key} </p></h4>
+                </h4>
             )
             )
     };
@@ -162,10 +164,6 @@ const listTable = () => {
         //          Llenar los arreglos de datos
     lista(cotizaciones);
     listaProductos(prod)
-
-    console.log('Cotizaciones: ' + cotizaciones.length);
-    console.log('Productos: ' + prod.length);
-    console.log('El valor inicial de visible es: '+ visible);
 
     return (
             <div>
