@@ -6,6 +6,7 @@ const formatter = new Intl.NumberFormat('es-CO', {
     currency: 'COP',
     minimumFractionDigits: 0
 })
+
 const columns = (onDelete) => [
     {
         title: 'Referencia',

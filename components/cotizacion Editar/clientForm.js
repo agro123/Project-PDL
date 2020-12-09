@@ -1,74 +1,20 @@
 import { Input, AutoComplete, Form, Tooltip } from 'antd';
-import data from '../../../data/data.json'
+import data from '../../data/data.json'
 import { useState, useEffect } from 'react';
-
+/*
 import NumericInput from '../../constants/numericInput' 
+import FormItemInput from 'antd/lib/form/FormItemInput';*/
 
-const ClienteForm = ({ handleForm, allOk, clientsField}) => {
-    const [client, setClient] = useState({
-        name: '',
-        id: '',
-        email: '',
-        address: '',
-        phoneNumb: ''
-    });
+const ClienteForm = ({ handleForm, allOk, clientsField, inputCliente}) => {
+    const [client, setClient] = useState(inputCliente);
+    console.log(inputCliente)
  
     useEffect(() => {
         handleForm(client);
-        idList();
-        clientList();
     })
 
     //----------------------------Rellenar Listas-------------------------------------    
-    let clientes = [];
-    const clientList = () => {
-        data.clientes.map(cliente => {
-            clientes.push({ value: cliente.name, label: cliente.name })
-        })
-    }
-    clientList();
 
-    let ids = [];
-    const idList = () => {
-        data.clientes.map(cliente => {
-            ids.push({ value: cliente.id, label: cliente.id })
-        })
-    }
-    idList();
-
-    //----------------------------AutoRellenar--------------------------------------
-    const existName = (prop) => {
-        for (let i = 0; i < data.clientes.length; i++) {
-            if (prop === data.clientes[i].name) {
-                setClient({
-                    name: data.clientes[i].name,
-                    id: data.clientes[i].id,
-                    phoneNumb: data.clientes[i].phoneNumb,
-                    address: data.clientes[i].address,
-                    email: data.clientes[i].email
-                });
-                return true;
-            }
-        }
-        return false;
-    }
-    const existId = (prop) => {
-        for (let i = 0; i < data.clientes.length; i++) {
-            if (prop === data.clientes[i].id) {
-                setClient({
-                    name: data.clientes[i].name,
-                    id: data.clientes[i].id,
-                    phoneNumb: data.clientes[i].phoneNumb,
-                    address: data.clientes[i].address,
-                    email: data.clientes[i].email
-                });
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //-------------------------------------------------------------------------------
     const onChange = e => {
         setClient({ ...client, [e.target.name]: e.target.value });
     };
@@ -87,12 +33,10 @@ const ClienteForm = ({ handleForm, allOk, clientsField}) => {
                             <AutoComplete
                                 value={client.name}
                                 placeholder="Nombre"
-                                options={clientes}
                                 name="name"
                                 onChange={value => {
                                     clientsField();
                                     setClient({ ...client, name: value });
-                                    existName(value);
                                 }}
                                 allowClear={true}
                             />
@@ -102,12 +46,11 @@ const ClienteForm = ({ handleForm, allOk, clientsField}) => {
                         <Tooltip placement="top" title={"C.C. o NIT"} >
                             <AutoComplete
                                 placeholder="Identificación"
-                                options={ids}
                                 value={client.id}
                                 onChange={value => {
                                     clientsField();
                                     setClient({ ...client, id: value });
-                                    existId(value);
+                            
                                 }}
                                 name="id"
                                 allowClear={true}
@@ -115,28 +58,40 @@ const ClienteForm = ({ handleForm, allOk, clientsField}) => {
                         </Tooltip>
                     </Form.Item>
                 </Form>
-                <Input
+                <AutoComplete
                     style={style}
                     placeholder="Dirección"
+                    defaultValue= {client.address}
                     value={client.address}
                     name="address"
-                    onChange={onChange}
+                    onChange={value => {
+                        clientsField();
+                        setClient({ ...client, address: value });
+                    }}
                     allowClear={true}
                 />
-                <Input
+                <AutoComplete
                     style={{ width: '195px', margin: '0 0 2% 0' }}
                     placeholder="Teléfono"
-                    onChange={onChange}
+                    defaultValue= {client.phoneNumb}
                     name="phoneNumb"
+                    onChange={value => {
+                        clientsField();
+                        setClient({ ...client, phoneNumb: value });
+                    }}
                     value={client.phoneNumb}
                     allowClear={true}
                 />
-                <Input
+                <AutoComplete
                     style={{ width: '195px', margin: '0 2% 0 0' }}
                     placeholder="Correo electronico"
+                    defaultValue= {client.email}
                     name="email"
+                    onChange={value => {
+                        clientsField();
+                        setClient({ ...client, email: value });
+                    }}
                     value={client.email}
-                    onChange={onChange}
                     allowClear={true}
                 />
 

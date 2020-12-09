@@ -1,13 +1,16 @@
 .site-layout-content {
-    Padding: 50px;
+    padding: 30px;
     min-height: 100vh;
   }
 .layout {
   display: flex;
 }
-
-@media screen and (max-width: 1366px) {
+.logo-img {
+  display: flex;
+  margin-left: 40px;
+}
+@media screen and (max-width: 1900px) {
 	.site-layout-content {
-    Padding: 15px;
+    padding: 15px;
   }
 }
