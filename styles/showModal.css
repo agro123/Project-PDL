@@ -23,6 +23,11 @@
     text-align:center;
     width: 150px;
 }
+.midSC {
+    display: flex;
+    margin-top: 10px;
+}
+
 .space {
     flex: auto;
 }
@@ -33,7 +38,10 @@
 .observacionSC{
     flex: auto;
     margin-right: 10px;
-    /* border: 1px solid black; */
+    border: 1px solid rgb(194, 194, 194);
+}
+.otrosGastos {
+    margin-right: 10px;
 }
 .totalSC {
     width: 250px;

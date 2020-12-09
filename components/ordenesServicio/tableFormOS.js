@@ -1,6 +1,6 @@
 import { Input, AutoComplete,Button } from 'antd';
 import ListTable from './tableOS';
-import OS from '../data/OS.json';
+import OS from '../../data/data.json';
 
 
 const TableForm = () => {

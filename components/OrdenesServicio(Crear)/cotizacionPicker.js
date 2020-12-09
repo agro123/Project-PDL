@@ -1,5 +1,5 @@
 import { Select, Button, Tooltip } from 'antd';
-import ShowCotizacion from './showCotizacion'
+import ShowCotizacion from '../customModal/showCotizacion'
 import { useState, useEffect } from 'react';
 import data from '../../data/data.json'
 const { Option } = Select;

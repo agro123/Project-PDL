@@ -106,6 +106,10 @@
     "ordenServicio":[{
 
         "No": "1",
+        "observaciones": "Esto es una observacion",
+        "total": "7845000",
+        "fechaFinal": "2020-12-18",
+        "cotizacionNum": "1",
 
         "cliente": {
             "name": "Laura Pulido Tamayo",
@@ -145,18 +149,14 @@
         ],
         "responsables": [
             {
-                "description": "Ps Yo Quien mas",
+                "name": "Ps Yo Quien mas",
                 "price": "2000000"
             },
             {
                 "name": "El Yogui",
                 "price": "2000000"                
             }
-        ],
-        "observaciones": "Esto es una observacion",
-        "total": "7845000",
-        "fechaFinal": "2020-12-18"
-
+        ]
     }]
 
 }
