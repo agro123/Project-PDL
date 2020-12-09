@@ -8,8 +8,7 @@ const formatter = new Intl.NumberFormat('es-CO', {
     minimumFractionDigits: 0
 })
 
-const ShowCotizacion = ({ index, visible, onOk }) => {
-    /* const [cotizacion, setCotizacion] = useState({}); */
+const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
     //-------------------------llamada a BD
     let cotizacion = {
         No: "",
@@ -25,8 +24,11 @@ const ShowCotizacion = ({ index, visible, onOk }) => {
         observacion: "",
         total: 0
     }
-    if (index !== "noOne") {
+    if (index !== "") {
         cotizacion = data.cotizaciones.find(c => c.No == index)
+        cotizacion = {...cotizacion, productos: cotizacion.productos = cotizacion.productos.map(p =>
+            p = { ...p, total: p.precio * p.cantidad }
+        )}
     }
 
 
@@ -68,8 +70,8 @@ const ShowCotizacion = ({ index, visible, onOk }) => {
                 centered
                 visible={visible}
                 onOk={onOk}
+                onCancel={onCancel}
                 width={700}
-                destroyOnClose={true}
             >
                 <div className='topSC'>
                     <div>
@@ -91,7 +93,7 @@ const ShowCotizacion = ({ index, visible, onOk }) => {
                     columns={columns}
                     size={"small"}
                     scroll={{
-                        y: 80
+                        y: 100
                     }}
                     pagination={false}
                 />

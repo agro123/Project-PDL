@@ -3,18 +3,18 @@ import ShowCotizacion from './showCotizacion'
 import { useState, useEffect } from 'react';
 import data from '../../data/data.json'
 const { Option } = Select;
-const CotizacionPicker = ({ handleDate }) => {
+const CotizacionPicker = ({ handleNumCotizacion }) => {
 
-    const [cotizacion, setCotizacion] = useState('noOne');
+    const [cotizacion, setCotizacion] = useState('');
     const [disable, setDisable] = useState(true);
     const [visible, setVisible] = useState(false);
     useEffect(() => {
-        /* handleDate(cotizacion); */
+        handleNumCotizacion(cotizacion); 
         setDisable(isSelect)
     })
 
     const isSelect = () => {
-        if (cotizacion == 'noOne') {
+        if (cotizacion == '') {
             return true;
         } return false;
     }
@@ -41,7 +41,7 @@ const CotizacionPicker = ({ handleDate }) => {
                             setCotizacion(value);
                         }}
                     >
-                        <Option value="noOne">Sin cotización</Option>
+                        <Option value="">Sin cotización</Option>
                         {cotizacionList()}
                     </Select>
                 </Tooltip>
@@ -54,7 +54,7 @@ const CotizacionPicker = ({ handleDate }) => {
                         Ver
                     </Button>
                 </Tooltip>
-                <ShowCotizacion visible={visible} index={cotizacion} onOk={()=> setVisible(false)} />
+                <ShowCotizacion visible={visible} index={cotizacion} onOk={()=> setVisible(false)} onCancel={()=> setVisible(false)}/>
             </div>
            
         </>

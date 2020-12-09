@@ -24,7 +24,8 @@ function OrdenServicio() {
   const [otrosGastos, setOtrosGastos] = useState([]);
   const [responsables, setResponsables] = useState([]);
   const [observation, setObservation] = useState('');
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState('');
+  const [numCotizacion, setNumCotizacion] = useState('')
   const [allOk, setAllOk] = useState('');
 
   //------------------------Data confirmation---------------------------------------
@@ -52,22 +53,25 @@ function OrdenServicio() {
 
   const handleMaterialForm = e => {
     setMaterials(e);
-    console.log("materiales", e)
+   /*  console.log("materiales", e) */
   }
   const handleOtrosGastosForm = e => {
     setOtrosGastos(e);
-    console.log("OtrosGastos", e)
+    /* console.log("OtrosGastos", e) */
   }
   const handleResponsablesForm = e => {
     setResponsables(e);
-    console.log("Responsables", e)
+    /* console.log("Responsables", e) */
   }
   const handleObservationForm = e => {
     setObservation(e);
   }
   const handleDate = e => {
     setDate(e);
-    console.log("FECHA:", e);
+/*     console.log("FECHA:", e); */
+  }
+  const handleNumCotizacion = e => {
+    setNumCotizacion(e);
   }
 
   const handleTotalMaterials = e => {
@@ -127,7 +131,8 @@ function OrdenServicio() {
       cliente: client,
       total: total,
       observaciones: observation,
-      fechaFinal: date
+      fechaFinal: date,
+      cotizacionNum: numCotizacion
     })
     openNotificationWithIcon('success', 'Orden de servicio agregada con éxito', '');
   };
@@ -158,7 +163,7 @@ function OrdenServicio() {
             allOk={allOk}
             clientsField={clientFields}
           />
-          <CotizacionPicker />
+          <CotizacionPicker handleNumCotizacion={handleNumCotizacion} />
         </div>
         <div className='middleOS'>
           <MaterialsForm handleForm={handleMaterialForm} getTotal={handleTotalMaterials} />
