@@ -2,32 +2,21 @@
     "clientes": [
         {
             "name": "Juanito Alcachofa",
-            "id": "1",
-            "cedula": "11075185204",
+            "id": "11075185204",
             "address": "Cra 42 #2a22",
             "phoneNumb": "4477123",
             "email": "juan@example.com"
         },
         {
             "name": "Armando Casas de Papel",
-            "id": "2",
-            "cedula": "11075456456204",
+            "id": "11075456456204",
             "address": "Cra 41 # 1a11",
             "phoneNumb": "5588123",
             "email": "armando@example.com"
         },
         {
-            "name": "German Garmendia",
-            "id": "3",
-            "cedula": "3454575185204",
-            "address": "Cra 40 # 3a33",
-            "phoneNumb": "4588124",
-            "email": "german@example.com"
-        },
-        {
-            "name": "German Garmendia",
-            "id": "4",
-            "cedula": "12345",
+            "name": "German Garmendia",        
+            "id": "3454575185204",
             "address": "Cra 40 # 3a33",
             "phoneNumb": "4588124",
             "email": "german@example.com"
@@ -36,19 +25,28 @@
     "productos": [
         {
             "ref": "12345",
-            "name": "Lamina de acero"
+            "name": "Cuerpos fijos en aluminio color blanco de 3.10 x 1.05 en 4 secciones y vidrio en cámara incoloro 3 + 3 con PVB 0.76 + cámara de 12mm e incoloro 4 + 4 PVB 0.76"
         },
         {
             "ref": "13456",
-            "name": "Lamina de aluminio"
+            "name": "Puerta de acero inoxidable"
         }
-
+    ],
+    "materiales": [
+        {
+            "ref": "1454",
+            "name": "Lamina de aluminio"
+        },
+        {
+            "ref": "1233",
+            "name": "Lamina de acero"
+        }
     ],
     "cotizaciones": [
         {
             "No": 1,
 
-            "Fecha": "2020-01-10",
+            "Fecha": "01-10-2020",
 
             "cliente": {
                 "name": "Juanito Alcachofa",
@@ -59,48 +57,106 @@
             },
             "productos":[ {
                 "ref": "12345",
-                "name": "Fachada Flotante",
-                "alto": 6000,
-                "ancho": 9000,
-                "area": 54000000,
-                "precio": 10000000,
-                "cantidad": 1
+                "name": "Lamina de acero",
+                "alto": 2000,
+                "ancho": 1000,
+                "area": "2",
+                "precio": 1000000,
+                "cantidad": 2
             }],
             "observacion": "Esto es una observación",
-            "total": 10000000
+            "total": 2000000
         },
         {
             "No": 2,
 
-            "Fecha": "2020-01-10",
+            "Fecha": "01-10-2020",
 
             "cliente": {
                 "name": "Laura Pulido Tamayo",
                 "id": "1005486485",
                 "address": "Cra 42 #2a22",
                 "phoneNumb": "4477123",
-                "email": "LaPuTa@example.com"
+                "email": "La.Pu.Ta@example.com"
             },
             "productos":[ {
                 "ref": "121",
-                "name": "Ventana",
+                "name": "Cuerpos fijos en aluminio color blanco de 3.10 x 1.05 en 4 secciones y vidrio en cámara incoloro 3 + 3 con PVB 0.76 + cámara de 12mm e incoloro 4 + 4 PVB 0.76",
                 "alto": 2000,
-                "ancho": 1300,
-                "area": 2600000,
-                "precio": 1750000,
-                "cantidad": 3
+                "ancho": 1000,
+                "area": "2",
+                "precio": 1000000,
+                "cantidad": 2
             },
             {
-                "ref": "122",
-                "name": "Division de Baño",
-                "alto": 1950,
-                "ancho": 700,
-                "area": 1365000,
-                "precio": 450000,
+                "ref": "125",
+                "name": "Puerte de acero inoxidable",
+                "alto": 2000,
+                "ancho": 1000,
+                "area": "2",
+                "precio": 1000000,
                 "cantidad": 2
             }],
             "observacion": "Una garantia",
-            "total": 6150000
+            "total": 1350000
         }
-    ]
+    ],
+
+
+    "ordenServicio":[{
+
+        "No": "1",
+
+        "cliente": {
+            "name": "Laura Pulido Tamayo",
+            "id": "1005486485",
+            "address": "Cra 42 #2a22",
+            "phoneNumb": "4477123",
+            "email": "La.Pu.Ta@example.com"
+        },
+
+        "materiales": [
+            {
+                "ref": "123",
+                "length": "6000",
+                "name": "ALN-927",
+                "price": "250000",
+                "quantity": "12",
+                "total": "3000000"
+            },
+            {
+                "ref": "1234",
+                "length": "6000",
+                "name": "S-306",
+                "price": "120000",
+                "quantity": "6",
+                "total": "720000"
+            }
+        ],
+        "otrosGastos": [
+            {
+                "description": "Gasolina",
+                "price": "50000"
+            },
+            {
+                "description": "Comida",
+                "price": "75000"                
+            }
+        ],
+        "responsables": [
+            {
+                "description": "Ps Yo Quien mas",
+                "price": "2000000"
+            },
+            {
+                "name": "El Yogui",
+                "price": "2000000"                
+            }
+        ],
+        "observaciones": "Esto es una observacion",
+        "total": "7845000",
+        "fechaFinal": "2020-12-18"
+
+    }]
+
 }

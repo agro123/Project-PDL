@@ -6,7 +6,7 @@ import data from '../../data/data.json';
 
 function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
 
-    console.log('Esto tendría que mostrarse si o sí')
+    console.log('DataMaterials: ',dataMaterials);
 
     const [material, setMaterial] = useState({
         ref: '',
@@ -18,7 +18,10 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
         area: ''
 
     })
-    const [list, setList] = useState([]);
+
+    const [list, setList] = useState(dataMaterials.map( dm => dm = {...dm, total: dm.cantidad*dm.precio } 
+
+    ));
     const [area, setArea] = useState('');
     const [unitTotal, setUnitTotal] = useState(0);
     const [key, setKey] = useState(0);
@@ -48,7 +51,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
 
     //----------------------------Datos Traidos De Editar----------------------------
 
-    const rellenarEditar = (data) => {
+    /* const rellenarEditar = (data) => {
 
         data.map(materia => 
             {
@@ -67,7 +70,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
             }
         )
     };
-
+ */
     //----------------------------Rellenar Listas-------------------------------------    
     let references = [];
     const refList = () => {
@@ -113,7 +116,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
         })
         return false;
     }
-    //--------------------------Calculo y verficacion de datos -----------------------------------------
+    //-------------------------Calculo y verficacion de datos -----------------------------------------
     const calcArea = () => {
         const q = parseInt(material.heigth, 10);
         const p = parseInt(material.width, 10);
@@ -192,7 +195,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                 <div className="titleLine">
                     <p>A cotizar</p>
                 </div>
-                {rellenarEditar(dataMaterials)}
+                {/* {rellenarEditar(dataMaterials)} */}
                 <Form style={{ display: 'flex' }}>
                     <Form.Item validateStatus={allOk} style={{ width: '100px', margin: '0 5px 10px 0' }}>
                         <AutoComplete

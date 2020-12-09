@@ -35,15 +35,16 @@ const listTable = () => {
                     },
                     {
                         title: '',
-                        dataIndex: 'boton1',
                         key: 'Button1',
+                        dataIndex: 'boton1',
+                        
                         width: 40,
                         
                     },
                     {
                         title: '',
-                        dataIndex: 'boton2',
                         key: 'Button2',
+                        dataIndex: 'boton2',
                         width: 40,
                         
                     }
@@ -132,7 +133,7 @@ const listTable = () => {
                                 name: pro.name,
                                 alto: pro.alto,
                                 ancho: pro.ancho,
-                                cantidad: pro.cacantidad,
+                                cantidad: pro.cantidad,
                                 precio: pro.precio,
                                 area: pro.area
                             }
@@ -147,12 +148,13 @@ const listTable = () => {
             
             return(
                 prod.map(
-                    (products1) => 
-                    <h4> {products1.cantidad} {products1.name} {products1.ref} 
+                    (products1) =>
+                    
+                    <h4> {products1.cantidad}  {products1.name} {products1.referencia+ " "} 
                 de {products1.alto}mm de alto 
                 por {products1.ancho}mm de ancho, 
                 con un valor por metro cuadrado de ${products1.precio} para un total 
-                de: ${products1.area/1000/1000 * products1.precio}
+                de: ${products1.area/1000000 * products1.precio}
                 </h4>
             )
             )
@@ -168,7 +170,8 @@ const listTable = () => {
     return (
             <div>
             <div>
-            <Table columns={columns}
+            <Table 
+                columns={columns}
                 dataSource={cotizaciones}
           
                 showHeader={true}
@@ -186,13 +189,14 @@ const listTable = () => {
                 visible={visible}
                 onOk={handleOk}
                 onCancel={handleCancel}
+                width={700}
             >
                 
                 <p> Numero de cotización: {cotizaciones[indice].id} <br /> 
                     Fecha: {cotizaciones[indice].fecha} </p> 
-                <h3> Señor(a/es): {cotizaciones[indice].nombre}, identificado con el Numero
+                <h3> Señor(a/es): {cotizaciones[indice].nombre} <br/> Identificado con el Numero
                 de cédula:  
-                {cotizaciones[indice].cedula}
+                {" " + cotizaciones[indice].cedula}
                 </h3>
                 <br />
                 <h3> A su solicitud se cotizó lo siguiente: </h3>

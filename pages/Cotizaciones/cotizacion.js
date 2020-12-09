@@ -7,7 +7,7 @@ import MaterialsForm from '../../components/cotizacion/crear/materialsForm';
 import ObservationForm from '../../components/cotizacion/crear/observacionForm';
 import TotalDisplay from '../../components/cotizacion/crear/totalDisplay';
 import { Button, Tooltip, notification, Modal } from 'antd';
-import { PrinterOutlined, WarningTwoTone } from '@ant-design/icons';
+import { PrinterOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 function Cotizacion() {
 
@@ -16,7 +16,16 @@ function Cotizacion() {
   const [materials, setMaterials] = useState([]);
   const [observation, setObservation] = useState('');
   const [allOk, setAllOk] = useState('');
-  const [visible, setVisible] = useState(false);
+  const [date, setDate] = useState(() => {
+    let date = new Date()
+
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+    return day + "-" + month + "-" + year
+  } //MODIFICAR ESTO
+
+  )
 
   //------------------------Data confirmation---------------------------------------
   const correctClient = () => {
@@ -55,7 +64,7 @@ function Cotizacion() {
     if (correctClient() || total != 0) {
       if (correctClient()) {
         if (total != 0) {
-          setVisible(true);
+          confirm();
         } else {
           openNotificationWithIcon('error', 'Lista de productos vacía',
             'Por favor agregue un producto a cotizar para que sea posible imprimir la cotización.');
@@ -68,24 +77,34 @@ function Cotizacion() {
 
       }
     } else {
-      console.log("total es",total, "Correct client es",correctClient() )
+      console.log("total es", total, "Correct client es", correctClient())
       openNotificationWithIcon('error', 'Campos vacios',
         'Complete los campos para poder agregar una cotización');
     }
   }
   const handleOk = e => {
     data.cotizaciones.push({
-      materials: [...materials],
-      client: client,
+      No: data.cotizaciones.length + 1,
+      Fecha: date,
+      productos: [...materials],
+      cliente: client,
       total: total,
-      observation: observation
+      observacion: observation
     })
     openNotificationWithIcon('success', 'Cotización agregada con éxito', '');
-    setVisible(false);
   };
-  const handleCancel = e => {
-    setVisible(false);
-  };
+
+  const confirm = () => {
+    Modal.confirm({
+      title: "¿Está seguro de realizar esta operación?",
+      icon: <ExclamationCircleOutlined />,
+      content:
+        "Por favor verifique que todos los datos estén bien antes de hacer clic en Aceptar.",
+      okText: "Aceptar",
+      cancelText: "Cancelar",
+      onOk() {handleOk()},
+    });
+  }
 
   return (
     <>
@@ -118,14 +137,6 @@ function Cotizacion() {
           </div>
         </div>
       </div>
-      <Modal
-        title={'¿Está seguro de realizar esta Operación?'}
-        visible={visible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>Por favor verifique que todos los datos estén bien antes de hacer clic en OK.</p>
-      </Modal>
     </>)
 }
 

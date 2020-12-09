@@ -15,53 +15,33 @@ const columns = (onDelete) => [
     {
         title: 'Material',
         dataIndex: 'name',
+     
     },
+
     {
-        title: 'Ancho',
-        dataIndex: 'ancho',
-        width: 105,
+        title: 'Logitud',
+        dataIndex: 'length',
+        width: 110,
         render: (text, record, index) => (
             <Tooltip placement="top" title={"Milímetros"}>
              {text}
             </Tooltip>
         ),
-    },
-    {
-        title: 'Alto',
-        dataIndex: 'alto',
-        width: 105,
-        render: (text, record, index) => (
-            <Tooltip placement="top" title={"Milímetros"}>
-             {text}
-            </Tooltip>
-        ),
-    },
-    {
-        title: 'Area',
-        dataIndex: 'area',
-        width: 105,
-        render: (text, record, index) => (
-            <Tooltip placement="top" title={"Milímetros"}>
-                {text}
-            </Tooltip>
-        ),
-    },
-    {
-        title: 'Precio Unitario',
-        dataIndex: 'precio',
-        width: 155,
-        render: (text, record, index) => (formatter.format(text)),
     },
     {
         title: 'Cantidad',
-        dataIndex: 'cantidad',
-        width: 90
+        dataIndex: 'quantity',
+        width: 100
     },
     {
-        title: 'Valor de venta',
+        title: 'Valor',
+        dataIndex: 'price',
+        width: 140
+    },
+    {
+        title: 'Total',
         dataIndex: 'total',
-        width: 130,
-        render: (text, record, index) => (formatter.format(text)),
+        width: 130
     },
     {
         title: '',

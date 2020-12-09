@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
-
 const TotalDisplay = ({inputTotal}) => {
 
-    const[total, setTotal] = useState(inputTotal)
 
     const formatter = new Intl.NumberFormat('es-CO',{
         style: 'currency',
@@ -16,7 +13,7 @@ const TotalDisplay = ({inputTotal}) => {
                 <div className="titleLine">
                     <p>Total</p>
                 </div>
-                <p className="total">{formatter.format(total)}</p>
+                <p className="total">{formatter.format(inputTotal)}</p>
             </div>
 
         </>

@@ -7,21 +7,21 @@ import ShowDate from '../../components/cotizacion Editar/showDate';
 import MaterialsForm from '../../components/cotizacion Editar/materialsForm';
 import ObservationForm from '../../components/cotizacion Editar/observacionForm';
 import TotalDisplay from '../../components/cotizacion Editar/totalDisplay';
-import { Button, Tooltip, notification, Modal } from 'antd';
+import { Button, Tooltip, notification, Modal, Space } from 'antd';
 import { PrinterOutlined, WarningTwoTone } from '@ant-design/icons';
 import Link from 'next/link';
 
 function Cotizacion() {
-
-  console.log('se está trayendo este indice: ' + indice.indice)
-
-  const [total, setTotal] = useState(data.cotizaciones[parseInt(indice.indice) - 1].total);
+console.log(data.cotizaciones[parseInt(indice.indice) - 1].total)
+  const [total, setTotal] = useState(0);
   const [client, setClient] = useState(data.cotizaciones[parseInt(indice.indice) - 1].cliente);
   const [materials, setMaterials] = useState([]);
   const [observation, setObservation] = useState(data.cotizaciones[parseInt(indice.indice) - 1].observacion);
   const [allOk, setAllOk] = useState('');
   const [visible, setVisible] = useState(false);
 
+
+  
   //------------------------Data confirmation---------------------------------------
   const correctClient = () => {
     if (client.name == '' || client.name === undefined || client.id == '' || client.id === undefined) {
@@ -72,18 +72,32 @@ function Cotizacion() {
 
       }
     } else {
-      console.log("total es",total, "Correct client es",correctClient() )
+      console.log("total es", total, "Correct client es", correctClient())
       openNotificationWithIcon('error', 'Campos vacios',
         'Complete los campos para poder agregar una cotización');
     }
   }
   const handleOk = e => {
+
+    data.cotizaciones[parseInt(indice.indice) - 1].cliente = client;
+    data.cotizaciones[parseInt(indice.indice) - 1].total = total;
+    data.cotizaciones[parseInt(indice.indice) - 1].observacion = observation;
+    data.cotizaciones[parseInt(indice.indice) - 1].productos.map(pro => {
+      pro = { ...materials, pro }
+    });
+
+    <Link href={'/Cotizaciones/cotizaciones'} >
+    </Link>
+
+
+    /*
+
     data.cotizaciones.push({
       materials: [...materials],
       client: client,
       total: total,
       observation: observation
-    })
+    })*/
     openNotificationWithIcon('success', 'Cotización agregada con éxito', '');
     setVisible(false);
   };
@@ -104,30 +118,33 @@ function Cotizacion() {
           handleForm={handleClientForm}
           allOk={allOk}
           clientsField={clientFields}
-          InputCliente= {client}
+          inputCliente={client}
         />
         <div className='middle'>
-          <MaterialsForm handleForm={handleMaterialForm} getTotal={handleTotal} 
-                    dataMaterials={data.cotizaciones[parseInt(indice.indice) - 1].productos} />
+          <MaterialsForm handleForm={handleMaterialForm} getTotal={handleTotal}
+            dataMaterials={data.cotizaciones[parseInt(indice.indice) - 1].productos} />
         </div>
         <div className='bot'>
-          <ObservationForm handleForm={handleObservationForm} 
-                            inputForm= {observation} />
+          <ObservationForm handleForm={handleObservationForm}
+            inputForm={observation} />
           <TotalDisplay inputTotal={total} />
           <div className='final'>
 
-          <Link href= {{pathname: '/Cotizaciones/cotizaciones'}} >
-                                        <Button type='default' danger>
-                                            <a>Cancelar</a>
-                                        </Button>
-                                    </Link>
-            <Tooltip placement="top" title={"Imprimir y Guardar"}>
-              <Button type="primary"
-                icon={<PrinterOutlined />}
-                onClick={onClick}
-              >Imprimir
+            <Space>
+              <Link href={{ pathname: '/Cotizaciones/cotizaciones' }} >
+                <Button type='default' danger>
+                  <a>Volver</a>
+                </Button>
+              </Link>
+              <Tooltip placement="top" title={"Imprimir y Guardar"}>
+                <Button type="primary"
+                  icon={<PrinterOutlined />}
+                  onClick={onClick}
+                >Imprimir
             </Button>
-            </Tooltip>
+              </Tooltip>
+
+            </Space>
           </div>
         </div>
       </div>

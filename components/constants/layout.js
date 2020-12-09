@@ -10,7 +10,7 @@ import { autoUpdater } from 'electron';
 const theme = "dark"
 
 const { SubMenu } = Menu;
-const { Content, Sider } = Layout;
+const { Content, Sider, Header } = Layout;
 
 const MyLayout = ({ children }) => (
   <>
@@ -18,8 +18,10 @@ const MyLayout = ({ children }) => (
       <Sider
         theme={theme}
         style={{
-          /* background: '#001529', */
-          flex: 'auto'
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
         }}
       >
         <div className='logo-img'>
@@ -45,13 +47,15 @@ const MyLayout = ({ children }) => (
           </SubMenu>
         </Menu>
       </Sider>
-      <Content
-        style={{
-          padding: '0 0px',
-        }}
-      >
-        <div className="site-layout-content">{children}</div>
-      </Content>
+      <Layout style={{ marginLeft: 200 }}>
+        <Content
+          style={{
+            padding: '0 0px',
+          }}
+        >
+          <div className="site-layout-content">{children}</div>
+        </Content>
+      </Layout>
     </Layout>
   </>
 );

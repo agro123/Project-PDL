@@ -1,0 +1,64 @@
+import { Select, Button, Tooltip } from 'antd';
+import ShowCotizacion from './showCotizacion'
+import { useState, useEffect } from 'react';
+import data from '../../data/data.json'
+const { Option } = Select;
+const CotizacionPicker = ({ handleDate }) => {
+
+    const [cotizacion, setCotizacion] = useState('noOne');
+    const [disable, setDisable] = useState(true);
+    const [visible, setVisible] = useState(false);
+    useEffect(() => {
+        /* handleDate(cotizacion); */
+        setDisable(isSelect)
+    })
+
+    const isSelect = () => {
+        if (cotizacion == 'noOne') {
+            return true;
+        } return false;
+    }
+
+    const cotizacionList = () =>
+        data.cotizaciones.map(c => <Option value={c.No}>{c.No}</Option>)
+
+    const onClick = e => {
+        setVisible(true)
+    }
+
+    return (
+        <>
+            <div className='containerDatePicker'>
+                <div className="titleLine">
+                    <p>Cotización</p>
+                </div>
+                <Tooltip placement="top" title={"Seleccionar cotización previa"} >
+                    <Select
+                        value={cotizacion}
+                        defaultValue="Sin cotización"
+                        style={{ width: "200px" }}
+                        onChange={value => {
+                            setCotizacion(value);
+                        }}
+                    >
+                        <Option value="noOne">Sin cotización</Option>
+                        {cotizacionList()}
+                    </Select>
+                </Tooltip>
+                <Tooltip placement="bottom" title={"Ver cotización"} >
+                    <Button
+                        style={{ width: '100px', margin: '8px 50px 0 50px' }}
+                        disabled={disable}
+                        onClick={onClick}
+                    >
+                        Ver
+                    </Button>
+                </Tooltip>
+                <ShowCotizacion visible={visible} index={cotizacion} onOk={()=> setVisible(false)} />
+            </div>
+           
+        </>
+    )
+}
+
+export default CotizacionPicker;

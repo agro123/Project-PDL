@@ -16,7 +16,6 @@ const handler = nextApp.getRequestHandler();
 // en esta variable vamos a guardar la instancia de nuestra UI
 let win;
 
-app.disableHardwareAcceleration();
 function createWindow() {
 	// iniciamos la app de Next.js
 	nextApp

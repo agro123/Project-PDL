@@ -1,5 +1,5 @@
 import styles from '../../styles/Home.module.css'
-import TableFormCotizaciones from '../../components/cotizaciones/tableFormCotizaciones';
+import TableFormCotizaciones from '../../components/cotizacionVer/tableFormCotizaciones';
 
 function Cotizaciones() {
 
@@ -9,9 +9,9 @@ function Cotizaciones() {
         <h1 className={styles.title}>
           Cotizaciones
        </h1>
-       <div className= "listadoPanel">
-         <TableFormCotizaciones />
-       </div>
+        <div className='cotizacionPanel'>
+          <TableFormCotizaciones />
+        </div>
       </div>
     </>)
 }
