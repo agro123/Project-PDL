@@ -1,4 +1,4 @@
-import { Modal, Table, Image } from 'antd';
+import { Modal, Table, Image, Button } from 'antd';
 import { useState, useEffect } from 'react';
 import data from '../../data/data.json'
 
@@ -69,9 +69,11 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
                 title={"Cotizacion No. " + index}
                 centered
                 visible={visible}
-                onOk={onOk}
                 onCancel={onCancel}
                 width={700}
+                footer={
+                    [<Button  type="primary" onClick={onOk}>Volver</Button>]
+                }
             >
                 <div className='topSC'>
                     <div>

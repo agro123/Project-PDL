@@ -32,7 +32,7 @@ const CotizacionPicker = ({ handleNumCotizacion }) => {
                 <div className="titleLine">
                     <p>Cotización</p>
                 </div>
-                <Tooltip placement="top" title={"Seleccionar cotización previa"} >
+                <Tooltip placement="top" title={"Seleccionar una cotización previa"} >
                     <Select
                         value={cotizacion}
                         defaultValue="Sin cotización"
