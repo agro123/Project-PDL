@@ -12,7 +12,6 @@ import { PrinterOutlined, WarningTwoTone } from '@ant-design/icons';
 import Link from 'next/link';
 
 function Cotizacion() {
-console.log(data.cotizaciones[parseInt(indice.indice) - 1].total)
   const [total, setTotal] = useState(0);
   const [client, setClient] = useState(data.cotizaciones[parseInt(indice.indice) - 1].cliente);
   const [materials, setMaterials] = useState([]);
@@ -109,7 +108,7 @@ console.log(data.cotizaciones[parseInt(indice.indice) - 1].total)
     <>
       <div className='top'>
         <h1 className={styles.title}>
-          Cotización
+          Cotización (Editar)
        </h1>
         <ShowDate />
       </div>

@@ -1,35 +1,27 @@
 import { Input, AutoComplete, Button, Form, Table, Tooltip, notification } from 'antd';
-import { PlusOutlined } from '@ant-design/icons'
+import { PlusOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
-import columns from './columns';
-import data from '../../data/data.json'; 
+import columns from '../../OrdenesServicio(Crear)/materialsColumns';
+import data from '../../../data/data.json';
+import NumericInput from '../../constants/numericInput';
 
 function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
-
-    console.log('DataMaterials: ',dataMaterials);
-
     const [material, setMaterial] = useState({
         ref: '',
         name: '',
-        precio: '',
-        alto: '',
-        ancho: '',
-        cantidad: '',
-        area: ''
-
+        price: '',
+        length: '',
+        quantity: ''
     })
+    const [list, setList] = useState(dataMaterials.map( dm => dm = {...dm, total: dm.quantity*dm.price } 
+        ));
 
-    const [list, setList] = useState(dataMaterials.map( dm => dm = {...dm, total: dm.cantidad*dm.precio } 
-
-    ));
-    const [area, setArea] = useState('');
     const [unitTotal, setUnitTotal] = useState(0);
     const [key, setKey] = useState(0);
     const [total, setTotal] = useState(0);
     const [allOk, setAllOk] = useState('');
 
     useEffect(() => {
-        calcArea();
         calcTotal();
         calcUnitTotal();
         getTotal(total);
@@ -48,33 +40,10 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                 description,
         });
     };
-
-    //----------------------------Datos Traidos De Editar----------------------------
-
-    /* const rellenarEditar = (data) => {
-
-        data.map(materia => 
-            {
-                list.push(
-                                    {ref: materia.ref,
-                                    name:materia.name,
-                                    alto: materia.alto,
-                                    ancho: materia.ancho,
-                                    area: materia.area, 
-                                    key: materia.ref, 
-                                    precio: materia.precio,
-                                    cantidad: materia.cantidad,
-                                    total: (materia.cantidad * materia.precio)
-                                    });
-                                    console.log('El valor de los totales'+parseInt(total))
-            }
-        )
-    };
- */
     //----------------------------Rellenar Listas-------------------------------------    
     let references = [];
     const refList = () => {
-        data.productos.map(material => {
+        data.materiales.map(material => {
             references.push({ value: material.ref, label: material.ref })
         })
     }
@@ -82,7 +51,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
 
     let materials = [];
     const materialList = () => {
-        data.productos.map(material => {
+        data.materiales.map(material => {
             materials.push({ value: material.name, label: material.name })
         })
     }
@@ -91,7 +60,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
 
     //----------------------------AutoRellenar--------------------------------------
     const existMaterial = (prop) => {
-        data.productos.map(mat => {
+        data.materiales.map(mat => {
             if (prop === mat.name) {
                 setMaterial({
                     ...material,
@@ -104,7 +73,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
         return false;
     }
     const existRef = (prop) => {
-        data.productos.map(mat => {
+        data.materiales.map(mat => {
             if (prop === mat.ref) {
                 setMaterial({
                     ...material,
@@ -116,17 +85,8 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
         })
         return false;
     }
-    //-------------------------Calculo y verficacion de datos -----------------------------------------
-    const calcArea = () => {
-        const q = parseInt(material.heigth, 10);
-        const p = parseInt(material.width, 10);
-
-        if ((!isNaN(q) && !isNaN(p)) && (q != undefined && p != undefined)) {
-            setArea(q * p);
-        } else {
-            setArea('');
-        }
-    }
+    //--------------------------Calculo y verficacion de datos -----------------------------------------
+  
     const calcTotal = () => {
         let t = 0;
         list.map(m => {
@@ -152,28 +112,27 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
             || material.price == ''
             || material.quantity == '') {
             setAllOk('error');
-            openNotificationWithIcon('error', 'Campos vacios en A cotizar',
-            'Los campos referencia, descripción, precio y cantidad no deben de estar vacíos al momento de agregar un ítem');
+            openNotificationWithIcon('error', 'Campos vacios en "Materiales"',
+                'Los campos "Referencia", "Material", "Cantidad" y "Precio" no deben de estar vacíos al momento de agregar un Material');
             return false;
         }
         return true;
     }
 
     //-------------------------------------------------------------------------------
-    const onChange = e => {
+    /* const onChange = e => {
         setAllOk('')
         setMaterial({ ...material, [e.target.name]: e.target.value, });
-    };
+    }; */
     const onClick = e => {
         if (verficarDatos()) {
             setKey(key + 1);
-            setList([...list, { ...material, area: area, key: key, total: unitTotal }]);
+            setList([...list, { ...material, key: key, total: unitTotal }]);
             setMaterial({
                 ref: '',
                 name: '',
                 price: '',
-                heigth: '',
-                width: '',
+                length: '',
                 quantity: '',
             })
         }
@@ -185,22 +144,17 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
 
     }
 
-    const st = {
-        
-    }
-
     return (
         <>
-            <div className="materialsForm">
+            <div className="materialsOSForm">
                 <div className="titleLine">
-                    <p>A cotizar</p>
+                    <p>Materiales</p>
                 </div>
-                {/* {rellenarEditar(dataMaterials)} */}
                 <Form style={{ display: 'flex' }}>
                     <Form.Item validateStatus={allOk} style={{ width: '100px', margin: '0 5px 10px 0' }}>
                         <AutoComplete
                             value={material.ref}
-                            placeholder="Ref."
+                            placeholder="*Ref."
                             options={references}
                             onChange={value => {
                                 setAllOk('');
@@ -212,7 +166,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                     </Form.Item>
                     <Form.Item validateStatus={allOk} style={{ flex: 'auto', margin: '0 5px 10px 0' }}>
                         <AutoComplete
-                            placeholder="Descripción"
+                            placeholder="*Material"
                             options={materials}
                             value={material.name}
                             onChange={value => {
@@ -224,54 +178,42 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                         />
                     </Form.Item>
                     <Tooltip placement="top" title={"Milímetros"}>
-                        <Input
+                        <NumericInput
                             style={{ width: '100px', margin: '0 5px 10px 0' }}
-                            value={material.width}
-                            name="width"
-                            onChange={onChange}
-                            placeholder="Ancho"
+                            value={material.length}
+                            onChange={value => {
+                                setAllOk('');
+                                setMaterial({ ...material, length: value });
+                            }}
+                            placeholder="Longitud"
                             allowClear={true}
                         />
                     </Tooltip>
-                    <Tooltip placement="top" title={"Milímetros"}>
-                        <Input
-                            style={{ width: '100px', margin: '0 5px 10px 0' }}
-                            value={material.heigth}
-                            name="heigth"
-                            onChange={onChange}
-                            placeholder="Alto"
-                            allowClear={true}
-                        />
-                    </Tooltip>
-                    <Tooltip placement="top" title={"Milimetros"}>
-                        <Input
-                            style={{ width: '100px', margin: '0 5px 10px 0' }}
-                            value={area}
-                            name="area"
-                            placeholder="Área"
-                        />
-                    </Tooltip>
-                    <Form.Item validateStatus={allOk} style={{ width: '150px', margin: '0 5px 10px 0' }}>
-                        <Tooltip placement="top" title={formatter.format(material.price)}>
-                            <Input
-
-                                value={material.price}
-                                name="price"
-                                onChange={onChange}
-                                placeholder="Precio"
+                    <Form.Item validateStatus={allOk} style={{ width: '90px', margin: '0 5px 10px 0' }}>
+                        <Tooltip placement="top" title="Cantidad">
+                            <NumericInput
+                                placeholder="*Cant."
+                                value={material.quantity}
+                                onChange={value => {
+                                    setAllOk('');
+                                    setMaterial({ ...material, quantity: value });
+                                }}
                                 allowClear={true}
                             />
                         </Tooltip>
                     </Form.Item>
-                    <Form.Item validateStatus={allOk} style={{ width: '90px', margin: '0 5px 10px 0' }}>
-                        <Input
-
-                            placeholder="Cant."
-                            value={material.quantity}
-                            name="quantity"
-                            onChange={onChange}
-                            allowClear={true}
-                        />
+                    <Form.Item validateStatus={allOk} style={{ width: '150px', margin: '0 5px 10px 0' }}>
+                        <Tooltip placement="top" title={formatter.format(material.price)}>
+                            <NumericInput
+                                value={material.price}
+                                onChange={value => {
+                                    setAllOk('');
+                                    setMaterial({ ...material, price: value });
+                                }}
+                                placeholder="*Precio"
+                                allowClear={true}
+                            />
+                        </Tooltip>
                     </Form.Item>
                     <p className='unitTotal'>{formatter.format(unitTotal)}</p>
                     <Tooltip placement="top" title={"Añadir"}>
@@ -282,9 +224,9 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                     columns={columns(onDelete)}
                     dataSource={list}
                     showHeader={false}
-                    /* scroll={{
-                        y: 280
-                    }} */
+                    scroll={{
+                        y: 150
+                    }}
                     size='small'
                     pagination={false}
                 />

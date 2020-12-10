@@ -5,6 +5,7 @@ import React, {Component, PureComponent, useState} from 'react';
 import customFilter from './filters/customFilter';
 import Link from 'next/link';
 import CotizacionEditar from '../../pages/Cotizaciones/cotizacionEditar'
+import ShowCotizacionesVer from '../customModal/showCotizacion'
 
 const listTable = () => {
     
@@ -53,7 +54,7 @@ const listTable = () => {
     const [cotizaciones, setCotizaciones] = useState ([]);
     const [prod, setProd] = useState ( []);
     const [visible, setVisible] = useState (false);
-    const [indice, setIndice] = useState (0);
+    const [indice, setIndice] = useState ("");
 
     const formatter = new Intl.NumberFormat('es-CO', {
                     style: 'currency',
@@ -109,7 +110,7 @@ const listTable = () => {
                         observaciones: cotiza.observacion,
                         total: cotiza.total,
                         boton1: <Button type='primary' shape='round' 
-                                    onClick= {() => showModal(cotiza.No - 1)                           
+                                    onClick= {() => showModal(cotiza.No)                           
                                     }> Ver </Button>,
                         boton2:     <Link href= {{pathname: '/Cotizaciones/cotizacionEditar'}} >
                                         <Button type='default' shape='round' onClick={() => showEditar(cotiza.No)} danger>
@@ -120,52 +121,10 @@ const listTable = () => {
                 )
             })
         }
-
-//                                cargar los productos
-    const listaProductos= (producto) => {
-
-                    Cotiz.cotizaciones[indice].productos.map(pro => {
-
-                        producto.push(
-                            {
-                                key: pro.ref,
-                                referencia: pro.ref,
-                                name: pro.name,
-                                alto: pro.alto,
-                                ancho: pro.ancho,
-                                cantidad: pro.cantidad,
-                                precio: pro.precio,
-                                area: pro.area
-                            }
-                        )
-                    })
-                
-                       
-    };
-
-    const algo= () => {
-
-            
-            return(
-                prod.map(
-                    (products1) =>
-                    
-                    <h4> {products1.cantidad}  {products1.name} {products1.referencia+ " "} 
-                de {products1.alto}mm de alto 
-                por {products1.ancho}mm de ancho, 
-                con un valor por metro cuadrado de ${products1.precio} para un total 
-                de: ${products1.area/1000000 * products1.precio}
-                </h4>
-            )
-            )
-    };
-
-
         
         //-------------------------------------------------------------
         //          Llenar los arreglos de datos
     lista(cotizaciones);
-    listaProductos(prod)
 
     return (
             <div>
@@ -184,34 +143,7 @@ const listTable = () => {
             />
 
             </div>
-            <Modal
-                title="Cotización"
-                visible={visible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                width={700}
-            >
-                
-                <p> Numero de cotización: {cotizaciones[indice].id} <br /> 
-                    Fecha: {cotizaciones[indice].fecha} </p> 
-                <h3> Señor(a/es): {cotizaciones[indice].nombre} <br/> Identificado con el Numero
-                de cédula:  
-                {" " + cotizaciones[indice].cedula}
-                </h3>
-                <br />
-                <h3> A su solicitud se cotizó lo siguiente: </h3>
-                
-
-                {algo()}
-               
-                <br />
-                <h3> El total de su cotización es: ${cotizaciones[indice].total} de pesos(COP)
-                </h3>
-                <br />
-                <h3> Nota: {cotizaciones[indice].observaciones}</h3>
-                
-               
-            </Modal>
+            <ShowCotizacionesVer index= {indice} visible={visible} onOk={handleOk} onCancel={handleCancel} />
             </div>
            
         );

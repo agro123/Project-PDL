@@ -1,13 +1,14 @@
 import { Alert, Button, Table, Modal } from 'antd';
-import OS from '../data/OS.json'
+import OS from '../../data/data.json'
 import dateFilter from './filters/dateFilter'
 import React, { Component, useState } from 'react'
 import Link from 'next/link'
+import ShowOrdenServicio from '../customModal/showOrdenServicio'
 
 
 const listTable = () => {
    
-    const [columns, setColumns] = useState ([
+    const columns = [
                     {
                         title: 'No.',
                         dataIndex: 'id',
@@ -46,7 +47,7 @@ const listTable = () => {
                         onClick= {() => alert('Y aqui se va a editar :3 jeje')} danger> Editar </Button>)*/
 
                     }
-                ]);
+                ];
             
 
                 const [ordenes, setOrdenes] = useState ( []);
@@ -59,48 +60,55 @@ const listTable = () => {
 
             const [visible, setVisible] = useState (false);
 
-            const [indice, setIndice] = useState (0);
-        
-    
+            const [indice, setIndice] = useState ("");
 
+
+
+
+            // ESTO MUESTRA EL MODAL
             const showModal = (id) => {
-            setVisible(true),
-            setIndice(id)
-        };
+                setVisible(true),
+                setIndice(id)
+                };
+        
+                const handleOk = e => {
+                    console.log(e)
+                    setVisible(false)
+                };
+            
+                const handleCancel = e => {
+                    console.log(e)
+                    setVisible(false)
+                  
+                };
+
+
+    const showEditar = (e) =>{
+
+        OS.indice = e;
+    }
+
+            
     
-
-    const handleOk = e => {
-        console.log(e)
-        setVisible(false)
-    };
-
-    const handleCancel = e => {
-        console.log(e)
-        setVisible(false)
-      
-    };
 
     const lista = (ordenes) => {
 
-        OS.OrdenServicio.map(os => {
-
+        OS.ordenServicio.map(os => {
+          
             ordenes.push(
                 {
-                    key: os.id,
-                    name: os.name,
-                    id: os.id,
-                    date: os.date,
-                    value: formatter.format(os.value),
-                    boton1: <Button type='primary' shape='round' onClick={() => showModal(os.id - 1)
+                    key: os.No,
+                    name: os.cliente.name,
+                    id: os.No,
+                    date: os.fechaFinal,
+                    value: formatter.format(os.total),
+                    boton1: <Button type='primary' shape='round' onClick={() => showModal(os.No)
                     }> Ver </Button>,
-                    boton2:
-                       
-                            <Button type='default' shape='round' danger onClick={() => alert("Aun no prro") }>
-
-                                <a>Editar</a>
-
-                            </Button>
-                     
+                    boton2:<Link href= {{pathname: '/ordenS/ordenServicioEditar'}} >
+                                <Button type='default' shape='round' onClick={() => showEditar(os.No)} danger>
+                                    <a>Editar</a>
+                                </Button>
+                            </Link> 
                 }
             )
         })
@@ -128,28 +136,11 @@ const listTable = () => {
                         pagination={true}
                     />
                 </div>
-                <Modal
-                    title={"Orden de servicio No.  " + ordenes[indice].id}
-                    visible={visible}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                    width={1000}
-                >
 
-                    <p>
-                    Fecha: {ordenes[indice].date} </p>
-                    <h2> Cliente: {ordenes[indice].name} </h2>
-                    <br />
-                    <h3> Valor: {ordenes[indice].value} </h3>
-                    <br />
-                    <br />
-                    <p> Esta es toda la informacion que tiene que salir y hago esto grande para que se agrande el Modal
-                    hacia los lados a ver que tan grande puede llegar a ser y que tanta informacion le cabe porque
-                    aqui se supone que van a ir todos los materiales que se van a usar en consecuencia lo que mi padre
-                    llama "La lista de corte", por ello esto va a ser un modal desgraciadamente grande y esto es una
-                    prueba bastante adecuada para hacerle frente a esa necesidad </p>
-
-                </Modal>
+                <div>
+                <ShowOrdenServicio index= {indice} visible={visible} onOk={handleOk} onCancel={handleCancel} />
+                </div>
+                
             </div>
 
         );

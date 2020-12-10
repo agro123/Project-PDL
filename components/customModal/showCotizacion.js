@@ -117,11 +117,11 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
                             <div className="LittleTitleLine">
                                 <p>Cliente</p>
                             </div>
-                            <p>-{cotizacion.cliente.name}</p>
-                            <p>-{cotizacion.cliente.id}</p>
-                            <p>-{cotizacion.cliente.address}</p>
-                            <p>-{cotizacion.cliente.phoneNumb}</p>
-                            <p>-{cotizacion.cliente.email}</p>
+                            <p>Nombre: {'    ', cotizacion.cliente.name}</p>
+                            <p>Cedula/NIT:{' ',cotizacion.cliente.id}</p>
+                            <p>Dirección:{'  ',cotizacion.cliente.address}</p>
+                            <p>Telefono:{'   ',cotizacion.cliente.phoneNumb}</p>
+                            <p>Email:{'      ',cotizacion.cliente.email}</p>
                         </div>
                     </div>
                 </div>

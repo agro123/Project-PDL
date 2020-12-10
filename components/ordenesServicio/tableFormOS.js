@@ -7,7 +7,7 @@ const TableForm = () => {
     const ref= []
     
         {
-           OS.OrdenServicio.map(os => {
+           OS.ordenServicio.map(os => {
                 ref.push(
                     {
                         value: os.id,
@@ -19,7 +19,7 @@ const TableForm = () => {
 
         const client = []
         {
-            OS.OrdenServicio.map(os => {
+            OS.ordenServicio.map(os => {
                  client.push(
                      {
                          value: os.name,

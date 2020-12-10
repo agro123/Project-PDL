@@ -14,6 +14,7 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
     let ordenDeServicio = {
         No: "",
         fechaFinal: "",
+        cotizacionNum: "",
         observacion: "",
         total: 0,
         cliente: {
