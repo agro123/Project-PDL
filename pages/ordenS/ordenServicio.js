@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import data from '../../data/data.json';
 import styles from '../../styles/Home.module.css';
-import ClientForm from '../../components/cotizacion/crear/clientForm';
+import ClientForm from '../../components/cuenta_cobro/cliente';
 import ShowDate from '../../components/OrdenesServicio(Crear)/showDate';
 import CotizacionPicker from '../../components/OrdenesServicio(Crear)/cotizacionPicker';
 import MaterialsForm from '../../components/OrdenesServicio(Crear)/materialsForm';
@@ -11,7 +11,13 @@ import ObservationForm from '../../components/cotizacion/crear/observacionForm';
 import TotalDisplay from '../../components/cotizacion/crear/totalDisplay';
 import { Button, Tooltip, notification, Modal, Space } from 'antd';
 import { SaveOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-
+const cli= {
+  name: "",
+  id: "",
+  address: "",
+  phoneNumb: "",
+  email: ""
+}
 function OrdenServicio() {
 
   const [total, setTotal] = useState(0);
@@ -19,14 +25,13 @@ function OrdenServicio() {
   const [total2, setTotal2] = useState(0);
   const [total3, setTotal3] = useState(0);
 
-  const [client, setClient] = useState({});
+  const [client, setClient] = useState(cli);
   const [materials, setMaterials] = useState([]);
   const [otrosGastos, setOtrosGastos] = useState([]);
   const [responsables, setResponsables] = useState([]);
   const [observation, setObservation] = useState('');
   const [date, setDate] = useState('');
-  const [numCotizacion, setNumCotizacion] = useState('')
-  const [allOk, setAllOk] = useState('');
+  const [numCotizacion, setNumCotizacion] = useState('');
 
   //------------------------Data confirmation---------------------------------------
   const correctClient = () => {
@@ -45,20 +50,21 @@ function OrdenServicio() {
 
   useEffect(() => {
     setTotal(total1 + total2 + total3)
+    findCliente(numCotizacion)
   })
   //--------------------------------------------------------------------------------
   const findCliente = num => {
-    const cot = data.cotizaciones.find(c => c.No == num);
-    setClient(cot.cliente);
+    if (num != "") {
+      const cot = data.cotizaciones.find(c => c.No == num);
+      setClient(cot.cliente);
+    }else {
+      setClient(cli);
+    }
   }
   //---------------------------------------------------------------------------------
-  const handleClientForm = e => {
-    setClient(e);
-  }
-
   const handleMaterialForm = e => {
     setMaterials(e);
-   /*  console.log("materiales", e) */
+    /*  console.log("materiales", e) */
   }
   const handleOtrosGastosForm = e => {
     setOtrosGastos(e);
@@ -73,7 +79,7 @@ function OrdenServicio() {
   }
   const handleDate = e => {
     setDate(e);
-/*     console.log("FECHA:", e); */
+    /*     console.log("FECHA:", e); */
   }
   const handleNumCotizacion = e => {
     setNumCotizacion(e);
@@ -89,9 +95,6 @@ function OrdenServicio() {
     setTotal3(e);
   }
 
-  const clientFields = e => {
-    setAllOk('');
-  }
 
   const onClick = e => {
     if (correctClient() || total != "0" || date != "") {//Verifica que existan datos necesarios para hacer una orden de servicio
@@ -116,10 +119,8 @@ function OrdenServicio() {
             'Por favor agregue materiales  para que sea posible guardar la orden de servicio.');
         }
       } else {
-        openNotificationWithIcon('error', 'Campos vacios en cliente',
-          'Los campos Nombre e Identificación son obligatorios. Por favor verifique que estén completos.');
-        setAllOk('error');
-
+        openNotificationWithIcon('error', 'No ha seleccionado una cotización',
+          'Por favor seleccione una cotización para que sea posible guardar la orden de servicio');
       }
     } else {
       openNotificationWithIcon('error', 'Campos vacios',
@@ -164,9 +165,7 @@ function OrdenServicio() {
       <div className='cotizacionPanel'>
         <div className='topOS'>
           <ClientForm
-            handleForm={handleClientForm}
-            allOk={allOk}
-            clientsField={clientFields}
+            cliente={client}
           />
           <CotizacionPicker handleNumCotizacion={handleNumCotizacion} />
         </div>

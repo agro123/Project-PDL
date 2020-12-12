@@ -19,7 +19,7 @@ const listTable = () => {
             width: 150
         },
         {
-            title: 'Fecha',
+            title: 'Fecha de entrega',
             dataIndex: 'date',
             ...dateFilter('date'),
             width: 100

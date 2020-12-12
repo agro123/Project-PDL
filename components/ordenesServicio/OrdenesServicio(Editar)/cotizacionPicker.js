@@ -47,7 +47,6 @@ const CotizacionPicker = ({ handleNumCotizacion, inputCotizacionIndex}) => {
                         }}
                     >
                         {cotizacionList()}
-                        <Option value="">Sin Cotización</Option>
                     </Select>
                 </Tooltip>
                 <Tooltip placement="bottom" title={"Ver cotización"} >
