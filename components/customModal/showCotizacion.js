@@ -26,9 +26,11 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
     }
     if (index !== "") {
         cotizacion = data.cotizaciones.find(c => c.No == index)
-        cotizacion = {...cotizacion, productos: cotizacion.productos = cotizacion.productos.map(p =>
-            p = { ...p, total: p.precio * p.cantidad }
-        )}
+        cotizacion = {
+            ...cotizacion, productos: cotizacion.productos = cotizacion.productos.map(p =>
+                p = { ...p, total: p.precio * p.cantidad, key: p.ref }
+            )
+        }
     }
 
 
@@ -72,7 +74,7 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
                 onCancel={onCancel}
                 width={700}
                 footer={
-                    [<Button  type="primary" onClick={onOk}>Volver</Button>]
+                    [<Button key="1 " type="primary" onClick={onOk}>Volver</Button>]
                 }
             >
                 <div className='topSC'>
@@ -118,10 +120,10 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
                                 <p>Cliente</p>
                             </div>
                             <p>Nombre: {'    ', cotizacion.cliente.name}</p>
-                            <p>Cedula/NIT:{' ',cotizacion.cliente.id}</p>
-                            <p>Dirección:{'  ',cotizacion.cliente.address}</p>
-                            <p>Telefono:{'   ',cotizacion.cliente.phoneNumb}</p>
-                            <p>Email:{'      ',cotizacion.cliente.email}</p>
+                            <p>Cedula/NIT:{' ', cotizacion.cliente.id}</p>
+                            <p>Dirección:{'  ', cotizacion.cliente.address}</p>
+                            <p>Telefono:{'   ', cotizacion.cliente.phoneNumb}</p>
+                            <p>Email:{'      ', cotizacion.cliente.email}</p>
                         </div>
                     </div>
                 </div>

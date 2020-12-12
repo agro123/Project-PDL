@@ -10,7 +10,15 @@ function OtrosGastosForm({ handleForm, getTotal, dataOtrosGastos }) {
         description: '',
         price: '',
     })
-    const [list, setList] = useState(dataOtrosGastos.map( dm => dm = {...dm, total: dm.price } 
+
+    const [indice, setIndice] = useState(0)
+
+    const SubirCuenta = () => {
+
+        setIndice(indice + 1)
+    }
+
+    const [list, setList] = useState(dataOtrosGastos.map( dm => dm = {...dm, key: dataOtrosGastos.indexOf(dm)}
         ));
     const [key, setKey] = useState(0);
     const [allOk, setAllOk] = useState('');

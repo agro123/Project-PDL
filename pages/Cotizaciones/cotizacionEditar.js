@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import data from '../../data/data.json';
 import indice from '../../data/indice.json'
 import styles from '../../styles/Home.module.css';
@@ -6,9 +6,9 @@ import ClientForm from '../../components/cotizacion Editar/clientForm';
 import ShowDate from '../../components/cotizacion Editar/showDate';
 import MaterialsForm from '../../components/cotizacion Editar/materialsForm';
 import ObservationForm from '../../components/cotizacion Editar/observacionForm';
-import TotalDisplay from '../../components/cotizacion Editar/totalDisplay';
+import TotalDisplay from '../../components/cotizacion/crear/totalDisplay';
 import { Button, Tooltip, notification, Modal, Space } from 'antd';
-import { PrinterOutlined, WarningTwoTone } from '@ant-design/icons';
+import { SaveOutlined, WarningTwoTone } from '@ant-design/icons';
 import Link from 'next/link';
 
 function Cotizacion() {
@@ -19,8 +19,6 @@ function Cotizacion() {
   const [allOk, setAllOk] = useState('');
   const [visible, setVisible] = useState(false);
 
-
-  
   //------------------------Data confirmation---------------------------------------
   const correctClient = () => {
     if (client.name == '' || client.name === undefined || client.id == '' || client.id === undefined) {
@@ -37,6 +35,7 @@ function Cotizacion() {
   };
 
   //--------------------------------------------------------------------------------
+
   const handleClientForm = e => {
     setClient(e);
   }
@@ -61,7 +60,7 @@ function Cotizacion() {
           setVisible(true);
         } else {
           openNotificationWithIcon('error', 'Lista de productos vacía',
-            'Por favor agregue un producto a cotizar para que sea posible imprimir la cotización.');
+            'Por favor agregue un producto a cotizar para que sea posible guardar la cotización.');
         }
 
       } else {
@@ -71,9 +70,8 @@ function Cotizacion() {
 
       }
     } else {
-      console.log("total es", total, "Correct client es", correctClient())
       openNotificationWithIcon('error', 'Campos vacios',
-        'Complete los campos para poder agregar una cotización');
+        'Complete los campos para poder guardar la cotización');
     }
   }
   const handleOk = e => {
@@ -97,7 +95,7 @@ function Cotizacion() {
       total: total,
       observation: observation
     })*/
-    openNotificationWithIcon('success', 'Cotización agregada con éxito', '');
+    openNotificationWithIcon('success', 'Cotización modificada con éxito', '');
     setVisible(false);
   };
   const handleCancel = e => {
@@ -126,8 +124,9 @@ function Cotizacion() {
         <div className='bot'>
           <ObservationForm handleForm={handleObservationForm}
             inputForm={observation} />
-          <TotalDisplay inputTotal={total} />
-          <div className='final'>
+          <TotalDisplay total={total} />
+          <div className='final'
+          >
 
             <Space>
               <Link href={{ pathname: '/Cotizaciones/cotizaciones' }} >
@@ -135,11 +134,11 @@ function Cotizacion() {
                   <a>Volver</a>
                 </Button>
               </Link>
-              <Tooltip placement="top" title={"Imprimir y Guardar"}>
+              <Tooltip placement="top" title={"Guardar"}>
                 <Button type="primary"
-                  icon={<PrinterOutlined />}
+                  icon={<SaveOutlined />}
                   onClick={onClick}
-                >Imprimir
+                >Guardar
             </Button>
               </Tooltip>
 
@@ -153,7 +152,7 @@ function Cotizacion() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Por favor verifique que todos los datos estén bien antes de hacer clic en OK.</p>
+        <p>Por favor verifique que todos los datos estén bien antes de hacer clic en "Aceptar".</p>
       </Modal>
     </>)
 }

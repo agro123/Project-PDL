@@ -10,8 +10,8 @@ function ResponsablesForm({ handleForm, getTotal,dataResponsables }) {
         name: '',
         price: '',
     })
-    const [list, setList] = useState(dataResponsables.map( dm => dm = {...dm, total: dm.price } 
-        ));
+    const [list, setList] = useState(dataResponsables.map( dm => dm = {...dm, key: dataResponsables.indexOf(dm)}
+    ));
     const [key, setKey] = useState(0);
     const [total, setTotal] = useState(0);
     const [allOk, setAllOk] = useState('');

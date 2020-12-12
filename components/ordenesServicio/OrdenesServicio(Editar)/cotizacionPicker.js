@@ -1,14 +1,16 @@
 import { Select, Button, Tooltip } from 'antd';
-import ShowCotizacion from '../customModal/showCotizacion'
+import ShowCotizacion from '../../customModal/showCotizacion'
 import { useState, useEffect } from 'react';
-import data from '../../data/data.json'
+import data from '../../../data/data.json'
 const { Option } = Select;
-const CotizacionPicker = ({ handleNumCotizacion}) => {
+const CotizacionPicker = ({ handleNumCotizacion, inputCotizacionIndex}) => {
 
-    const [cotizacion, setCotizacion] = useState('');
+    const [cotizacion, setCotizacion] = useState(inputCotizacionIndex);
     const [disable, setDisable] = useState(true);
     const [visible, setVisible] = useState(false);
 
+
+    
     useEffect(() => {
         handleNumCotizacion(cotizacion); 
         setDisable(isSelect)
@@ -27,6 +29,7 @@ const CotizacionPicker = ({ handleNumCotizacion}) => {
         setVisible(true)
     }
 
+
     return (
         <>
             <div className='containerDatePicker'>
@@ -34,16 +37,17 @@ const CotizacionPicker = ({ handleNumCotizacion}) => {
                     <p>Cotización</p>
                 </div>
                 <Tooltip placement="top" title={"Seleccionar una cotización previa"} >
+                    
                     <Select
+                        defaultValue= {cotizacion}
                         value={cotizacion}
-                        defaultValue="Sin cotización"
                         style={{ width: "200px" }}
                         onChange={value => {
                             setCotizacion(value);
                         }}
                     >
-                        <Option value="">Seleccionar</Option>
                         {cotizacionList()}
+                        <Option value="">Sin Cotización</Option>
                     </Select>
                 </Tooltip>
                 <Tooltip placement="bottom" title={"Ver cotización"} >

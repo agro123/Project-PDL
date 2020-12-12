@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import data from '../../data/data.json';
 import styles from '../../styles/Home.module.css';
-import ClientForm from '../../components/cotizacion/crear/clientForm';
-import ShowDate from '../../components/OrdenesServicio(Crear)/showDate';
-import CotizacionPicker from '../../components/OrdenesServicio(Crear)/cotizacionPicker';
+import ClientForm from '../../components/cotizacion Editar/clientForm'; 
+import ShowDate from '../../components/ordenesServicio/OrdenesServicio(Editar)/showDate';
+import CotizacionPicker from '../../components/ordenesServicio/OrdenesServicio(Editar)/cotizacionPicker';
 import MaterialsForm from '../../components/ordenesServicio/OrdenesServicio(Editar)/materialsForm';
 import OtrosGastosForm from '../../components/ordenesServicio/OrdenesServicio(Editar)/otrosGastosForm';
 import ResponsablesForm from '../../components/ordenesServicio/OrdenesServicio(Editar)/responsablesForm';
@@ -14,7 +14,6 @@ import Link from 'next/link'
 import { SaveOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 function OrdenServicioEditar() {
-
 
 
   const [total, setTotal] = useState(0);
@@ -103,15 +102,15 @@ function OrdenServicioEditar() {
               confirm();
             } else {
               openNotificationWithIcon('error', 'No ha seleccionado una fecha de entrega',
-                'Por favor seleccione  una fecha de entrega para que sea posible guardar la orden de servicio.');
+                'Por favor seleccione una fecha de entrega para que sea posible modificar la orden de servicio.');
             }
           } else {
             openNotificationWithIcon('error', 'Lista de Responsables vacía',
-              'Por favor agregue trabajadores para que sea posible guardar la orden de servicio.');
+              'Por favor agregue trabajadores para que sea posible modificar la orden de servicio.');
           }
         } else {
           openNotificationWithIcon('error', 'Lista de Materiales vacía',
-            'Por favor agregue materiales  para que sea posible guardar la orden de servicio.');
+            'Por favor agregue materiales para que sea posible modificar la orden de servicio.');
         }
       } else {
         openNotificationWithIcon('error', 'Campos vacios en cliente',
@@ -121,23 +120,23 @@ function OrdenServicioEditar() {
       }
     } else {
       openNotificationWithIcon('error', 'Campos vacios',
-        'Complete los campos para poder agregar una Orden de servicio');
+        'Complete los campos para poder modificar una Orden de servicio');
     }
   }
 
   const handleOk = e => {
-    data.ordenServicio.push({
-      No: data.ordenServicio.length + 1,
-      materials: [...materials],
-      otrosGastos: [...otrosGastos],
-      responsables: [...responsables],
-      cliente: client,
-      total: total,
-      observaciones: observation,
-      fechaFinal: date,
-      cotizacionNum: numCotizacion
-    })
-    openNotificationWithIcon('success', 'Orden de servicio agregada con éxito', '');
+
+    data.ordenServicio[parseInt(data.indice) - 1].cliente = client;
+    data.ordenServicio[parseInt(data.indice) - 1].total = total;
+    data.ordenServicio[parseInt(data.indice) - 1].observaciones = observation;
+    data.ordenServicio[parseInt(data.indice) - 1].fechaFinal = date;
+    data.ordenServicio[parseInt(data.indice) - 1].cotizacionNum = numCotizacion;
+    data.ordenServicio[parseInt(data.indice) - 1].materiales = [...materials]
+    data.ordenServicio[parseInt(data.indice) - 1].otrosGastos = [...otrosGastos]
+    data.ordenServicio[parseInt(data.indice) - 1].responsables = [...responsables]
+
+
+    openNotificationWithIcon('success', 'Orden de servicio modificada con éxito', '');
   };
   const confirm = () => {
     Modal.confirm({
@@ -157,7 +156,8 @@ function OrdenServicioEditar() {
         <h1 className={styles.title}>
           Orden de Servicio (Editar)
        </h1>
-        <ShowDate handleDate={handleDate} />
+        <ShowDate handleDate={handleDate}
+                  inputDate= {data.ordenServicio[parseInt(data.indice) - 1].fechaFinal} />
       </div>
       <div className='cotizacionPanel'>
         <div className='topOS'>
@@ -165,8 +165,10 @@ function OrdenServicioEditar() {
             handleForm={handleClientForm}
             allOk={allOk}
             clientsField={clientFields}
+            inputCliente={data.ordenServicio[parseInt(data.indice) - 1].cliente}
           />
-          <CotizacionPicker handleNumCotizacion={handleNumCotizacion} />
+          <CotizacionPicker handleNumCotizacion={handleNumCotizacion} 
+                            inputCotizacionIndex={data.ordenServicio[parseInt(data.indice) - 1].cotizacionNum} />
         </div>
         <div className='middleOS'>
           <MaterialsForm handleForm={handleMaterialForm} getTotal={handleTotalMaterials}

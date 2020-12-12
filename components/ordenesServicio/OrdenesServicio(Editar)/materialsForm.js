@@ -13,8 +13,8 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
         length: '',
         quantity: ''
     })
-    const [list, setList] = useState(dataMaterials.map( dm => dm = {...dm, total: dm.quantity*dm.price } 
-        ));
+    const [list, setList] = useState(dataMaterials.map( dm => dm = {...dm, key: dataMaterials.indexOf(dm)}
+    ));
 
     const [unitTotal, setUnitTotal] = useState(0);
     const [key, setKey] = useState(0);
@@ -125,7 +125,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
         setMaterial({ ...material, [e.target.name]: e.target.value, });
     }; */
     const onClick = e => {
-        if (verficarDatos()) {
+        if (verficarDatos()) { 
             setKey(key + 1);
             setList([...list, { ...material, key: key, total: unitTotal }]);
             setMaterial({

@@ -5,9 +5,6 @@ import columns from './columns';
 import data from '../../data/data.json'; 
 
 function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
-
-    console.log('DataMaterials: ',dataMaterials);
-
     const [material, setMaterial] = useState({
         ref: '',
         name: '',
@@ -19,7 +16,7 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
 
     })
 
-    const [list, setList] = useState(dataMaterials.map( dm => dm = {...dm, total: dm.cantidad*dm.precio } 
+    const [list, setList] = useState(dataMaterials.map( dm => dm = {...dm, total: dm.cantidad*dm.precio, key: dm.ref } 
 
     ));
     const [area, setArea] = useState('');
@@ -48,29 +45,6 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                 description,
         });
     };
-
-    //----------------------------Datos Traidos De Editar----------------------------
-
-    /* const rellenarEditar = (data) => {
-
-        data.map(materia => 
-            {
-                list.push(
-                                    {ref: materia.ref,
-                                    name:materia.name,
-                                    alto: materia.alto,
-                                    ancho: materia.ancho,
-                                    area: materia.area, 
-                                    key: materia.ref, 
-                                    precio: materia.precio,
-                                    cantidad: materia.cantidad,
-                                    total: (materia.cantidad * materia.precio)
-                                    });
-                                    console.log('El valor de los totales'+parseInt(total))
-            }
-        )
-    };
- */
     //----------------------------Rellenar Listas-------------------------------------    
     let references = [];
     const refList = () => {
@@ -129,16 +103,18 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
     }
     const calcTotal = () => {
         let t = 0;
+        
         list.map(m => {
-            const q = parseInt(m.price, 10);
-            const p = parseInt(m.quantity, 10);
+            const q = parseInt(m.precio, 10);
+            const p = parseInt(m.cantidad, 10);
+
             t = t + (q * p);
         })
         setTotal(t);
     }
     const calcUnitTotal = () => {
-        const q = parseInt(material.price, 10);
-        const p = parseInt(material.quantity, 10);
+        const q = parseInt(material.precio, 10);
+        const p = parseInt(material.cantidad, 10);
 
         if ((!isNaN(q) && !isNaN(p)) && (q != undefined && p != undefined)) {
             setUnitTotal(q * p);
@@ -149,8 +125,8 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
 
     const verficarDatos = () => {
         if (material.ref == '' || material.name == ''
-            || material.price == ''
-            || material.quantity == '') {
+            || material.precio == ''
+            || material.cantidad == '') {
             setAllOk('error');
             openNotificationWithIcon('error', 'Campos vacios en A cotizar',
             'Los campos referencia, descripción, precio y cantidad no deben de estar vacíos al momento de agregar un ítem');
@@ -171,10 +147,10 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
             setMaterial({
                 ref: '',
                 name: '',
-                price: '',
+                precio: '',
                 heigth: '',
                 width: '',
-                quantity: '',
+                cantidad: '',
             })
         }
     }
@@ -252,11 +228,11 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                         />
                     </Tooltip>
                     <Form.Item validateStatus={allOk} style={{ width: '150px', margin: '0 5px 10px 0' }}>
-                        <Tooltip placement="top" title={formatter.format(material.price)}>
+                        <Tooltip placement="top" title={formatter.format(material.precio)}>
                             <Input
 
-                                value={material.price}
-                                name="price"
+                                value={material.precio}
+                                name="precio"
                                 onChange={onChange}
                                 placeholder="Precio"
                                 allowClear={true}
@@ -267,8 +243,8 @@ function MaterialsForm({ handleForm, getTotal, dataMaterials }) {
                         <Input
 
                             placeholder="Cant."
-                            value={material.quantity}
-                            name="quantity"
+                            value={material.cantidad}
+                            name="cantidad"
                             onChange={onChange}
                             allowClear={true}
                         />

@@ -1,5 +1,4 @@
 import { Modal, Table, Image, Button } from 'antd';
-import { useState, useEffect } from 'react';
 import { columnsMat, columnsOG, columnsRT } from './columns'
 import data from '../../data/data.json';
 
@@ -31,7 +30,7 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
     if (index !== "") {
         ordenDeServicio = data.ordenServicio.find(c => c.No == index)
     }
-    //--------------------------------------
+  
 
     return (
         <>
@@ -42,7 +41,7 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
                 onCancel={onCancel}
                 width={700}
                 footer={
-                    [<Button type="primary" onClick={onOk}>Volver</Button>]
+                    [<Button key="1" type="primary" onClick={onOk}>Volver</Button>]
                 }
             >
                 <div className='topSC'>
@@ -51,7 +50,7 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
                     </div>
                     <div className='dateSC'>
                         <div className="LittleTitleLine">
-                            <p>Cotizacion No.</p>
+                            <p>Cotización No.</p>
                         </div>
                         <p>{ordenDeServicio.cotizacionNum}</p>
                     </div>

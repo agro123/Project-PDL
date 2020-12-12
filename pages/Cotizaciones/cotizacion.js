@@ -77,7 +77,6 @@ function Cotizacion() {
 
       }
     } else {
-      console.log("total es", total, "Correct client es", correctClient())
       openNotificationWithIcon('error', 'Campos vacios',
         'Complete los campos para poder agregar una cotización');
     }

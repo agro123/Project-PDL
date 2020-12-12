@@ -7,8 +7,6 @@ import FormItemInput from 'antd/lib/form/FormItemInput';*/
 
 const ClienteForm = ({ handleForm, allOk, clientsField, inputCliente}) => {
     const [client, setClient] = useState(inputCliente);
-    console.log(inputCliente)
- 
     useEffect(() => {
         handleForm(client);
     })

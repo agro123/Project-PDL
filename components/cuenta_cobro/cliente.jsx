@@ -1,19 +1,19 @@
 
-const Cliente = () => {
+const Cliente = ({ cliente }) => {
 
     return (
         <>
-            <div className="titleLine">
-                <p>
-                    Cliente
-                </p>
-            </div>
-            <div>
-                <p className='margenLetra'>Nombre: </p>
-                <p className='margenLetra'>C.C:</p>
-                <p className='margenLetra'>Dirección:</p>
-                <p className='margenLetra'>Correo:</p>
-                <p className='margenLetra'>Telefono:</p>
+            <div className="clientInfo">
+                <div className="titleLine">
+                    <p>Cliente</p>
+                </div>
+                <div>
+                    <p className='margenLetra'>{cliente.name}</p>
+                    <p className='margenLetra'>{cliente.id}</p>
+                    <p className='margenLetra'>{cliente.address}</p>
+                    <p className='margenLetra'>{cliente.phoneNumb}</p>
+                    <p className='margenLetra'>{cliente.email}</p>
+                </div>
             </div>
         </>
     )

@@ -12,9 +12,9 @@ const DateFilter = (dataIndex) => {
                 <DatePicker
                     placeholder="Seleccionar"
                     style={{ width: 188, marginBottom: 8, display: "block" }}
-                    format="YYYY-MM-DD"
+                    format="DD-MM-YYYY"
                     onChange={e =>
-                        setSelectedKeys(e ? [e.format("YYYY-MM-DD")] : [])
+                        setSelectedKeys(e ? [e.format("DD-MM-YYYY")] : [])
                     }
                 />
                 <Space>
@@ -25,14 +25,14 @@ const DateFilter = (dataIndex) => {
                         size="small"
                         style={{ width: 90 }}
                     >
-                        Search
+                        Buscar
                         </Button>
                     <Button
                         onClick={() => handleReset(clearFilters)}
                         size="small"
                         style={{ width: 90 }}
                     >
-                        Reset
+                        Restaurar
                     </Button>
                 </Space>
             </div>

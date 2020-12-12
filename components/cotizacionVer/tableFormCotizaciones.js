@@ -5,23 +5,18 @@ import Cotizaciones from '../../data/data.json';
 
 const TableFormCotizaciones = () => {
 
-    
 
-         return (
-            <div className="TableForm">
-            <div className="titleLine">
-               
+
+    return (
+        <div className='cotizacionPanel'>
+            <div className="titleLine"></div>
+            <div className='Table'>
+                <ListTable />
+                <div />
             </div>
-            <br />
-           
-            
-            <div className= 'Table'>
-            <ListTable />
-            <div />
         </div>
-        </div>
-         )
-         
-    };
+    )
+
+};
 
 export default TableFormCotizaciones;

@@ -16,7 +16,7 @@ const CustomFilter = (dataIndex) => {
         <Input
           placeholder={`Buscar ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [ e.target.value ] : [])}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => confirm()}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
         />
@@ -24,9 +24,9 @@ const CustomFilter = (dataIndex) => {
           <Button
             type='primary'
             onClick={() => confirm()}
-            icon ={<SearchOutlined  style={{fontSize: '12px', color: '#1890FF'}} />}
-            size='middle'
-            style={{ width: 100 }}
+            icon={<SearchOutlined style={{ fontSize: '12px', color: '#FFFFFF' }} />}
+            size='small'
+            style={{ width: 90 }}
           >
             Buscar
           </Button>
@@ -37,7 +37,7 @@ const CustomFilter = (dataIndex) => {
       </div>
     ),
     filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890FF' : undefined }} />,
-    onFilter: (value, record) => 
+    onFilter: (value, record) =>
       record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : false,
     render: (text) => text
   };

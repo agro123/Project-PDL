@@ -46,9 +46,11 @@
     ],
     "cotizaciones": [
         {
+            
             "No": 1,
-
             "Fecha": "01-10-2020",
+            "observacion": "Esto es una observación",
+            "total": "2000000",
 
             "cliente": {
                 "name": "Juanito Alcachofa",
@@ -63,11 +65,9 @@
                 "alto": 2000,
                 "ancho": 1000,
                 "area": "2",
-                "precio": 1000000,
-                "cantidad": 2
-            }],
-            "observacion": "Esto es una observación",
-            "total": 2000000
+                "precio": "1000000",
+                "cantidad": "2"
+            }]
         },
         {
             "No": 2,
@@ -87,8 +87,8 @@
                 "alto": 2000,
                 "ancho": 1000,
                 "area": "2",
-                "precio": 1000000,
-                "cantidad": 2
+                "precio": "1000000",
+                "cantidad": "2"
             },
             {
                 "ref": "125",
@@ -96,11 +96,11 @@
                 "alto": 2000,
                 "ancho": 1000,
                 "area": "2",
-                "precio": 1000000,
-                "cantidad": 2
+                "precio": "1000000",
+                "cantidad": "2"
             }],
             "observacion": "Una garantia",
-            "total": 4000000
+            "total": "4000000"
         }
     ],
 
@@ -110,7 +110,7 @@
         "No": "1",
         "observaciones": "Esto es una observacion",
         "total": "7845000",
-        "fechaFinal": "2020-12-18",
+        "fechaFinal": "18-12-2020",
         "cotizacionNum": "1",
 
         "cliente": {
@@ -159,6 +159,8 @@
                 "price": "2000000"                
             }
         ]
-    }]
+    }],
+
+    "cuentaCobro": []
 
 }

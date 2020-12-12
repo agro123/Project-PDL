@@ -1,36 +1,29 @@
 //import styles from '../../styles/cotizacion.css';
-import { Input, AutoComplete} from 'antd';
+import { Input } from 'antd';
+
+const { TextArea } = Input;
+
+const NumOrdenServ = ({ productos, numero }) => {
 
 
-
-
-const NumOrdenServ = () => {
-
-    const {TextArea} = Input;
-
-    const style1 ={ width: '250px'};
-    const style2 ={ width: '100%', height: '200px' };
-
-    return(
-       
-            <div>
-                <h1>
-                    Orden de servicio
-                </h1>
-                <input 
-                    placeholder='No. Orden'
-                    style={style1}
-                /> 
-                <h2 style={{marginTop:'50px'}}>Cuenta de Cobro No. 1</h2>
-
-                <h1 className='tabla'>Por concepto de</h1>
-                <TextArea
-                    style={style2}
-                />
+    return (
+        <>
+            <div className="informationPanel">
+                <h2> Cuenta de cobro No. {numero}</h2>
+                <div >
+                    <div className="titleLine">
+                        <p>Por concepto de</p>
+                    </div>
+                    <TextArea
+                        value={""}
+                        style={{ height: '300px' }}
+                    />
+                </div>
 
             </div>
-        
-        
+
+        </>
+
     )
 }
 

@@ -47,6 +47,11 @@ function OrdenServicio() {
     setTotal(total1 + total2 + total3)
   })
   //--------------------------------------------------------------------------------
+  const findCliente = num => {
+    const cot = data.cotizaciones.find(c => c.No == num);
+    setClient(cot.cliente);
+  }
+  //---------------------------------------------------------------------------------
   const handleClientForm = e => {
     setClient(e);
   }
