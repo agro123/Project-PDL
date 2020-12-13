@@ -27,7 +27,7 @@
     "productos": [
         {
             "ref": "12345",
-            "name": "Cuerpos fijos en aluminio color blanco de 3.10 x 1.05 en 4 secciones y vidrio en cámara incoloro 3 + 3 con PVB 0.76 + cámara de 12mm e incoloro 4 + 4 PVB 0.76"
+            "name": "Cuerpos fijos en aluminio color blanco"
         },
         {
             "ref": "13456",
@@ -60,8 +60,8 @@
                 "email": "juan@example.com"
             },
             "productos":[ {
-                "ref": "12345",
-                "name": "Lamina de acero",
+                "ref": "13456",
+                "name": "Puerta de acero inoxidable",
                 "alto": 2000,
                 "ancho": 1000,
                 "area": "2",
@@ -83,7 +83,7 @@
             },
             "productos":[ {
                 "ref": "121",
-                "name": "Cuerpos fijos en aluminio color blanco de 3.10 x 1.05 en 4 secciones y vidrio en cámara incoloro 3 + 3 con PVB 0.76 + cámara de 12mm e incoloro 4 + 4 PVB 0.76",
+                "name": "Cuerpos fijos en aluminio color blanco",
                 "alto": 2000,
                 "ancho": 1000,
                 "area": "2",

@@ -3,7 +3,8 @@ import MenuOption from './menuOption';
 import {
   FileTextOutlined,
   ReconciliationOutlined,
-  ContainerOutlined
+  ContainerOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import { autoUpdater } from 'electron';
 
@@ -29,10 +30,10 @@ const MyLayout = ({ children }) => (
         </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={['0']}
           theme={theme}
-
         >
+          <Menu.Item key="0" icon={<HomeOutlined />}><MenuOption label="Inicio" url="/inicio" /></Menu.Item>
           <SubMenu key="sub1" icon={<FileTextOutlined />} title="Cotización">
             <Menu.Item key="1"><MenuOption label="Crear" url="/Cotizaciones/cotizacion" /></Menu.Item>
             <Menu.Item key="2"><MenuOption label="Ver" url="/Cotizaciones/cotizaciones" /></Menu.Item>

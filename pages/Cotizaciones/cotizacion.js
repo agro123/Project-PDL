@@ -23,9 +23,7 @@ function Cotizacion() {
     let month = date.getMonth() + 1
     let year = date.getFullYear()
     return day + "-" + month + "-" + year
-  } //MODIFICAR ESTO
-
-  )
+  }) //MODIFICAR ESTO
 
   //------------------------Data confirmation---------------------------------------
   const correctClient = () => {

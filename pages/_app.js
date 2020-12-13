@@ -8,9 +8,13 @@ import '../styles/showModal.css'
 import { ConfigProvider } from 'antd';
 import es_ES from 'antd/lib/locale/es_ES';
 import Layout from '../components/constants/layout';
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
   return <>
+    <Head>
+      <title>Project PDL</title>
+    </Head>
     <ConfigProvider locale={es_ES}>
       <Layout>
         <Component {...pageProps} />

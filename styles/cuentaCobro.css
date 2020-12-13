@@ -15,3 +15,19 @@
     margin: 0 30px 0 0;
     width: 200px;
 }
+
+.middleCC {
+    height: 620px;
+    position: relative;
+}
+.informationPanel .ant-table-body{
+    max-height: 350px !important;
+}
+@media screen and (max-width: 1367px) {
+    .middleCC {
+        height: auto;
+    }
+    .informationPanel .ant-table-body{
+        max-height: 131px !important;
+    }
+}

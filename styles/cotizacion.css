@@ -2,6 +2,7 @@
 .top {
     display: flex;
     position: relative;
+    flex-wrap: wrap;
 }
 .middle {
     display: flex;
