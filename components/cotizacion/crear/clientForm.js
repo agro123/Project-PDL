@@ -2,9 +2,9 @@ import { Input, AutoComplete, Form, Tooltip } from 'antd';
 import data from '../../../data/data.json'
 import { useState, useEffect } from 'react';
 
-import NumericInput from '../../constants/numericInput'
+import NumericInput from '../../constants/numericInput' 
 
-const ClienteForm = ({ handleForm, allOk, clientsField }) => {
+const ClienteForm = ({ handleForm, allOk, clientsField}) => {
     const [client, setClient] = useState({
         name: '',
         id: '',

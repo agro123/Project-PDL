@@ -1,0 +1,68 @@
+.LittleTitleLine {
+    background-color: #1890FF;
+    position: relative;
+    display: flex;
+    height: 22px;
+    padding: 1px;
+    padding-left: 10px;
+    margin-bottom: 0px;
+}
+.LittleTitleLine p {
+    /* Datos de cliente */
+    font-style: normal;
+    font-weight: normal;
+    font-family: var(--fuente);
+    color: #FFFFFF;
+    font-size: 14px;
+}
+.topSC {
+    display: flex;
+    margin-bottom: 10px;
+}
+.dateSC {
+    text-align:center;
+    width: 150px;
+}
+.midSC {
+    display: flex;
+    margin-top: 10px;
+}
+
+.space {
+    flex: auto;
+}
+.botSC{
+    margin-top: 10px;
+    display: flex;
+}
+.observacionSC{
+    flex: auto;
+    margin-right: 10px;
+    border: 1px solid rgb(194, 194, 194);
+}
+.otrosGastos {
+    margin-right: 10px;
+}
+.totalSC {
+    width: 250px;
+    height: 50px;
+    text-align:center;
+}
+.clienteSC {
+    flex: auto;
+}
+.clienteSC p{
+    margin: 0 0 0 0;
+}
+.formaDePago {
+    width: 200px;
+    margin: 0 10px 0 0;
+    text-align:center;
+}
+.clienteCC {
+    width: 270px;
+    margin: 0 0 10px 0;
+}
+.clienteCC p{
+    margin: 0 0 0 0;
+}

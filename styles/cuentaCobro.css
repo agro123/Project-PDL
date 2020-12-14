@@ -1,0 +1,33 @@
+.informationPanel {
+    margin: 30px 0 30px 0;
+    width: auto;
+}
+.margenLetra{
+    height: 10px;
+    margin-top: 10px;
+}
+
+.clientInfo {
+    margin: 0 28px 28px 0;
+    width: 300px;
+}
+.pagoInfo {
+    margin: 0 30px 0 0;
+    width: 200px;
+}
+
+.middleCC {
+    height: 620px;
+    position: relative;
+}
+.informationPanel .ant-table-body{
+    max-height: 350px !important;
+}
+@media screen and (max-width: 1367px) {
+    .middleCC {
+        height: auto;
+    }
+    .informationPanel .ant-table-body{
+        max-height: 131px !important;
+    }
+}

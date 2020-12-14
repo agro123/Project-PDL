@@ -1,0 +1,29 @@
+.middleOS {
+    display: flex;
+    position: relative;
+}
+.materialsOSForm {
+    position: relative;
+    flex: auto;
+    margin-bottom: 20px;
+    height: 228px;
+}
+.materialsOSForm:nth-child(2) {
+    margin-left: 28px
+}
+.containerDatePicker {
+    position: relative;
+    width: 200px;
+}
+.topOS{
+    display: flex;
+}
+
+@media screen and (max-width: 1600px) {
+
+    .materialsOSForm {
+        margin-bottom: 10px;
+    }
+
+
+}

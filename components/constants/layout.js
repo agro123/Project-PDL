@@ -1,33 +1,40 @@
-import { Layout, Menu,Image  } from 'antd';
+import { Layout, Menu, Image, } from 'antd';
 import MenuOption from './menuOption';
 import {
   FileTextOutlined,
   ReconciliationOutlined,
-  ContainerOutlined
+  ContainerOutlined,
+  HomeOutlined,
+  UserOutlined,IdcardOutlined
 } from '@ant-design/icons';
 import { autoUpdater } from 'electron';
 
 const theme = "dark"
 
 const { SubMenu } = Menu;
-const { Content, Sider } = Layout;
+const { Content, Sider, Header } = Layout;
 
 const MyLayout = ({ children }) => (
   <>
     <Layout className="layout">
       <Sider
-       theme={theme}
+        theme={theme}
         style={{
-          /* background: '#001529', */
-          flex: 'auto'
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
         }}
       >
-        <Image  src="https://www.anmosugoi.com/wp-content/uploads/2020/01/megumin-sonrojada.jpg"/>
+        <div className='logo-img'>
+          <Image preview={false} width={100} src="/images/LogoBlue.png" />
+        </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={['0']}
           theme={theme}
         >
+          <Menu.Item key="0" icon={<HomeOutlined />}><MenuOption label="Inicio" url="/inicio" /></Menu.Item>
           <SubMenu key="sub1" icon={<FileTextOutlined />} title="Cotización">
             <Menu.Item key="1"><MenuOption label="Crear" url="/Cotizaciones/cotizacion" /></Menu.Item>
             <Menu.Item key="2"><MenuOption label="Ver" url="/Cotizaciones/cotizaciones" /></Menu.Item>
@@ -40,15 +47,19 @@ const MyLayout = ({ children }) => (
             <Menu.Item key="3"><MenuOption label="Crear" url="/cuentaCobro/cuentaCobro" /></Menu.Item>
             <Menu.Item key="4"><MenuOption label="Ver" url="/cuentaCobro/cuentasCobro" /></Menu.Item>
           </SubMenu>
+          <Menu.Item key="sub4" icon={<UserOutlined />}><MenuOption label="Clientes" url="/clientes/clientes" /></Menu.Item>
+          <Menu.Item key="sub5" icon={<IdcardOutlined />}><MenuOption label="Empleados" url="/empleados/empleados" /></Menu.Item>
         </Menu>
       </Sider>
-      <Content
-        style={{
-          padding: '0 0px',
-        }}
-      >
-        <div className="site-layout-content">{children}</div>
-      </Content>
+      <Layout style={{ marginLeft: 200 }}>
+        <Content
+          style={{
+            padding: '0 0px',
+          }}
+        >
+          <div className="site-layout-content">{children}</div>
+        </Content>
+      </Layout>
     </Layout>
   </>
 );
