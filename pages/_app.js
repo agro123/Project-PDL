@@ -4,7 +4,8 @@ import '../styles/layout.css';
 import '../styles/cotizacion.css';
 import '../styles/cuentaCobro.css';
 import '../styles/ordenesServicio.css';
-import '../styles/showModal.css'
+import '../styles/showModal.css';
+import '../styles/ordenDeServicio.css';
 import { ConfigProvider } from 'antd';
 import es_ES from 'antd/lib/locale/es_ES';
 import Layout from '../components/constants/layout';

@@ -1,10 +1,11 @@
-import { Layout, Menu, Image } from 'antd';
+import { Layout, Menu, Image, } from 'antd';
 import MenuOption from './menuOption';
 import {
   FileTextOutlined,
   ReconciliationOutlined,
   ContainerOutlined,
-  HomeOutlined
+  HomeOutlined,
+  UserOutlined,IdcardOutlined
 } from '@ant-design/icons';
 import { autoUpdater } from 'electron';
 
@@ -46,6 +47,8 @@ const MyLayout = ({ children }) => (
             <Menu.Item key="3"><MenuOption label="Crear" url="/cuentaCobro/cuentaCobro" /></Menu.Item>
             <Menu.Item key="4"><MenuOption label="Ver" url="/cuentaCobro/cuentasCobro" /></Menu.Item>
           </SubMenu>
+          <Menu.Item key="sub4" icon={<UserOutlined />}><MenuOption label="Clientes" url="/clientes/clientes" /></Menu.Item>
+          <Menu.Item key="sub5" icon={<IdcardOutlined />}><MenuOption label="Empleados" url="/empleados/empleados" /></Menu.Item>
         </Menu>
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
