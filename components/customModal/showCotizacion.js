@@ -1,4 +1,5 @@
 import { Modal, Table, Image, Button } from 'antd';
+import { columnsCotizacion } from './columns'
 import { useState, useEffect } from 'react';
 import data from '../../data/data.json'
 
@@ -36,35 +37,6 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
 
     //--------------------------------------
 
-    const columns = [
-        {
-            title: 'Producto',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: 'Área',
-            dataIndex: 'area',
-            key: 'area',
-        },
-        {
-            title: 'Precio',
-            dataIndex: 'precio',
-            key: 'precio',
-            render: (text, record, index) => (formatter.format(text)),
-        },
-        {
-            title: 'Cantidad',
-            dataIndex: 'cantidad',
-            key: 'cantidad',
-        },
-        {
-            title: 'Total',
-            dataIndex: 'total',
-            key: 'total',
-            render: (text, record, index) => (formatter.format(text)),
-        },
-    ];
     return (
         <>
             <Modal
@@ -94,7 +66,7 @@ const ShowCotizacion = ({ index, visible, onOk, onCancel }) => {
                 </div>
                 <Table
                     dataSource={cotizacion.productos}
-                    columns={columns}
+                    columns={columnsCotizacion}
                     size={"small"}
                     scroll={{
                         y: 100

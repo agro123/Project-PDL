@@ -54,3 +54,15 @@
 .clienteSC p{
     margin: 0 0 0 0;
 }
+.formaDePago {
+    width: 200px;
+    margin: 0 10px 0 0;
+    text-align:center;
+}
+.clienteCC {
+    width: 270px;
+    margin: 0 0 10px 0;
+}
+.clienteCC p{
+    margin: 0 0 0 0;
+}

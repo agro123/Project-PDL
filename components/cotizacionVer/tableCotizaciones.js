@@ -132,9 +132,7 @@ const listTable = () => {
                 <Table
                     columns={columns}
                     dataSource={cotizaciones}
-
                     showHeader={true}
-
                     scroll={{
                         y: 500
                     }}

@@ -64,3 +64,63 @@ export const columnsRT = [
         render: (text, record, index) => (formatter.format(text)),
     }
 ];
+
+export const columnsCotizacion = [
+    {
+        title: 'Producto',
+        dataIndex: 'name',
+        key: 'name',
+    },
+    {
+        title: 'Área',
+        dataIndex: 'area',
+        key: 'area',
+    },
+    {
+        title: 'Precio',
+        dataIndex: 'precio',
+        key: 'precio',
+        render: (text, record, index) => (formatter.format(text)),
+    },
+    {
+        title: 'Cantidad',
+        dataIndex: 'cantidad',
+        key: 'cantidad',
+    },
+    {
+        title: 'Total',
+        dataIndex: 'total',
+        key: 'total',
+        render: (text, record, index) => (formatter.format(text)),
+    },
+];
+
+export const columnsCuentaCobro = [
+    {
+        title: 'Referencia',
+        dataIndex: 'ref',
+        key: 'ref',
+    },
+    {
+        title: 'Descripción',
+        dataIndex: 'name',
+        key: 'name',
+    },
+    {
+        title: 'Precio unitario',
+        dataIndex: 'precio',
+        key: 'precio',
+        render: (text, record, index) => (formatter.format(text)),
+    },
+    {
+        title: 'Cantidad',
+        dataIndex: 'cantidad',
+        key: 'cantidad',
+    },
+    {
+        title: 'Valor de venta',
+        dataIndex: 'total',
+        key: 'total',
+        render: (text, record, index) => (formatter.format(text)),
+    },
+];
